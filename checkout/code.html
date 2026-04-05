@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Serenity Research Labs - Checkout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "inverse-surface": "#293040",
+          "background": "#f9f9ff",
+          "inverse-on-surface": "#edf0ff",
+          "tertiary": "#006490",
+          "surface-container-high": "#e1e8fd",
+          "secondary": "#515f74",
+          "on-surface": "#141b2b",
+          "surface-tint": "#0060ab",
+          "error-container": "#ffdad6",
+          "on-error-container": "#93000a",
+          "secondary-fixed": "#d5e3fc",
+          "surface": "#f9f9ff",
+          "outline": "#717783",
+          "inverse-primary": "#a3c9ff",
+          "secondary-fixed-dim": "#b9c7df",
+          "on-surface-variant": "#404752",
+          "on-primary-container": "#ffffff",
+          "tertiary-container": "#007eb4",
+          "on-secondary-fixed": "#0d1c2e",
+          "on-error": "#ffffff",
+          "surface-variant": "#dce2f7",
+          "tertiary-fixed-dim": "#89ceff",
+          "on-tertiary": "#ffffff",
+          "on-secondary": "#ffffff",
+          "on-secondary-container": "#57657a",
+          "surface-dim": "#d3daef",
+          "primary-container": "#0078d4",
+          "on-primary": "#ffffff",
+          "on-primary-fixed": "#001c39",
+          "on-tertiary-fixed": "#001e2f",
+          "on-background": "#141b2b",
+          "primary-fixed-dim": "#a3c9ff",
+          "primary": "#005faa",
+          "surface-container-low": "#f1f3ff",
+          "surface-bright": "#f9f9ff",
+          "on-primary-fixed-variant": "#004883",
+          "error": "#ba1a1a",
+          "secondary-container": "#d5e3fc",
+          "primary-fixed": "#d3e3ff",
+          "surface-container-lowest": "#ffffff",
+          "on-tertiary-container": "#ffffff",
+          "on-tertiary-fixed-variant": "#004c6e",
+          "surface-container": "#e9edff",
+          "on-secondary-fixed-variant": "#3a485b",
+          "tertiary-fixed": "#c9e6ff",
+          "outline-variant": "#c0c7d4",
+          "surface-container-highest": "#dce2f7"
+        },
+        fontFamily: {
+          "headline": ["Inter"],
+          "body": ["Inter"],
+          "label": ["Inter"]
+        },
+        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Floating Label Logic */
+  .floating-label-group { position: relative; }
+  .floating-label-group input:focus ~ label,
+  .floating-label-group input:not(:placeholder-shown) ~ label {
+    transform: translateY(-1.25rem) scale(0.8);
+    color: #005faa;
+  }
+  .floating-label-group label {
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    transition: all 0.2s ease-out;
+    pointer-events: none;
+  }
+
+  body { min-height: max(884px, 100dvh); }
+
+  /* Stripe Elements styling */
+  #payment-element {
+    min-height: 200px;
+  }
+
+  /* Loading spinner */
+  .spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Success animation */
+  @keyframes checkmark {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .success-check { animation: checkmark 0.5s ease-out forwards; }
+
+  /* Error shake */
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
+  .shake { animation: shake 0.4s ease-out; }
+
+  /* Mobile menu styles */
+  #mobile-menu-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:70; }
+  #mobile-menu-overlay.active { display:block; }
+  #mobile-menu { position:fixed; top:0; right:-300px; width:280px; height:100%; background:white; z-index:80; transition:right 0.3s ease; padding:80px 32px 32px; box-shadow:-4px 0 20px rgba(0,0,0,0.1); }
+  #mobile-menu.active { right:0; }
+  #mobile-menu a { display:block; padding:16px 0; font-size:18px; font-weight:500; color:#334155; border-bottom:1px solid #f1f5f9; text-decoration:none; font-family:'Inter',sans-serif; }
+  #mobile-menu a:hover { color:#0060ab; }
+  #mobile-menu .close-btn { position:absolute; top:24px; right:24px; background:none; border:none; cursor:pointer; }
+
+  /* Fade in for payment element */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed antialiased">
+
+<!-- Sticky Promo Banner -->
+<div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase fixed top-0 w-full z-[60]">
+  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · Free shipping on orders $100+</span>
+</div>
+
+<!-- TopAppBar -->
+<header class="fixed top-[34px] w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl bg-gradient-to-b from-slate-50 to-transparent">
+<div class="flex justify-between items-center px-8 h-20 max-w-screen-2xl mx-auto">
+<button class="md:hidden" onclick="openMobileMenu()"><span class="material-symbols-outlined text-slate-700" style="font-size:28px;">menu</span></button>
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black tracking-tighter text-slate-900 dark:text-white font-headline">SERENITY</span>
+</div>
+<nav class="hidden md:flex gap-12 items-center font-['Inter'] tracking-tight font-medium">
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../homepage/code.html">Home</a>
+<a class="text-blue-600 dark:text-blue-400 font-semibold border-b-2 border-blue-600 font-['Inter'] tracking-tight" href="../products_page/code.html">Shop</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../faq_page/code.html">Support</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../about/code.html">About</a>
+</nav>
+<div class="flex items-center gap-6">
+<button class="hover:opacity-70 transition-opacity duration-200 scale-95 active:scale-90 transition-transform text-blue-600">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</div>
+</header>
+
+<main class="pt-40 pb-24 px-8 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-20">
+
+<!-- Left Column: Checkout Form -->
+<div class="lg:col-span-7">
+  <header class="mb-16">
+    <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-outline mb-2 block">SECURE GATEWAY</span>
+    <h1 class="text-5xl font-extrabold tracking-tighter font-headline text-on-surface">Checkout</h1>
+  </header>
+
+  <form id="payment-form" class="space-y-16">
+
+    <!-- Shipping Section -->
+    <section>
+      <h2 class="text-xs font-bold uppercase tracking-widest text-outline mb-8">01. Delivery Logistics</h2>
+      <div class="space-y-10">
+        <div class="floating-label-group border-b border-outline-variant/30">
+          <input class="w-full bg-transparent border-none px-0 py-3 focus:ring-0 focus:outline-none text-on-surface font-medium" id="name" placeholder=" " type="text" required/>
+          <label class="text-outline text-sm uppercase tracking-wider font-semibold" for="name">Full Legal Name</label>
+        </div>
+        <div class="floating-label-group border-b border-outline-variant/30">
+          <input class="w-full bg-transparent border-none px-0 py-3 focus:ring-0 focus:outline-none text-on-surface font-medium" id="email" placeholder=" " type="email" required/>
+          <label class="text-outline text-sm uppercase tracking-wider font-semibold" for="email">Secure Email Address</label>
+        </div>
+        <div class="floating-label-group border-b border-outline-variant/30">
+          <input class="w-full bg-transparent border-none px-0 py-3 focus:ring-0 focus:outline-none text-on-surface font-medium" id="address" placeholder=" " type="text" required/>
+          <label class="text-outline text-sm uppercase tracking-wider font-semibold" for="address">Street Address</label>
+        </div>
+        <div class="grid grid-cols-3 gap-6">
+          <div class="floating-label-group border-b border-outline-variant/30">
+            <input class="w-full bg-transparent border-none px-0 py-3 focus:ring-0 focus:outline-none text-on-surface font-medium" id="city" placeholder=" " type="text" required/>
+            <label class="text-outline text-sm uppercase tracking-wider font-semibold" for="city">City</label>
+          </div>
+          <div class="floating-label-group border-b border-outline-variant/30">
+            <input class="w-full bg-transparent border-none px-0 py-3 focus:ring-0 focus:outline-none text-on-surface font-medium" id="state" placeholder=" " type="text" required/>
+            <label class="text-outline text-sm uppercase tracking-wider font-semibold" for="state">State</label>
+          </div>
+          <div class="floating-label-group border-b border-outline-variant/30">
+            <input class="w-full bg-transparent border-none px-0 py-3 focus:ring-0 focus:outline-none text-on-surface font-medium" id="zip" placeholder=" " type="text" required/>
+            <label class="text-outline text-sm uppercase tracking-wider font-semibold" for="zip">ZIP Code</label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Payment Section — Stripe Elements -->
+    <section>
+      <h2 class="text-xs font-bold uppercase tracking-widest text-outline mb-8">02. Payment Method</h2>
+
+      <!-- Stripe Payment Element mounts here -->
+      <div class="bg-surface-container-low p-8 rounded-xl">
+        <div class="flex items-center gap-6 mb-6">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-outline">Powered by Stripe</span>
+          <div class="flex items-center gap-3">
+            <span class="text-xs font-bold text-on-surface-variant bg-surface-container-lowest px-2 py-1 rounded">VISA</span>
+            <span class="text-xs font-bold text-on-surface-variant bg-surface-container-lowest px-2 py-1 rounded">MC</span>
+            <span class="text-xs font-bold text-on-surface-variant bg-surface-container-lowest px-2 py-1 rounded">AMEX</span>
+            <span class="text-xs font-bold text-on-surface-variant bg-surface-container-lowest px-2 py-1 rounded">APPLE PAY</span>
+            <span class="text-xs font-bold text-on-surface-variant bg-surface-container-lowest px-2 py-1 rounded">VENMO</span>
+          </div>
+        </div>
+
+        <!-- This is where Stripe injects the real payment form -->
+        <div id="payment-element"></div>
+
+        <!-- Payment errors show here -->
+        <div id="payment-errors" class="mt-4 text-sm text-red-600 font-medium hidden"></div>
+
+        <!-- Loading state while Stripe initializes -->
+        <div id="payment-loading" class="flex items-center justify-center py-12 gap-3">
+          <div class="spinner" style="border-top-color: #005faa; border-color: rgba(0,95,170,0.2);"></div>
+          <span class="text-sm text-outline font-medium">Loading secure payment form...</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Disclaimers -->
+    <section class="space-y-6">
+      <h2 class="text-xs font-bold uppercase tracking-widest text-outline mb-6">03. Legal &amp; Compliance</h2>
+      <div class="flex gap-4 items-start group cursor-pointer">
+        <input class="mt-1 w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" id="age" type="checkbox" required/>
+        <label class="text-sm text-on-surface-variant leading-relaxed select-none" for="age">
+          I certify that I am at least 21 years of age and understand the age requirements for research chemical acquisition.
+        </label>
+      </div>
+      <div class="flex gap-4 items-start group cursor-pointer">
+        <input class="mt-1 w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" id="disclaimer" type="checkbox" required/>
+        <label class="text-sm text-on-surface-variant leading-relaxed select-none" for="disclaimer">
+          I acknowledge that these products are strictly for <span class="font-bold text-on-surface">laboratory research use only</span> and are not intended for human consumption or diagnostic procedures.
+        </label>
+      </div>
+    </section>
+
+    <!-- Security badges -->
+    <div class="flex items-center justify-center gap-6 py-4 mb-4 bg-surface-container-low rounded-lg">
+      <span class="material-symbols-outlined text-green-600 text-lg" data-icon="lock">lock</span>
+      <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">256-bit SSL Encrypted</span>
+      <span class="text-outline-variant">|</span>
+      <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">PCI Compliant</span>
+      <span class="text-outline-variant">|</span>
+      <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Stripe Secured</span>
+    </div>
+
+    <!-- Submit Button -->
+    <button id="submit-btn" class="w-full py-6 bg-primary-container text-white font-black tracking-widest uppercase text-sm hover:bg-primary transition-all rounded-xl flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed" type="submit" disabled>
+      <span id="btn-text">Complete Order</span>
+      <span id="btn-spinner" class="hidden"><span class="spinner"></span></span>
+      <span id="btn-arrow" class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+    </button>
+  </form>
+
+  <!-- Success Message (hidden by default) -->
+  <div id="success-message" class="hidden text-center py-20 space-y-8">
+    <div class="success-check inline-flex items-center justify-center w-24 h-24 rounded-full bg-green-100">
+      <span class="material-symbols-outlined text-green-600" style="font-size: 48px; font-variation-settings: 'FILL' 1;">check_circle</span>
+    </div>
+    <h2 class="text-4xl font-extrabold tracking-tighter font-headline text-on-surface">Order Confirmed</h2>
+    <p class="text-on-surface-variant max-w-md mx-auto">Your order has been placed successfully. A confirmation email with tracking details will be sent to your inbox shortly.</p>
+    <p class="text-xs text-outline uppercase tracking-widest font-bold">Order ID: <span id="order-id" class="text-primary">—</span></p>
+    <a href="../products_page/code.html" class="inline-flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-widest hover:underline">
+      Continue Shopping <span class="material-symbols-outlined text-sm">arrow_forward</span>
+    </a>
+  </div>
+</div>
+
+<!-- Right Column: Order Summary -->
+<div class="lg:col-span-5">
+  <div class="sticky top-32 space-y-12">
+    <div class="bg-surface-container-low p-10 rounded-2xl">
+      <h2 class="text-xs font-black uppercase tracking-[0.2em] text-outline mb-10">Order Summary</h2>
+      <div id="cart-items" class="space-y-8 mb-12">
+        <!-- Cart items populated by JS -->
+      </div>
+
+      <!-- Promo Code Field -->
+      <div class="border-t border-outline-variant/20 pt-8 mb-6">
+        <div class="flex gap-3">
+          <div class="flex-grow relative">
+            <input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-primary focus:border-primary focus:outline-none text-on-surface font-medium uppercase tracking-wider" id="promo" placeholder="PROMO CODE" type="text"/>
+          </div>
+          <button id="apply-promo-btn" class="bg-on-surface text-surface px-6 py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:opacity-90 transition-opacity" type="button" onclick="applyPromo()">Apply</button>
+        </div>
+        <p id="promo-status" class="text-[10px] mt-3 uppercase tracking-wider font-medium text-outline">Follow us on TikTok &amp; Instagram for exclusive codes</p>
+      </div>
+
+      <!-- Totals -->
+      <div class="border-t border-outline-variant/20 pt-6 space-y-4">
+        <div class="flex justify-between text-sm">
+          <span class="text-on-surface-variant">Subtotal</span>
+          <span id="subtotal-display" class="font-medium text-on-surface">$0.00</span>
+        </div>
+        <div id="discount-row" class="flex justify-between text-sm hidden">
+          <span class="text-green-600">Discount (15%)</span>
+          <span id="discount-display" class="font-medium text-green-600">-$0.00</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-on-surface-variant">Shipping</span>
+          <span id="shipping-display" class="font-medium text-green-600">FREE</span>
+        </div>
+        <div class="flex justify-between items-end pt-4 border-t border-outline-variant/20">
+          <span class="text-xs font-black uppercase tracking-widest text-on-surface">Total Due</span>
+          <span id="total-display" class="text-3xl font-black tracking-tighter text-primary">$0.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust badges -->
+    <div class="px-6 space-y-6">
+      <div class="flex gap-4 items-center">
+        <span class="material-symbols-outlined text-outline" data-icon="lock">lock</span>
+        <p class="text-[10px] font-semibold text-outline uppercase tracking-wider leading-relaxed">
+          End-to-end encrypted transaction via Stripe Secure
+        </p>
+      </div>
+      <div class="flex gap-4 items-center">
+        <span class="material-symbols-outlined text-outline" data-icon="verified_user">verified_user</span>
+        <p class="text-[10px] font-semibold text-outline uppercase tracking-wider leading-relaxed">
+          Discrete clinical packaging. No external lab marking.
+        </p>
+      </div>
+      <div class="flex gap-4 items-center">
+        <span class="material-symbols-outlined text-outline" data-icon="verified">verified</span>
+        <p class="text-[10px] font-semibold text-outline uppercase tracking-wider leading-relaxed">
+          99%+ purity verified · COA included with every order
+        </p>
+      </div>
+      <div class="flex gap-4 items-center">
+        <span class="material-symbols-outlined text-outline" data-icon="undo">undo</span>
+        <p class="text-[10px] font-semibold text-outline uppercase tracking-wider leading-relaxed">
+          Satisfaction guarantee · Damaged products replaced free
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-900 w-full py-16 px-8 border-t border-slate-100 dark:border-slate-800">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto font-['Inter'] text-sm tracking-wide">
+<div class="space-y-6">
+<span class="text-lg font-bold tracking-tighter text-slate-900 dark:text-white">SERENITY</span>
+<p class="text-slate-500 dark:text-slate-400 leading-relaxed max-w-xs">
+  Advancing human potential through rigorous biochemical research and uncompromising purity standards.
+</p>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-xs">Resources</h4>
+<ul class="space-y-4 text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-blue-500 transition-colors" href="../about/code.html">Lab Analysis</a></li>
+<li><a class="hover:text-blue-500 transition-colors" href="../faq_page/code.html">Safety Protocols</a></li>
+<li><a class="hover:text-blue-500 transition-colors" href="../about/code.html">Lab Reports</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-xs">Company</h4>
+<ul class="space-y-4 text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-blue-500 transition-colors" href="../about/code.html">About Us</a></li>
+<li><a class="hover:text-blue-500 transition-colors" href="../faq_page/code.html">Contact</a></li>
+<li><a class="hover:text-blue-500 transition-colors" href="../faq_page/code.html">Privacy</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h4 class="font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-xs">Newsletter</h4>
+<div class="flex gap-2">
+<input class="bg-white dark:bg-slate-800 border-none rounded p-3 text-xs w-full focus:ring-1 focus:ring-blue-500" placeholder="Research Email" type="text"/>
+<button class="bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-slate-400 dark:text-slate-500 text-[10px] uppercase tracking-widest font-medium">
+  © 2026 Serenity Research Labs. For research use only. Not for human consumption.
+</p>
+<div class="flex gap-8">
+<a href="https://tiktok.com" class="text-slate-400 hover:text-blue-500 transition-colors text-xs font-bold uppercase tracking-widest">TikTok</a>
+<a href="https://instagram.com" class="text-slate-400 hover:text-blue-500 transition-colors text-xs font-bold uppercase tracking-widest">Instagram</a>
+</div>
+</div>
+</footer>
+<script src="../js/chatbot.js"></script>
+
+<script>
+// =============================================================================
+// CART STATE — In production, sync this with localStorage or a cart API
+// =============================================================================
+// Default demo cart items (these would normally come from "Add to Cart" actions)
+let cart = [
+  { id: "gym-stack", name: "The Gym Stack", desc: "BPC-157 + TB-500 + CJC/Ipa", qty: 1, price: 119.99, icon: "science" },
+  { id: "bac-water", name: "Bacteriostatic Water", desc: "30ml", qty: 1, price: 9.99, icon: "water_drop" },
+];
+
+let promoCode = "";
+let promoApplied = false;
+
+// =============================================================================
+// RENDER CART
+// =============================================================================
+function renderCart() {
+  const container = document.getElementById("cart-items");
+  container.innerHTML = "";
+
+  cart.forEach(item => {
+    container.innerHTML += `
+      <div class="flex items-center gap-6">
+        <div class="w-20 h-20 bg-surface-container-highest rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary text-3xl">${item.icon}</span>
+        </div>
+        <div class="flex-grow">
+          <h3 class="font-bold text-on-surface tracking-tight">${item.name}</h3>
+          <p class="text-[10px] text-outline uppercase tracking-wider font-semibold">Qty: ${item.qty} · ${item.desc}</p>
+        </div>
+        <span class="font-bold text-on-surface">$${(item.price * item.qty).toFixed(2)}</span>
+      </div>
+    `;
+  });
+
+  updateTotals();
+}
+
+function updateTotals() {
+  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  const discount = promoApplied ? subtotal * 0.15 : 0;
+  const afterDiscount = subtotal - discount;
+  const shipping = afterDiscount >= 100 ? 0 : 7.99;
+  const total = afterDiscount + shipping;
+
+  document.getElementById("subtotal-display").textContent = `$${subtotal.toFixed(2)}`;
+  document.getElementById("total-display").textContent = `$${total.toFixed(2)}`;
+
+  const discountRow = document.getElementById("discount-row");
+  if (promoApplied) {
+    discountRow.classList.remove("hidden");
+    document.getElementById("discount-display").textContent = `-$${discount.toFixed(2)}`;
+  } else {
+    discountRow.classList.add("hidden");
+  }
+
+  if (shipping === 0) {
+    document.getElementById("shipping-display").textContent = "FREE";
+    document.getElementById("shipping-display").className = "font-medium text-green-600";
+  } else {
+    document.getElementById("shipping-display").textContent = `$${shipping.toFixed(2)}`;
+    document.getElementById("shipping-display").className = "font-medium text-on-surface";
+  }
+}
+
+function applyPromo() {
+  const input = document.getElementById("promo");
+  const status = document.getElementById("promo-status");
+  const code = input.value.trim().toUpperCase();
+
+  if (code === "SERENITY15") {
+    promoCode = code;
+    promoApplied = true;
+    status.textContent = "✓ SERENITY15 applied — 15% off!";
+    status.className = "text-[10px] mt-3 uppercase tracking-wider font-bold text-green-600";
+    input.disabled = true;
+    input.classList.add("opacity-50");
+    document.getElementById("apply-promo-btn").disabled = true;
+    document.getElementById("apply-promo-btn").classList.add("opacity-50");
+    updateTotals();
+  } else {
+    status.textContent = "✕ Invalid promo code";
+    status.className = "text-[10px] mt-3 uppercase tracking-wider font-bold text-red-500";
+    input.classList.add("shake");
+    setTimeout(() => input.classList.remove("shake"), 500);
+  }
+}
+
+
+// =============================================================================
+// STRIPE INTEGRATION
+// =============================================================================
+let stripe, elements, paymentElement;
+
+async function initStripe() {
+  try {
+    // Fetch publishable key from our backend
+    const response = await fetch("/api/config");
+    const { publishableKey } = await response.json();
+
+    stripe = Stripe(publishableKey);
+
+    // Create Payment Intent on the server
+    const intentResponse = await fetch("/api/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        items: cart.map(item => ({ id: item.id, quantity: item.qty })),
+        promoCode: promoCode,
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        address: document.getElementById("address").value,
+        city: document.getElementById("city").value,
+        state: document.getElementById("state").value,
+        zip: document.getElementById("zip").value,
+      }),
+    });
+
+    const intentData = await intentResponse.json();
+
+    if (intentData.error) {
+      showError(intentData.error);
+      return;
+    }
+
+    // Create Stripe Elements with the Payment Element
+    elements = stripe.elements({
+      clientSecret: intentData.clientSecret,
+      appearance: {
+        theme: "stripe",
+        variables: {
+          colorPrimary: "#005faa",
+          colorBackground: "#f9f9ff",
+          colorText: "#141b2b",
+          colorDanger: "#ba1a1a",
+          fontFamily: "Inter, system-ui, sans-serif",
+          spacingUnit: "4px",
+          borderRadius: "8px",
+        },
+        rules: {
+          ".Input": {
+            border: "1px solid #c0c7d4",
+            boxShadow: "none",
+          },
+          ".Input:focus": {
+            border: "1px solid #005faa",
+            boxShadow: "0 0 0 1px #005faa",
+          },
+          ".Label": {
+            fontWeight: "600",
+            fontSize: "11px",
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+          },
+        },
+      },
+    });
+
+    // Mount the Payment Element (this single element handles cards, Apple Pay, Google Pay, Venmo, etc.)
+    paymentElement = elements.create("payment", {
+      layout: {
+        type: "tabs",
+        defaultCollapsed: false,
+      },
+      // Wallets like Apple Pay / Google Pay show automatically when available
+      wallets: {
+        applePay: "auto",
+        googlePay: "auto",
+      },
+    });
+
+    paymentElement.mount("#payment-element");
+
+    // Hide loading, enable submit when ready
+    paymentElement.on("ready", () => {
+      document.getElementById("payment-loading").classList.add("hidden");
+      document.getElementById("submit-btn").disabled = false;
+    });
+
+    paymentElement.on("change", (event) => {
+      if (event.error) {
+        showError(event.error.message);
+      } else {
+        hideError();
+      }
+    });
+
+  } catch (err) {
+    console.error("Stripe init error:", err);
+    document.getElementById("payment-loading").innerHTML = `
+      <div class="text-center py-8 space-y-4">
+        <span class="material-symbols-outlined text-amber-500" style="font-size:36px;">warning</span>
+        <p class="text-sm text-on-surface-variant font-medium">Payment system loading...</p>
+        <p class="text-xs text-outline">Make sure the server is running (python server.py)</p>
+        <button onclick="initStripe()" class="text-xs text-primary font-bold uppercase tracking-widest hover:underline">Retry Connection</button>
+      </div>
+    `;
+  }
+}
+
+// =============================================================================
+// FORM SUBMISSION
+// =============================================================================
+document.getElementById("payment-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  // Validate checkboxes
+  if (!document.getElementById("age").checked || !document.getElementById("disclaimer").checked) {
+    showError("Please accept both legal disclaimers to proceed.");
+    return;
+  }
+
+  // Validate shipping fields
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if (!name || !email || !address) {
+    showError("Please fill in all shipping fields.");
+    return;
+  }
+
+  setLoading(true);
+
+  // Confirm payment with Stripe
+  const { error, paymentIntent } = await stripe.confirmPayment({
+    elements,
+    confirmParams: {
+      return_url: window.location.origin + "/checkout/code.html?success=true",
+      receipt_email: email,
+      shipping: {
+        name: name,
+        address: {
+          line1: address,
+          city: document.getElementById("city").value.trim(),
+          state: document.getElementById("state").value.trim(),
+          postal_code: document.getElementById("zip").value.trim(),
+          country: "US",
+        },
+      },
+    },
+    redirect: "if_required",
+  });
+
+  if (error) {
+    showError(error.message);
+    setLoading(false);
+  } else if (paymentIntent && paymentIntent.status === "succeeded") {
+    showSuccess(paymentIntent.id);
+  }
+});
+
+// =============================================================================
+// UI HELPERS
+// =============================================================================
+function showError(message) {
+  const el = document.getElementById("payment-errors");
+  el.textContent = message;
+  el.classList.remove("hidden");
+  el.classList.add("shake");
+  setTimeout(() => el.classList.remove("shake"), 500);
+}
+
+function hideError() {
+  const el = document.getElementById("payment-errors");
+  el.classList.add("hidden");
+}
+
+function setLoading(isLoading) {
+  const btn = document.getElementById("submit-btn");
+  const text = document.getElementById("btn-text");
+  const spinner = document.getElementById("btn-spinner");
+  const arrow = document.getElementById("btn-arrow");
+
+  if (isLoading) {
+    btn.disabled = true;
+    text.textContent = "Processing...";
+    spinner.classList.remove("hidden");
+    arrow.classList.add("hidden");
+  } else {
+    btn.disabled = false;
+    text.textContent = "Complete Order";
+    spinner.classList.add("hidden");
+    arrow.classList.remove("hidden");
+  }
+}
+
+function showSuccess(paymentIntentId) {
+  document.getElementById("payment-form").classList.add("hidden");
+  const success = document.getElementById("success-message");
+  success.classList.remove("hidden");
+  success.classList.add("fade-in");
+  document.getElementById("order-id").textContent = paymentIntentId.slice(-8).toUpperCase();
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// Check if returning from a redirect-based payment (e.g., Apple Pay on some devices)
+async function checkRedirectResult() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("success") === "true" && params.get("payment_intent")) {
+    const piId = params.get("payment_intent");
+    showSuccess(piId);
+  }
+}
+
+// =============================================================================
+// MOBILE MENU
+// =============================================================================
+function openMobileMenu() {
+  document.getElementById('mobile-menu').classList.add('active');
+  document.getElementById('mobile-menu-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('active');
+  document.getElementById('mobile-menu-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// =============================================================================
+// INIT
+// =============================================================================
+renderCart();
+checkRedirectResult();
+initStripe();
+</script>
+
+</body></html>

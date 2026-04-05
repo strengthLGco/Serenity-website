@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Serenity Research Labs - G-LOW</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "inverse-surface": "#293040","background": "#f9f9ff","inverse-on-surface": "#edf0ff","tertiary": "#006490",
+        "surface-container-high": "#e1e8fd","secondary": "#515f74","on-surface": "#141b2b","surface-tint": "#0060ab",
+        "error-container": "#ffdad6","on-error-container": "#93000a","secondary-fixed": "#d5e3fc","surface": "#f9f9ff",
+        "outline": "#717783","inverse-primary": "#a3c9ff","secondary-fixed-dim": "#b9c7df","on-surface-variant": "#404752",
+        "on-primary-container": "#ffffff","tertiary-container": "#007eb4","on-secondary-fixed": "#0d1c2e","on-error": "#ffffff",
+        "surface-variant": "#dce2f7","tertiary-fixed-dim": "#89ceff","on-tertiary": "#ffffff","on-secondary": "#ffffff",
+        "on-secondary-container": "#57657a","surface-dim": "#d3daef","primary-container": "#0078d4","on-primary": "#ffffff",
+        "on-primary-fixed": "#001c39","on-tertiary-fixed": "#001e2f","on-background": "#141b2b","primary-fixed-dim": "#a3c9ff",
+        "primary": "#005faa","surface-container-low": "#f1f3ff","surface-bright": "#f9f9ff","on-primary-fixed-variant": "#004883",
+        "error": "#ba1a1a","secondary-container": "#d5e3fc","primary-fixed": "#d3e3ff","surface-container-lowest": "#ffffff",
+        "on-tertiary-container": "#ffffff","on-tertiary-fixed-variant": "#004c6e","surface-container": "#e9edff",
+        "on-secondary-fixed-variant": "#3a485b","tertiary-fixed": "#c9e6ff","outline-variant": "#c0c7d4",
+        "surface-container-highest": "#dce2f7"
+      },
+      fontFamily: { "headline": ["Inter"], "body": ["Inter"], "label": ["Inter"] },
+      borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+    },
+  },
+}
+</script>
+<style>
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; line-height: 1; }
+body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
+.text-micro { font-size: 0.65rem; letter-spacing: 0.05em; }
+</style>
+<style>
+    /* Mobile menu styles */
+    #mobile-menu-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:70; }
+    #mobile-menu-overlay.active { display:block; }
+    #mobile-menu { position:fixed; top:0; right:-300px; width:280px; height:100%; background:white; z-index:80; transition:right 0.3s ease; padding:80px 32px 32px; box-shadow:-4px 0 20px rgba(0,0,0,0.1); }
+    #mobile-menu.active { right:0; }
+    #mobile-menu a { display:block; padding:16px 0; font-size:18px; font-weight:500; color:#334155; border-bottom:1px solid #f1f5f9; text-decoration:none; font-family:'Inter',sans-serif; }
+    #mobile-menu a:hover { color:#0060ab; }
+    #mobile-menu .close-btn { position:absolute; top:24px; right:24px; background:none; border:none; cursor:pointer; }
+</style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-white">
+<!-- Promo Banner -->
+<div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase fixed top-0 w-full z-[60]">
+  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off &middot; Free shipping on orders $100+</span>
+</div>
+<!-- TopAppBar -->
+<nav class="fixed top-[34px] w-full z-50 bg-white/80 backdrop-blur-xl bg-gradient-to-b from-slate-50 to-transparent">
+<div class="flex justify-between items-center px-8 h-20 max-w-screen-2xl mx-auto">
+  <button class="md:hidden" onclick="openMobileMenu()"><span class="material-symbols-outlined text-slate-700" style="font-size:28px;">menu</span></button>
+<div class="flex items-center gap-4">
+    <span class="text-2xl font-black tracking-tighter text-slate-900">SERENITY</span>
+  </div>
+  <div class="hidden md:flex items-center gap-10 font-['Inter'] tracking-tight font-medium">
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../homepage/code.html">Home</a>
+<a class="text-blue-600 dark:text-blue-400 font-semibold border-b-2 border-blue-600 font-['Inter'] tracking-tight" href="../products_page/code.html">Shop</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../pricing_stacks/code.html">Research</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../faq_page/code.html">Support</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../about/code.html">About</a>
+</div>
+  <div class="flex items-center gap-6">
+    <span class="material-symbols-outlined text-slate-900 cursor-pointer hover:opacity-70">search</span>
+    <div class="relative">
+      <span class="material-symbols-outlined text-slate-900 cursor-pointer">shopping_cart</span>
+    </div>
+  </div>
+</div>
+</nav>
+<main class="pt-28">
+<!-- Product Hero -->
+<section class="max-w-screen-2xl mx-auto px-8 py-20 lg:py-32 grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+  <!-- Left: Image -->
+  <div class="relative aspect-square bg-surface-container-lowest flex items-center justify-center overflow-hidden rounded-xl">
+    <img alt="G-LOW Product Image" class="w-4/5 h-4/5 object-contain" src="../images/products/glow.png?v=3"/>
+    <!-- Trust Badges on Image -->
+    <div class="absolute top-6 left-6 flex flex-col gap-2">
+      <span class="bg-primary text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-xs" style="font-size:14px">verified</span> 99%+ Purity
+      </span>
+      <span class="bg-green-600 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-xs" style="font-size:14px">local_shipping</span> Ships in 24hrs
+      </span>
+    </div>
+  </div>
+  <!-- Right: Product Info -->
+  <div class="flex flex-col">
+    <span class="text-primary font-bold tracking-widest text-xs uppercase mb-2">GLP-1 Receptor Agonist</span>
+    <h1 class="text-5xl md:text-7xl font-bold tracking-tighter text-on-surface mb-4 leading-none">G-LOW</h1>
+    <p class="text-lg text-on-surface-variant font-medium mb-6 italic">The Weight Management Peptide Everyone's Talking About</p>
+    <div class="flex flex-wrap items-center gap-3 mb-8">
+      <span class="px-3 py-1 border border-primary text-primary text-[10px] font-bold uppercase tracking-widest rounded-sm">99%+ Purity</span>
+      <span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-widest rounded-full">Research Grade</span>
+      <span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">70mg Lyophilized</span>
+    </div>
+    <div class="mb-8">
+      <p class="text-4xl font-light tracking-tight text-on-surface">$89.99 <span class="text-sm text-outline uppercase tracking-wider ml-2 font-medium">USD</span></p>
+    </div>
+    <!-- Quantity Selector -->
+    <div class="flex flex-col gap-3 mb-6">
+      <label class="text-[10px] font-bold uppercase tracking-widest text-outline">Select Quantity</label>
+      <div class="flex items-center w-32 h-14 border border-outline-variant/30 bg-surface-container-lowest rounded-lg">
+        <button class="flex-1 h-full flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-sm">remove</span></button>
+        <div class="flex-1 text-center font-medium">1</div>
+        <button class="flex-1 h-full flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-sm">add</span></button>
+      </div>
+    </div>
+    <!-- Add to Cart -->
+    <button class="w-full bg-primary-container text-on-primary py-5 font-bold uppercase tracking-widest text-sm hover:brightness-110 active:scale-[0.98] transition-all rounded-xl mb-4">Add to Cart</button>
+    <!-- Trust Row -->
+    <div class="flex flex-col gap-3 mt-2">
+      <div class="flex items-center gap-2 text-on-surface-variant">
+        <span class="material-symbols-outlined text-sm text-green-600">verified</span>
+        <span class="text-xs font-medium">COA included with every order</span>
+      </div>
+      <div class="flex items-center gap-2 text-on-surface-variant">
+        <span class="material-symbols-outlined text-sm text-green-600">lock</span>
+        <span class="text-xs font-medium">Secure checkout &middot; 256-bit SSL</span>
+      </div>
+      <div class="flex items-center gap-2 text-on-surface-variant">
+        <span class="material-symbols-outlined text-sm text-green-600">undo</span>
+        <span class="text-xs font-medium">Satisfaction guarantee &middot; Damaged products replaced</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tabs Section -->
+<section class="bg-surface-container-low py-24 border-t border-outline-variant/10">
+<div class="max-w-7xl mx-auto px-8">
+  <!-- Tab Headers -->
+  <div class="flex gap-12 border-b border-outline-variant/20 mb-16 overflow-x-auto whitespace-nowrap">
+    <button class="pb-6 border-b-2 border-primary text-on-surface font-bold text-xs uppercase tracking-widest">Research</button>
+    <button class="pb-6 border-b-2 border-transparent text-outline hover:text-on-surface font-bold text-xs uppercase tracking-widest transition-colors">Certificate of Analysis</button>
+    <button class="pb-6 border-b-2 border-transparent text-outline hover:text-on-surface font-bold text-xs uppercase tracking-widest transition-colors">Protocols</button>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+    <div class="space-y-8">
+      <div>
+        <h3 class="text-micro font-black text-primary uppercase tracking-[0.2em] mb-4">Mechanism of Action</h3>
+        <p class="text-on-surface-variant leading-relaxed font-light">G-LOW is a potent GLP-1 receptor agonist designed for metabolic research. GLP-1 (glucagon-like peptide-1) is an incretin hormone naturally released after eating that signals satiety, slows gastric emptying, and enhances insulin secretion. G-LOW mimics this pathway with enhanced stability and duration of action. The 70mg concentration provides researchers with extended study capabilities, making it one of the most cost-effective GLP-1 research compounds available.</p>
+      </div>
+      <div>
+        <h3 class="text-micro font-black text-primary uppercase tracking-[0.2em] mb-4">What Researchers Report</h3>
+        <ul class="space-y-4 text-on-surface-variant font-light">
+          <li class="flex gap-4">
+            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+            <span>Significant appetite reduction through central satiety signaling.</span>
+          </li>
+<li class="flex gap-4">
+            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+            <span>Improved insulin sensitivity and glycemic regulation markers.</span>
+          </li>
+<li class="flex gap-4">
+            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+            <span>Dose-dependent reduction in body weight in metabolic models.</span>
+          </li>
+
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-micro font-black text-primary uppercase tracking-[0.2em] mb-4">Researched For</h3>
+        <p class="text-on-surface-variant leading-relaxed font-light">Weight management, metabolic syndrome, appetite regulation, insulin sensitivity, and GLP-1 pathway research. The most in-demand peptide category right now — this is what everyone from gym-goers to longevity researchers is looking at.</p>
+      </div>
+    </div>
+    <!-- Right Column: Molecular Profile + Dosing -->
+    <div class="space-y-8">
+      <div class="bg-surface-container-lowest p-10 border border-outline-variant/5 rounded-xl">
+        <div class="flex justify-between items-start mb-10">
+          <div>
+            <h4 class="font-bold text-lg tracking-tight mb-1">Molecular Profile</h4>
+            <p class="text-micro text-outline uppercase tracking-widest">Chemical Metadata</p>
+          </div>
+          <span class="material-symbols-outlined text-outline">science</span>
+        </div>
+        <dl class="space-y-6">
+          <div class="flex justify-between border-b border-outline-variant/10 pb-4">
+            <dt class="text-xs font-bold uppercase tracking-widest text-outline">Sequence</dt>
+            <dd class="text-xs font-mono text-on-surface text-right max-w-[200px]">Modified GLP-1 analog</dd>
+          </div>
+          <div class="flex justify-between border-b border-outline-variant/10 pb-4">
+            <dt class="text-xs font-bold uppercase tracking-widest text-outline">Molecular Weight</dt>
+            <dd class="text-xs font-mono text-on-surface">4113.6 Da</dd>
+          </div>
+          <div class="flex justify-between border-b border-outline-variant/10 pb-4">
+            <dt class="text-xs font-bold uppercase tracking-widest text-outline">CAS Number</dt>
+            <dd class="text-xs font-mono text-on-surface">910463-68-2</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-xs font-bold uppercase tracking-widest text-outline">Purity (HPLC)</dt>
+            <dd class="text-xs font-mono text-on-surface">99.22%</dd>
+          </div>
+        </dl>
+      </div>
+      <!-- Dosing Protocol Table -->
+      <div class="bg-surface-container-lowest p-10 border border-outline-variant/5 rounded-xl">
+        <div class="flex justify-between items-start mb-8">
+          <div>
+            <h4 class="font-bold text-lg tracking-tight mb-1">Research Protocols</h4>
+            <p class="text-micro text-outline uppercase tracking-widest">Common dosing schedules in literature</p>
+          </div>
+          <span class="material-symbols-outlined text-outline">labs</span>
+        </div>
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b border-outline-variant/10">
+              <th class="text-[10px] font-bold uppercase tracking-widest text-outline pb-4">Protocol</th>
+              <th class="text-[10px] font-bold uppercase tracking-widest text-outline pb-4">Dose</th>
+              <th class="text-[10px] font-bold uppercase tracking-widest text-outline pb-4">Frequency</th>
+              <th class="text-[10px] font-bold uppercase tracking-widest text-outline pb-4">Duration</th>
+            </tr>
+          </thead>
+          <tbody class="text-sm text-on-surface-variant">
+            <tr class="border-b border-outline-variant/10">
+              <td class="py-4 font-medium text-on-surface text-xs">Starting Dose</td>
+              <td class="py-4 text-xs">0.25mg</td>
+              <td class="py-4 text-xs">1x/week</td>
+              <td class="py-4 text-xs">4 weeks</td>
+            </tr>
+<tr class="border-b border-outline-variant/10">
+              <td class="py-4 font-medium text-on-surface text-xs">Titration</td>
+              <td class="py-4 text-xs">0.5mg</td>
+              <td class="py-4 text-xs">1x/week</td>
+              <td class="py-4 text-xs">4 weeks</td>
+            </tr>
+<tr class="border-b border-outline-variant/10">
+              <td class="py-4 font-medium text-on-surface text-xs">Research Dose</td>
+              <td class="py-4 text-xs">1-2.4mg</td>
+              <td class="py-4 text-xs">1x/week</td>
+              <td class="py-4 text-xs">12+ weeks</td>
+            </tr>
+
+          </tbody>
+        </table>
+        <p class="text-[10px] text-outline mt-6 italic">For research reference only. Serenity does not recommend specific protocols.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Cross-sell -->
+<section class="py-24 px-8 bg-surface">
+<div class="max-w-7xl mx-auto">
+  <h2 class="text-2xl font-bold tracking-tight text-on-surface mb-4">Stack With</h2>
+  <p class="text-on-surface-variant text-sm mb-12">Researchers commonly pair G-LOW with these compounds for enhanced protocols.</p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <a href="../product_detail_retatrutide/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all">
+        <h3 class="font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">Retatrutide</h3>
+        <p class="text-xs text-on-surface-variant mb-4">Next-gen triple agonist</p>
+        <span class="text-lg font-medium text-primary">$65.00</span>
+      </a>
+<a href="../product_detail_cjcipa/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all">
+        <h3 class="font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">CJC/Ipamorelin</h3>
+        <p class="text-xs text-on-surface-variant mb-4">Metabolic + body comp</p>
+        <span class="text-lg font-medium text-primary">$54.99</span>
+      </a>
+<a href="../products_page/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all">
+        <h3 class="font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">Bac Water</h3>
+        <p class="text-xs text-on-surface-variant mb-4">Required for reconstitution</p>
+        <span class="text-lg font-medium text-primary">$9.99</span>
+      </a>
+
+  </div>
+</div>
+</section>
+
+<!-- Compliance Banner -->
+<section class="bg-on-surface py-6">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-center gap-4">
+  <span class="material-symbols-outlined text-error text-xl" style="font-variation-settings: 'FILL' 1;">warning</span>
+  <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] text-white text-center">WARNING: THIS PRODUCT IS INTENDED FOR LABORATORY RESEARCH USE ONLY. NOT FOR HUMAN CONSUMPTION.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 w-full py-16 px-8 border-t border-slate-100">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+  <div class="col-span-1">
+    <span class="text-lg font-bold tracking-tighter text-slate-900 block mb-6">SERENITY</span>
+    <p class="text-slate-500 text-sm leading-relaxed">Setting the global standard for research peptide purity and quality.</p>
+  </div>
+  <div class="flex flex-col gap-4">
+    <h5 class="text-[10px] font-black uppercase tracking-widest text-slate-900">Navigation</h5>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../products_page/code.html">Shop</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../faq_page/code.html">Support</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../about/code.html">About</a>
+  </div>
+  <div class="flex flex-col gap-4">
+    <h5 class="text-[10px] font-black uppercase tracking-widest text-slate-900">Legal</h5>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../faq_page/code.html">Terms of Service</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../faq_page/code.html">Privacy Policy</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../faq_page/code.html">Refund Policy</a>
+  </div>
+  <div class="flex flex-col gap-4">
+    <h5 class="text-[10px] font-black uppercase tracking-widest text-slate-900">Connect</h5>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="#">TikTok</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="#">Instagram</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../about/code.html">About Us</a>
+  </div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-slate-200">
+  <p class="text-slate-400 text-xs text-center">&copy; 2026 Serenity Research Labs. For research use only. Not for human consumption.</p>
+</div>
+</footer>
+<!-- Chatbot Widget -->
+<script src="../js/chatbot.js"></script>
+
+<script>
+function openMobileMenu() {
+  document.getElementById('mobile-menu').classList.add('active');
+  document.getElementById('mobile-menu-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('active');
+  document.getElementById('mobile-menu-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+</script>
+
+</body></html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Serenity Research Labs - About Us</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-surface": "#293040",
+            "background": "#f9f9ff",
+            "inverse-on-surface": "#edf0ff",
+            "tertiary": "#006490",
+            "surface-container-high": "#e1e8fd",
+            "secondary": "#515f74",
+            "on-surface": "#141b2b",
+            "surface-tint": "#0060ab",
+            "error-container": "#ffdad6",
+            "on-error-container": "#93000a",
+            "secondary-fixed": "#d5e3fc",
+            "surface": "#f9f9ff",
+            "outline": "#717783",
+            "inverse-primary": "#a3c9ff",
+            "secondary-fixed-dim": "#b9c7df",
+            "on-surface-variant": "#404752",
+            "on-primary-container": "#ffffff",
+            "tertiary-container": "#007eb4",
+            "on-secondary-fixed": "#0d1c2e",
+            "on-error": "#ffffff",
+            "surface-variant": "#dce2f7",
+            "tertiary-fixed-dim": "#89ceff",
+            "on-tertiary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#57657a",
+            "surface-dim": "#d3daef",
+            "primary-container": "#0078d4",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#001c39",
+            "on-tertiary-fixed": "#001e2f",
+            "on-background": "#141b2b",
+            "primary-fixed-dim": "#a3c9ff",
+            "primary": "#005faa",
+            "surface-container-low": "#f1f3ff",
+            "surface-bright": "#f9f9ff",
+            "on-primary-fixed-variant": "#004883",
+            "error": "#ba1a1a",
+            "secondary-container": "#d5e3fc",
+            "primary-fixed": "#d3e3ff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#ffffff",
+            "on-tertiary-fixed-variant": "#004c6e",
+            "surface-container": "#e9edff",
+            "on-secondary-fixed-variant": "#3a485b",
+            "tertiary-fixed": "#c9e6ff",
+            "outline-variant": "#c0c7d4",
+            "surface-container-highest": "#dce2f7"
+          },
+          fontFamily: {
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9ff;
+    }
+  </style>
+<style>
+    /* Mobile menu styles */
+    #mobile-menu-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:70; }
+    #mobile-menu-overlay.active { display:block; }
+    #mobile-menu { position:fixed; top:0; right:-300px; width:280px; height:100%; background:white; z-index:80; transition:right 0.3s ease; padding:80px 32px 32px; box-shadow:-4px 0 20px rgba(0,0,0,0.1); }
+    #mobile-menu.active { right:0; }
+    #mobile-menu a { display:block; padding:16px 0; font-size:18px; font-weight:500; color:#334155; border-bottom:1px solid #f1f5f9; text-decoration:none; font-family:'Inter',sans-serif; }
+    #mobile-menu a:hover { color:#0060ab; }
+    #mobile-menu .close-btn { position:absolute; top:24px; right:24px; background:none; border:none; cursor:pointer; }
+</style>
+</head>
+<body class="text-on-surface antialiased">
+
+<!-- Promo Banner -->
+<div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase fixed top-0 w-full z-[60]">
+  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · Free shipping on orders $100+</span>
+</div>
+<!-- TopAppBar -->
+<header class="fixed top-[34px] w-full z-50 bg-white/80 backdrop-blur-xl bg-gradient-to-b from-slate-50 to-transparent">
+<div class="flex justify-between items-center px-8 h-20 max-w-screen-2xl mx-auto">
+<button class="md:hidden" onclick="openMobileMenu()"><span class="material-symbols-outlined text-slate-700" style="font-size:28px;">menu</span></button>
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black tracking-tighter text-slate-900">SERENITY</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-500 hover:text-slate-900 transition-colors font-['Inter'] tracking-tight font-medium" href="../homepage/code.html">Home</a>
+<a class="text-slate-500 hover:text-slate-900 transition-colors font-['Inter'] tracking-tight font-medium" href="../products_page/code.html">Shop</a>
+<a class="text-slate-500 hover:text-slate-900 transition-colors font-['Inter'] tracking-tight font-medium" href="../faq_page/code.html">Support</a>
+<a class="text-blue-600 font-semibold border-b-2 border-blue-600 font-['Inter'] tracking-tight" href="../about/code.html">About</a>
+</nav>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-blue-600 hover:opacity-70 transition-opacity duration-200 cursor-pointer" data-icon="shopping_cart">shopping_cart</span>
+</div>
+</div>
+</header>
+
+<main class="pt-48 pb-32">
+
+<!-- Hero -->
+<section class="max-w-4xl mx-auto px-8 mb-32 text-center">
+<p class="text-[10px] uppercase tracking-[0.2em] font-bold text-primary mb-4">Who We Are</p>
+<h1 class="text-5xl md:text-7xl font-black tracking-tighter text-on-surface mb-8 leading-[0.95]">About Serenity</h1>
+<div class="h-1 w-12 bg-primary mx-auto mb-12"></div>
+<p class="text-xl text-on-surface-variant leading-relaxed max-w-2xl mx-auto font-light">
+    A US-based research peptide company built for the new era of health, performance, and scientific discovery.
+</p>
+</section>
+
+<!-- Mission Statement -->
+<section class="max-w-5xl mx-auto px-8 mb-32">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
+<div>
+<span class="text-[10px] uppercase tracking-[0.2em] font-bold text-primary mb-6 block">Our Mission</span>
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight text-on-surface mb-8 leading-tight">Moving with the world of peptides and health.</h2>
+<p class="text-on-surface-variant leading-relaxed mb-6">
+    The peptide industry is evolving fast. New research, new compounds, and new possibilities emerge every month. Serenity Research Labs was founded to be the supplier that keeps pace with that momentum — providing researchers, athletes, and health-conscious individuals with access to high-purity, rigorously tested compounds they can trust.
+</p>
+<p class="text-on-surface-variant leading-relaxed">
+    We're not a faceless overseas operation. We're a US-based team that personally handles every order, answers every question, and stands behind every batch. When you order from Serenity, you're getting a direct line to people who care about what they're selling and who they're selling it to.
+</p>
+</div>
+<div class="bg-surface-container-low rounded-2xl p-12 space-y-10">
+<div>
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="verified">verified</span>
+<h3 class="font-bold text-on-surface text-lg">99%+ Purity Standard</h3>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">Every batch is third-party tested via HPLC and Mass Spectrometry. We publish Certificates of Analysis because transparency isn't optional — it's the standard.</p>
+</div>
+<div>
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="local_shipping">local_shipping</span>
+<h3 class="font-bold text-on-surface text-lg">Fast US Shipping</h3>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">Orders ship within 24 hours in temperature-controlled, discreet packaging. Most domestic orders arrive within 2-4 business days.</p>
+</div>
+<div>
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="support_agent">support_agent</span>
+<h3 class="font-bold text-on-surface text-lg">Real People, Real Support</h3>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">Have a question about a compound, an order, or dosing protocols? We respond to every message personally. No bots, no ticket queues, no runaround.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Values Grid -->
+<section class="bg-surface-container-low py-32">
+<div class="max-w-5xl mx-auto px-8">
+<div class="text-center mb-20">
+<span class="text-[10px] uppercase tracking-[0.2em] font-bold text-primary mb-4 block">What We Stand For</span>
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight text-on-surface">Built different. On purpose.</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="bg-surface-container-lowest p-10 rounded-xl">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block" data-icon="shield">shield</span>
+<h3 class="text-xl font-bold text-on-surface mb-4">Safety First</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+    Every compound we carry has been vetted for purity and stability. We don't cut corners on sourcing, and we don't list anything we wouldn't use in our own research.
+</p>
+</div>
+<div class="bg-surface-container-lowest p-10 rounded-xl">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block" data-icon="trending_up">trending_up</span>
+<h3 class="text-xl font-bold text-on-surface mb-4">Always Evolving</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+    New peptides like Retatrutide and emerging stacks are added as soon as we can source and verify them. We stay on the cutting edge so you don't have to search for it.
+</p>
+</div>
+<div class="bg-surface-container-lowest p-10 rounded-xl">
+<span class="material-symbols-outlined text-primary text-3xl mb-6 block" data-icon="handshake">handshake</span>
+<h3 class="text-xl font-bold text-on-surface mb-4">Community Driven</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+    We're building Serenity alongside our customers. Follow us on TikTok and Instagram for exclusive codes, compound breakdowns, and real conversations about what works.
+</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-32 px-8">
+<div class="max-w-4xl mx-auto bg-primary-container rounded-2xl p-12 md:p-20 text-center relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-3xl md:text-4xl font-bold text-on-primary mb-4 tracking-tight">Ready to get started?</h2>
+<p class="text-white/80 mb-10 max-w-lg mx-auto">Browse our full collection of research-grade peptides and curated stacks.</p>
+<a class="inline-flex items-center gap-2 bg-white text-primary-container px-8 py-4 rounded-lg font-bold hover:bg-slate-50 transition-colors" href="../products_page/code.html">
+    View Collection
+    <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white to-transparent"></div>
+</div>
+</div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-slate-50 border-t border-slate-100">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto w-full py-16 px-8">
+<div class="col-span-1 md:col-span-1">
+<span class="text-lg font-bold tracking-tighter text-slate-900 block mb-4">SERENITY</span>
+<p class="text-slate-500 font-['Inter'] text-sm leading-relaxed">A US-based research peptide supplier. Fast shipping, verified purity, real support.</p>
+</div>
+<div>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-6">Explore</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../products_page/code.html">Shop</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../pricing_stacks/code.html">Stacks</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../about/code.html">Lab Reports</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-6">Support</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../faq_page/code.html">FAQ</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../faq_page/code.html">Shipping</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../faq_page/code.html">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-6">Connect</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="#">TikTok</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="#">Instagram</a></li>
+<li><a class="text-blue-600 text-sm font-medium" href="../about/code.html">About Us</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 py-8 border-t border-slate-200/50">
+<p class="text-slate-400 font-['Inter'] text-[10px] text-center md:text-left">
+    &copy; 2026 Serenity Research Labs. For research use only. Not for human consumption.
+</p>
+</div>
+</footer>
+<script src="../js/chatbot.js"></script>
+
+<script>
+function openMobileMenu() {
+  document.getElementById('mobile-menu').classList.add('active');
+  document.getElementById('mobile-menu-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('active');
+  document.getElementById('mobile-menu-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+</script>
+
+</body></html>

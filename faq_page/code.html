@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Serenity Research Labs - FAQ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-surface": "#293040",
+            "background": "#f9f9ff",
+            "inverse-on-surface": "#edf0ff",
+            "tertiary": "#006490",
+            "surface-container-high": "#e1e8fd",
+            "secondary": "#515f74",
+            "on-surface": "#141b2b",
+            "surface-tint": "#0060ab",
+            "error-container": "#ffdad6",
+            "on-error-container": "#93000a",
+            "secondary-fixed": "#d5e3fc",
+            "surface": "#f9f9ff",
+            "outline": "#717783",
+            "inverse-primary": "#a3c9ff",
+            "secondary-fixed-dim": "#b9c7df",
+            "on-surface-variant": "#404752",
+            "on-primary-container": "#ffffff",
+            "tertiary-container": "#007eb4",
+            "on-secondary-fixed": "#0d1c2e",
+            "on-error": "#ffffff",
+            "surface-variant": "#dce2f7",
+            "tertiary-fixed-dim": "#89ceff",
+            "on-tertiary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#57657a",
+            "surface-dim": "#d3daef",
+            "primary-container": "#0078d4",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#001c39",
+            "on-tertiary-fixed": "#001e2f",
+            "on-background": "#141b2b",
+            "primary-fixed-dim": "#a3c9ff",
+            "primary": "#005faa",
+            "surface-container-low": "#f1f3ff",
+            "surface-bright": "#f9f9ff",
+            "on-primary-fixed-variant": "#004883",
+            "error": "#ba1a1a",
+            "secondary-container": "#d5e3fc",
+            "primary-fixed": "#d3e3ff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#ffffff",
+            "on-tertiary-fixed-variant": "#004c6e",
+            "surface-container": "#e9edff",
+            "on-secondary-fixed-variant": "#3a485b",
+            "tertiary-fixed": "#c9e6ff",
+            "outline-variant": "#c0c7d4",
+            "surface-container-highest": "#dce2f7"
+          },
+          fontFamily: {
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9ff;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <style>
+    /* Mobile menu styles */
+    #mobile-menu-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:70; }
+    #mobile-menu-overlay.active { display:block; }
+    #mobile-menu { position:fixed; top:0; right:-300px; width:280px; height:100%; background:white; z-index:80; transition:right 0.3s ease; padding:80px 32px 32px; box-shadow:-4px 0 20px rgba(0,0,0,0.1); }
+    #mobile-menu.active { right:0; }
+    #mobile-menu a { display:block; padding:16px 0; font-size:18px; font-weight:500; color:#334155; border-bottom:1px solid #f1f5f9; text-decoration:none; font-family:'Inter',sans-serif; }
+    #mobile-menu a:hover { color:#0060ab; }
+    #mobile-menu .close-btn { position:absolute; top:24px; right:24px; background:none; border:none; cursor:pointer; }
+</style>
+</head>
+<body class="text-on-surface antialiased">
+<!-- Promo Banner -->
+<div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase fixed top-0 w-full z-[60]">
+  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · Free shipping on orders $100+</span>
+</div>
+<!-- TopAppBar Component -->
+<header class="fixed top-[34px] w-full z-50 bg-white/80 backdrop-blur-xl bg-gradient-to-b from-slate-50 to-transparent">
+<div class="flex justify-between items-center px-8 h-20 max-w-screen-2xl mx-auto">
+<button class="md:hidden" onclick="openMobileMenu()"><span class="material-symbols-outlined text-slate-700" style="font-size:28px;">menu</span></button>
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black tracking-tighter text-slate-900">SERENITY</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../homepage/code.html">Home</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../products_page/code.html">Shop</a>
+<a class="text-blue-600 dark:text-blue-400 font-semibold border-b-2 border-blue-600 font-['Inter'] tracking-tight" href="../faq_page/code.html">Support</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../about/code.html">About</a>
+</nav>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-blue-600 hover:opacity-70 transition-opacity duration-200 cursor-pointer" data-icon="shopping_cart">shopping_cart</span>
+</div>
+</div>
+</header>
+<main class="pt-48 pb-32 px-6">
+<div class="max-w-2xl mx-auto">
+<!-- Page Header -->
+<div class="text-center mb-24">
+<p class="text-[10px] uppercase tracking-[0.2em] font-bold text-primary mb-4">Support Center</p>
+<h1 class="text-5xl md:text-6xl font-black tracking-tighter text-on-surface mb-6">Frequently Asked Questions</h1>
+<div class="h-1 w-12 bg-primary mx-auto"></div>
+</div>
+<!-- FAQ Section (Accordion) -->
+<section class="space-y-0">
+<!-- Question 1 -->
+<div class="group border-b border-outline-variant/20">
+<button class="w-full py-10 flex justify-between items-center text-left focus:outline-none">
+<span class="text-xl md:text-2xl font-medium tracking-tight text-on-surface group-hover:text-primary transition-colors">What are research peptides?</span>
+<span class="material-symbols-outlined text-outline transition-transform group-hover:rotate-45" data-icon="add">add</span>
+</button>
+<div class="overflow-hidden max-h-0 group-focus-within:max-h-96 transition-all duration-500 ease-in-out">
+<p class="pb-10 text-on-surface-variant leading-relaxed font-body">
+              Research peptides are short chains of amino acids designed specifically for laboratory experimentation and scientific study. At Serenity Research Labs, our peptides are synthesized to meet the highest standards of purity for in-vitro research applications.
+            </p>
+</div>
+</div>
+<!-- Question 2 -->
+<div class="group border-b border-outline-variant/20">
+<button class="w-full py-10 flex justify-between items-center text-left focus:outline-none">
+<span class="text-xl md:text-2xl font-medium tracking-tight text-on-surface group-hover:text-primary transition-colors">How is purity verified?</span>
+<span class="material-symbols-outlined text-outline transition-transform group-hover:rotate-45" data-icon="add">add</span>
+</button>
+<div class="overflow-hidden max-h-0 group-focus-within:max-h-96 transition-all duration-500 ease-in-out">
+<p class="pb-10 text-on-surface-variant leading-relaxed font-body">
+              Every batch undergoes rigorous High-Performance Liquid Chromatography (HPLC) and Mass Spectrometry (MS) analysis. We maintain a "Clinical Gallery" standard where every molecule is mapped and verified by independent third-party laboratories.
+            </p>
+</div>
+</div>
+<!-- Question 3 -->
+<div class="group border-b border-outline-variant/20">
+<button class="w-full py-10 flex justify-between items-center text-left focus:outline-none">
+<span class="text-xl md:text-2xl font-medium tracking-tight text-on-surface group-hover:text-primary transition-colors">What payment methods?</span>
+<span class="material-symbols-outlined text-outline transition-transform group-hover:rotate-45" data-icon="add">add</span>
+</button>
+<div class="overflow-hidden max-h-0 group-focus-within:max-h-96 transition-all duration-500 ease-in-out">
+<p class="pb-10 text-on-surface-variant leading-relaxed font-body">
+              We accept all major credit and debit cards (Visa, Mastercard, American Express), Apple Pay, and select cryptocurrencies (Bitcoin, Ethereum). All transactions are processed through secure, PCI-compliant payment infrastructure with end-to-end encryption.
+            </p>
+</div>
+</div>
+<!-- Question 4 -->
+<div class="group border-b border-outline-variant/20">
+<button class="w-full py-10 flex justify-between items-center text-left focus:outline-none">
+<span class="text-xl md:text-2xl font-medium tracking-tight text-on-surface group-hover:text-primary transition-colors">Shipping policy?</span>
+<span class="material-symbols-outlined text-outline transition-transform group-hover:rotate-45" data-icon="add">add</span>
+</button>
+<div class="overflow-hidden max-h-0 group-focus-within:max-h-96 transition-all duration-500 ease-in-out">
+<p class="pb-10 text-on-surface-variant leading-relaxed font-body">
+              Orders are dispatched within 24 hours in temperature-controlled packaging. We provide global tracked shipping to ensure your research materials arrive in pristine condition, maintaining biological integrity throughout the transit.
+            </p>
+</div>
+</div>
+<!-- Question 5 -->
+<div class="group border-b border-outline-variant/20">
+<button class="w-full py-10 flex justify-between items-center text-left focus:outline-none">
+<span class="text-xl md:text-2xl font-medium tracking-tight text-on-surface group-hover:text-primary transition-colors">Return policy?</span>
+<span class="material-symbols-outlined text-outline transition-transform group-hover:rotate-45" data-icon="add">add</span>
+</button>
+<div class="overflow-hidden max-h-0 group-focus-within:max-h-96 transition-all duration-500 ease-in-out">
+<p class="pb-10 text-on-surface-variant leading-relaxed font-body">
+              Due to the sensitive nature of scientific reagents, we cannot accept returns once the vacuum seal is broken. However, if a product arrives damaged or fails to meet our stated purity standards, we offer immediate replacement or credit.
+            </p>
+</div>
+</div>
+<!-- Question 6 -->
+<div class="group border-b border-outline-variant/20">
+<button class="w-full py-10 flex justify-between items-center text-left focus:outline-none">
+<span class="text-xl md:text-2xl font-medium tracking-tight text-on-surface group-hover:text-primary transition-colors">Do you provide COAs?</span>
+<span class="material-symbols-outlined text-outline transition-transform group-hover:rotate-45" data-icon="add">add</span>
+</button>
+<div class="overflow-hidden max-h-0 group-focus-within:max-h-96 transition-all duration-500 ease-in-out">
+<p class="pb-10 text-on-surface-variant leading-relaxed font-body">
+              Absolutely. Certificates of Analysis (COAs) are available for every single batch we produce. You can find the batch-specific COA by scanning the QR code on your product vial or by entering the SKU in our digital portal.
+            </p>
+</div>
+</div>
+</section>
+<!-- Contact CTA -->
+<div class="mt-32 p-12 bg-surface-container-low rounded-xl text-center border border-outline-variant/10">
+<h3 class="text-2xl font-bold tracking-tight text-on-surface mb-4">Still have questions?</h3>
+<p class="text-on-surface-variant mb-8 max-w-md mx-auto">Our clinical support team is available 24/7 to assist with technical specifications or order inquiries.</p>
+<button class="bg-primary text-on-primary px-10 py-4 rounded-md font-bold tracking-tight hover:bg-primary-container transition-colors shadow-sm">
+          Contact us
+        </button>
+</div>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="bg-slate-50 border-t border-slate-100">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto w-full py-16 px-8">
+<div class="col-span-1 md:col-span-1">
+<span class="text-lg font-bold tracking-tighter text-slate-900 block mb-4">SERENITY</span>
+<p class="text-slate-500 font-['Inter'] text-sm leading-relaxed">Defining the future of clinical research through purity and precision.</p>
+</div>
+<div>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-6">Connect</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="#">TikTok</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="#">Instagram</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../about/code.html">About</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-6">Support</h4>
+<ul class="space-y-4">
+<li><a class="text-blue-600 text-sm font-medium" href="../faq_page/code.html">FAQ</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../faq_page/code.html">Shipping</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../faq_page/code.html">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-6">Legal</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../faq_page/code.html">Terms</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../faq_page/code.html">Privacy</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 py-8 border-t border-slate-200/50">
+<p class="text-slate-400 font-['Inter'] text-[10px] text-center md:text-left">
+        © 2026 Serenity Research Labs. For research use only. Not for human consumption.
+      </p>
+</div>
+</footer>
+<script src="../js/chatbot.js"></script>
+
+<script>
+function openMobileMenu() {
+  document.getElementById('mobile-menu').classList.add('active');
+  document.getElementById('mobile-menu-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('active');
+  document.getElementById('mobile-menu-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+</script>
+
+</body></html>
