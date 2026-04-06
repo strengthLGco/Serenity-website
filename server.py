@@ -178,7 +178,7 @@ def create_payment_intent():
                     "country": "US",
                 },
             } if data.get("name") else None,
-            receipt_email=data.get("email"),
+            receipt_email=data.get("email") if data.get("email") else None,
             description="Serenity Research Labs Order",
         )
 

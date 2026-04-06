@@ -522,19 +522,13 @@ async function initStripe() {
 
     stripe = Stripe(publishableKey);
 
-    // Create Payment Intent on the server
+    // Create Payment Intent on the server (cart + promo only — shipping/email sent at confirmation)
     const intentResponse = await fetch("/api/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         items: cart.map(item => ({ id: item.id, quantity: item.qty })),
         promoCode: promoCode,
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        address: document.getElementById("address").value,
-        city: document.getElementById("city").value,
-        state: document.getElementById("state").value,
-        zip: document.getElementById("zip").value,
       }),
     });
 
