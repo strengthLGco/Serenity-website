@@ -118,8 +118,9 @@
 <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../about/code.html">About</a>
 </nav>
 <div class="flex items-center gap-4">
-<button class="hover:opacity-70 transition-opacity duration-200 scale-95 active:scale-90 transition-transform text-blue-600 dark:text-blue-400">
+<button class="hover:opacity-70 transition-opacity duration-200 scale-95 active:scale-90 transition-transform text-blue-600 dark:text-blue-400 relative cursor-pointer" data-cart-link>
 <span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span data-cart-badge class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-white hidden">0</span>
 </button>
 </div>
 </div>
@@ -378,5 +379,6 @@ function closeMobileMenu() {
   document.body.style.overflow = '';
 }
 </script>
+<script src="../js/cart.js"></script>
 
 </body></html>

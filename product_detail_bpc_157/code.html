@@ -122,9 +122,9 @@
 </div>
 <div class="flex items-center gap-6">
 <span class="material-symbols-outlined text-slate-900 dark:text-white cursor-pointer hover:opacity-70 transition-opacity duration-200">search</span>
-<div class="relative">
-<span class="material-symbols-outlined text-slate-900 dark:text-white cursor-pointer scale-95 active:scale-90 transition-transform">shopping_cart</span>
-<span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-white">2</span>
+<div class="relative cursor-pointer" data-cart-link>
+<span class="material-symbols-outlined text-slate-900 dark:text-white scale-95 active:scale-90 transition-transform">shopping_cart</span>
+<span data-cart-badge class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-white hidden">0</span>
 </div>
 </div>
 </div>
@@ -160,17 +160,17 @@
 <div class="flex flex-col gap-3 mb-8">
 <label class="text-[10px] font-bold uppercase tracking-widest text-outline">Select Quantity</label>
 <div class="flex items-center w-32 h-14 border border-outline-variant/30 bg-surface-container-lowest">
-<button class="flex-1 h-full flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<button data-qty-minus class="flex-1 h-full flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant">
 <span class="material-symbols-outlined text-sm">remove</span>
 </button>
-<div class="flex-1 text-center font-medium">1</div>
-<button class="flex-1 h-full flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<div data-qty-display class="flex-1 text-center font-medium">1</div>
+<button data-qty-plus class="flex-1 h-full flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant">
 <span class="material-symbols-outlined text-sm">add</span>
 </button>
 </div>
 </div>
 <!-- Add to Cart -->
-<button class="w-full bg-primary-container text-on-primary py-6 font-bold uppercase tracking-widest text-sm hover:brightness-110 active:scale-[0.98] transition-all mb-6">
+<button data-add-to-cart data-product-id="bpc-157" data-product-name="BPC-157" data-product-desc="5mg Lyophilized" data-product-price="44.99" data-product-icon="science" class="w-full bg-primary-container text-on-primary py-6 font-bold uppercase tracking-widest text-sm hover:brightness-110 active:scale-[0.98] transition-all mb-6">
                     Add to Cart
                 </button>
 <!-- Trust Row -->
@@ -336,6 +336,7 @@
 </div>
 </footer>
 <script src="../js/chatbot.js"></script>
+<script src="../js/cart.js"></script>
 
 <script>
 function openMobileMenu() {

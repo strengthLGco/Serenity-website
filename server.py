@@ -93,7 +93,7 @@ def create_payment_intent():
             },
             "tb-500": {
                 "name": "TB-500",
-                "price": 4499  # $44.99
+                "price": 4999  # $49.99
             },
             "cjc-ipa": {
                 "name": "CJC-1295 / Ipamorelin",
@@ -105,7 +105,7 @@ def create_payment_intent():
             },
             "mt2": {
                 "name": "Melanotan II",
-                "price": 3999  # $39.99
+                "price": 3499  # $34.99
             },
             "igf1-lr3": {
                 "name": "IGF-1 LR3",
@@ -113,7 +113,7 @@ def create_payment_intent():
             },
             "retatrutide": {
                 "name": "Retatrutide",
-                "price": 7999  # $79.99
+                "price": 6500  # $65.00
             },
             "glow-stack": {
                 "name": "The Glow Stack",

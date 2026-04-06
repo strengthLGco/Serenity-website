@@ -69,8 +69,9 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
 </div>
   <div class="flex items-center gap-6">
     <span class="material-symbols-outlined text-slate-900 cursor-pointer hover:opacity-70">search</span>
-    <div class="relative">
-      <span class="material-symbols-outlined text-slate-900 cursor-pointer">shopping_cart</span>
+    <div class="relative cursor-pointer" data-cart-link>
+      <span class="material-symbols-outlined text-slate-900 scale-95 active:scale-90 transition-transform">shopping_cart</span>
+      <span data-cart-badge class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-white hidden">0</span>
     </div>
   </div>
 </div>
@@ -108,13 +109,13 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
     <div class="flex flex-col gap-3 mb-6">
       <label class="text-[10px] font-bold uppercase tracking-widest text-outline">Select Quantity</label>
       <div class="flex items-center w-32 h-14 border border-outline-variant/30 bg-surface-container-lowest rounded-lg">
-        <button class="flex-1 h-full flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-sm">remove</span></button>
-        <div class="flex-1 text-center font-medium">1</div>
-        <button class="flex-1 h-full flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-sm">add</span></button>
+        <button data-qty-minus class="flex-1 h-full flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-sm">remove</span></button>
+        <div data-qty-display class="flex-1 text-center font-medium">1</div>
+        <button data-qty-plus class="flex-1 h-full flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-sm">add</span></button>
       </div>
     </div>
     <!-- Add to Cart -->
-    <button class="w-full bg-primary-container text-on-primary py-5 font-bold uppercase tracking-widest text-sm hover:brightness-110 active:scale-[0.98] transition-all rounded-xl mb-4">Add to Cart</button>
+    <button data-add-to-cart data-product-id="glow-stack" data-product-name="The Glow Stack" data-product-desc="GHK-Cu + MT-II" data-product-price="89.99" data-product-icon="science" class="w-full bg-primary-container text-on-primary py-5 font-bold uppercase tracking-widest text-sm hover:brightness-110 active:scale-[0.98] transition-all rounded-xl mb-4">Add to Cart</button>
     <!-- Trust Row -->
     <div class="flex flex-col gap-3 mt-2">
       <div class="flex items-center gap-2 text-on-surface-variant">
@@ -298,5 +299,6 @@ function closeMobileMenu() {
   document.body.style.overflow = '';
 }
 </script>
+<script src="../js/cart.js"></script>
 
 </body></html>

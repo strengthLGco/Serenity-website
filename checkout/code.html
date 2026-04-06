@@ -167,9 +167,12 @@
 <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../about/code.html">About</a>
 </nav>
 <div class="flex items-center gap-6">
+<div class="relative" data-cart-link>
 <button class="hover:opacity-70 transition-opacity duration-200 scale-95 active:scale-90 transition-transform text-blue-600">
 <span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-0 right-0 w-5 h-5 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center hidden" data-cart-badge>0</span>
 </button>
+</div>
 </div>
 </div>
 </header>
@@ -422,13 +425,14 @@
 
 <script>
 // =============================================================================
-// CART STATE — In production, sync this with localStorage or a cart API
+// CART STATE — Loaded from localStorage (set by product pages via cart.js)
 // =============================================================================
-// Default demo cart items (these would normally come from "Add to Cart" actions)
-let cart = [
-  { id: "gym-stack", name: "The Gym Stack", desc: "BPC-157 + TB-500 + CJC/Ipa", qty: 1, price: 119.99, icon: "science" },
-  { id: "bac-water", name: "Bacteriostatic Water", desc: "30ml", qty: 1, price: 9.99, icon: "water_drop" },
-];
+let cart = [];
+try {
+  cart = JSON.parse(localStorage.getItem("serenity_cart")) || [];
+} catch (e) {
+  cart = [];
+}
 
 let promoCode = "";
 let promoApplied = false;
@@ -439,6 +443,18 @@ let promoApplied = false;
 function renderCart() {
   const container = document.getElementById("cart-items");
   container.innerHTML = "";
+
+  if (cart.length === 0) {
+    container.innerHTML = `
+      <div class="text-center py-8">
+        <span class="material-symbols-outlined text-outline text-4xl mb-4">shopping_cart</span>
+        <p class="text-on-surface-variant font-medium">Your cart is empty</p>
+        <a href="../products_page/code.html" class="text-primary text-sm font-bold uppercase tracking-widest hover:underline mt-4 inline-block">Browse Products</a>
+      </div>
+    `;
+    document.getElementById("submit-btn").disabled = true;
+    return;
+  }
 
   cart.forEach(item => {
     container.innerHTML += `
@@ -741,5 +757,6 @@ renderCart();
 checkRedirectResult();
 initStripe();
 </script>
+<script src="../js/cart.js"></script>
 
 </body></html>
