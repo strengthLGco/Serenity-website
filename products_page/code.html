@@ -101,9 +101,21 @@
 </style>
 </head>
 <body class="bg-background text-on-surface font-body antialiased">
+<!-- Age Verification Modal -->
+<div id="age-gate" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] flex items-center justify-center hidden">
+  <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+    <h2 class="text-2xl font-bold text-on-surface mb-4">Age Verification</h2>
+    <p class="text-on-surface-variant text-sm mb-6 leading-relaxed">You must be 18 years or older to access this site. All products are sold exclusively for in vitro research purposes only. Not for human or animal use.</p>
+    <div class="mb-6">
+      <label class="block text-sm font-medium text-on-surface mb-2">Birthday (MM/DD/YYYY)</label>
+      <input type="text" id="birthday-input" placeholder="MM/DD/YYYY" class="w-full px-4 py-2 border border-outline rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" maxlength="10"/>
+    </div>
+    <button onclick="verifyAge()" class="w-full bg-primary-container text-on-primary-container font-semibold py-2.5 rounded-lg hover:opacity-90 transition-opacity">Enter Site</button>
+  </div>
+</div>
 <!-- Sticky Promo Banner -->
 <div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase fixed top-0 w-full z-[60]">
-  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · Free shipping on orders $100+</span>
+  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · Free shipping on orders $100+ · <span class="text-slate-400">For research purposes only</span></span>
 </div>
 <!-- TopAppBar -->
 <nav class="fixed top-[34px] w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
@@ -130,14 +142,18 @@
 <header class="max-w-7xl mx-auto px-8 mb-16 text-center">
 <p class="technical-label text-label-sm text-primary font-bold mb-4 tracking-[0.2em]">Validated Synthetics</p>
 <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-on-surface mb-8">Collection</h1>
+<p class="text-on-surface-variant text-base mt-4">All products for research purposes only. Not for human or animal use.</p>
 </header>
 <!-- Product Grid -->
 <section class="max-w-7xl mx-auto px-8">
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-12">
 <!-- Product Card 1 -->
 <div class="group flex flex-col space-y-6">
-<a href="../product_detail_bpc_157/code.html" class="aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
+<a href="../product_detail_bpc_157/code.html" class="relative aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
 <img alt="Laboratory Vial" class="max-h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105" data-alt="Close-up of a premium pharmaceutical vial with a minimalist white label, sitting on a pristine white surface with soft studio lighting." src="../images/products/bpc157.png?v=3"/>
+<div class="absolute top-4 left-4">
+<span class="bg-slate-900/80 text-white px-2.5 py-1 rounded text-[9px] font-bold tracking-wider uppercase backdrop-blur-sm">For Research Only</span>
+</div>
 </a>
 <div class="space-y-2">
 <div class="flex justify-between items-start">
@@ -155,8 +171,11 @@
 </div>
 <!-- Product Card 2 -->
 <div class="group flex flex-col space-y-6">
-<a href="../product_detail_tb500/code.html" class="aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
+<a href="../product_detail_tb500/code.html" class="relative aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
 <img alt="Research vial" class="max-h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105" data-alt="A small laboratory glass vial filled with crystal clear liquid, staged against a high-key white background with elegant soft shadows." src="../images/products/tb500.png?v=3"/>
+<div class="absolute top-4 left-4">
+<span class="bg-slate-900/80 text-white px-2.5 py-1 rounded text-[9px] font-bold tracking-wider uppercase backdrop-blur-sm">For Research Only</span>
+</div>
 </a>
 <div class="space-y-2">
 <div class="flex justify-between items-start">
@@ -174,8 +193,11 @@
 </div>
 <!-- Product Card 3 -->
 <div class="group flex flex-col space-y-6">
-<a href="../product_detail_retatrutide/code.html" class="aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
+<a href="../product_detail_retatrutide/code.html" class="relative aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
 <img alt="Scientific sample" class="max-h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105" data-alt="Microscopic focus on a high-grade laboratory glass container with silver cap, isolated on white with sterile clinical lighting." src="../images/products/retatrutide.png?v=3"/>
+<div class="absolute top-4 left-4">
+<span class="bg-slate-900/80 text-white px-2.5 py-1 rounded text-[9px] font-bold tracking-wider uppercase backdrop-blur-sm">For Research Only</span>
+</div>
 </a>
 <div class="space-y-2">
 <div class="flex justify-between items-start">
@@ -193,8 +215,11 @@
 </div>
 <!-- Product Card 4 -->
 <div class="group flex flex-col space-y-6">
-<a href="../product_detail_ghkcu/code.html" class="aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
+<a href="../product_detail_ghkcu/code.html" class="relative aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
 <img alt="Peptide vial" class="max-h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105" data-alt="A clean, clinical product shot of a small medical vial with a light blue top, sitting in expansive white negative space." src="../images/products/ghkcu.png?v=3"/>
+<div class="absolute top-4 left-4">
+<span class="bg-slate-900/80 text-white px-2.5 py-1 rounded text-[9px] font-bold tracking-wider uppercase backdrop-blur-sm">For Research Only</span>
+</div>
 </a>
 <div class="space-y-2">
 <div class="flex justify-between items-start">
@@ -212,8 +237,11 @@
 </div>
 <!-- Product Card 5 -->
 <div class="group flex flex-col space-y-6">
-<a href="../product_detail_mt2/code.html" class="aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
+<a href="../product_detail_mt2/code.html" class="relative aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
 <img alt="Laboratory chemical" class="max-h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105" data-alt="A pharmaceutical glass vial with a white cap, glowing under soft diffused light against a stark white background." src="../images/products/mt2.png?v=3"/>
+<div class="absolute top-4 left-4">
+<span class="bg-slate-900/80 text-white px-2.5 py-1 rounded text-[9px] font-bold tracking-wider uppercase backdrop-blur-sm">For Research Only</span>
+</div>
 </a>
 <div class="space-y-2">
 <div class="flex justify-between items-start">
@@ -231,8 +259,11 @@
 </div>
 <!-- Product Card 6 -->
 <div class="group flex flex-col space-y-6">
-<a href="../product_detail_igf1lr3/code.html" class="aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
+<a href="../product_detail_igf1lr3/code.html" class="relative aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
 <img alt="Sterile vial" class="max-h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105" data-alt="High precision scientific glass bottle with silver seal, floating in a clean clinical white studio setup with sharp clarity." src="../images/products/igf1lr3.png?v=3"/>
+<div class="absolute top-4 left-4">
+<span class="bg-slate-900/80 text-white px-2.5 py-1 rounded text-[9px] font-bold tracking-wider uppercase backdrop-blur-sm">For Research Only</span>
+</div>
 </a>
 <div class="space-y-2">
 <div class="flex justify-between items-start">
@@ -250,8 +281,11 @@
 </div>
 <!-- Product Card 7: G-LOW -->
 <div class="group flex flex-col space-y-6">
-<a href="../product_detail_glow/code.html" class="aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
+<a href="../product_detail_glow/code.html" class="relative aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
 <img alt="G-LOW vial" class="max-h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105" src="../images/products/glow.png?v=3"/>
+<div class="absolute top-4 left-4">
+<span class="bg-slate-900/80 text-white px-2.5 py-1 rounded text-[9px] font-bold tracking-wider uppercase backdrop-blur-sm">For Research Only</span>
+</div>
 </a>
 <div class="space-y-2">
 <div class="flex justify-between items-start">
@@ -269,8 +303,11 @@
 </div>
 <!-- Product Card 8: Bac Water -->
 <div class="group flex flex-col space-y-6">
-<a href="../checkout/code.html" class="aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
+<a href="../checkout/code.html" class="relative aspect-[4/5] bg-surface-container-lowest overflow-hidden rounded-xl transition-shadow duration-500 hover:shadow-[0_40px_80px_-20px_rgba(20,27,43,0.08)] flex items-center justify-center p-12">
 <img alt="Bac Water vial" class="max-h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105" src="../images/products/bacwater.png?v=3"/>
+<div class="absolute top-4 left-4">
+<span class="bg-slate-900/80 text-white px-2.5 py-1 rounded text-[9px] font-bold tracking-wider uppercase backdrop-blur-sm">For Research Only</span>
+</div>
 </a>
 <div class="space-y-2">
 <div class="flex justify-between items-start">
@@ -307,11 +344,12 @@
 </ul>
 </div>
 <div>
-<h4 class="text-xs font-black uppercase tracking-[0.2em] text-on-surface mb-6">Support</h4>
+<h4 class="text-xs font-black uppercase tracking-[0.2em] text-on-surface mb-6">Legal</h4>
 <ul class="space-y-4">
-<li><a class="font-['Inter'] text-sm tracking-wide text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../faq_page/code.html">Support</a></li>
+<li><a class="font-['Inter'] text-sm tracking-wide text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../terms/code.html">Terms of Service</a></li>
+<li><a class="font-['Inter'] text-sm tracking-wide text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../privacy/code.html">Privacy Policy</a></li>
+<li><a class="font-['Inter'] text-sm tracking-wide text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../refund/code.html">Refund Policy</a></li>
 <li><a class="font-['Inter'] text-sm tracking-wide text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../faq_page/code.html">Shipping Policy</a></li>
-<li><a class="font-['Inter'] text-sm tracking-wide text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../faq_page/code.html">Terms of Research</a></li>
 </ul>
 </div>
 <div>
@@ -337,6 +375,44 @@ function closeMobileMenu() {
   document.getElementById('mobile-menu-overlay').classList.remove('active');
   document.body.style.overflow = '';
 }
+
+// Age verification gate
+function initAgeGate() {
+  const ageGateVerified = sessionStorage.getItem('ageGateVerified');
+  if (!ageGateVerified) {
+    document.getElementById('age-gate').classList.remove('hidden');
+  }
+}
+
+function verifyAge() {
+  const birthdayInput = document.getElementById('birthday-input').value;
+  const datePattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/\d{4}$/;
+
+  if (!datePattern.test(birthdayInput)) {
+    alert('Please enter a valid date in MM/DD/YYYY format');
+    return;
+  }
+
+  const [month, day, year] = birthdayInput.split('/').map(Number);
+  const birthDate = new Date(year, month - 1, day);
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  if (age >= 18) {
+    sessionStorage.setItem('ageGateVerified', 'true');
+    document.getElementById('age-gate').classList.add('hidden');
+  } else {
+    alert('You must be 18 years or older to access this site');
+  }
+}
+
+// Initialize age gate on page load
+document.addEventListener('DOMContentLoaded', initAgeGate);
 </script>
 <script src="../js/cart.js"></script>
 
