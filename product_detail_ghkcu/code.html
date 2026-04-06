@@ -139,8 +139,7 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
   <!-- Tab Headers -->
   <div class="flex gap-12 border-b border-outline-variant/20 mb-16 overflow-x-auto whitespace-nowrap">
     <button class="pb-6 border-b-2 border-primary text-on-surface font-bold text-xs uppercase tracking-widest">Research</button>
-    <button class="pb-6 border-b-2 border-transparent text-outline hover:text-on-surface font-bold text-xs uppercase tracking-widest transition-colors">Certificate of Analysis</button>
-    <button class="pb-6 border-b-2 border-transparent text-outline hover:text-on-surface font-bold text-xs uppercase tracking-widest transition-colors">Protocols</button>
+    <a href="../coa/ghk-cu-coa.pdf" target="_blank" class="pb-6 border-b-2 border-transparent text-outline hover:text-on-surface font-bold text-xs uppercase tracking-widest transition-colors cursor-pointer">Certificate of Analysis</a>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
     <div class="space-y-8">
@@ -171,35 +170,8 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
         <p class="text-on-surface-variant leading-relaxed font-light">Skin rejuvenation, hair restoration, wound healing, and anti-aging protocols. Popular in the 18-30 crowd for maintaining skin quality during intense training and sun exposure.</p>
       </div>
     </div>
-    <!-- Right Column: Molecular Profile + Dosing -->
+    <!-- Right Column: Dosing Protocols -->
     <div class="space-y-8">
-      <div class="bg-surface-container-lowest p-10 border border-outline-variant/5 rounded-xl">
-        <div class="flex justify-between items-start mb-10">
-          <div>
-            <h4 class="font-bold text-lg tracking-tight mb-1">Molecular Profile</h4>
-            <p class="text-micro text-outline uppercase tracking-widest">Chemical Metadata</p>
-          </div>
-          <span class="material-symbols-outlined text-outline">science</span>
-        </div>
-        <dl class="space-y-6">
-          <div class="flex justify-between border-b border-outline-variant/10 pb-4">
-            <dt class="text-xs font-bold uppercase tracking-widest text-outline">Sequence</dt>
-            <dd class="text-xs font-mono text-on-surface text-right max-w-[200px]">Gly-His-Lys·Cu(II)</dd>
-          </div>
-          <div class="flex justify-between border-b border-outline-variant/10 pb-4">
-            <dt class="text-xs font-bold uppercase tracking-widest text-outline">Molecular Weight</dt>
-            <dd class="text-xs font-mono text-on-surface">403.9 Da</dd>
-          </div>
-          <div class="flex justify-between border-b border-outline-variant/10 pb-4">
-            <dt class="text-xs font-bold uppercase tracking-widest text-outline">CAS Number</dt>
-            <dd class="text-xs font-mono text-on-surface">49557-75-7</dd>
-          </div>
-          <div class="flex justify-between">
-            <dt class="text-xs font-bold uppercase tracking-widest text-outline">Purity (HPLC)</dt>
-            <dd class="text-xs font-mono text-on-surface">99.28%</dd>
-          </div>
-        </dl>
-      </div>
       <!-- Dosing Protocol Table -->
       <div class="bg-surface-container-lowest p-10 border border-outline-variant/5 rounded-xl">
         <div class="flex justify-between items-start mb-8">
@@ -221,21 +193,21 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
           <tbody class="text-sm text-on-surface-variant">
             <tr class="border-b border-outline-variant/10">
               <td class="py-4 font-medium text-on-surface text-xs">Topical Protocol</td>
-              <td class="py-4 text-xs">1-2mg/mL</td>
-              <td class="py-4 text-xs">2x daily</td>
-              <td class="py-4 text-xs">8-12 weeks</td>
+              <td class="py-4 text-xs font-sans">1-2mg/mL</td>
+              <td class="py-4 text-xs font-sans">2x daily</td>
+              <td class="py-4 text-xs font-sans">8-12 weeks</td>
             </tr>
 <tr class="border-b border-outline-variant/10">
               <td class="py-4 font-medium text-on-surface text-xs">Injection Protocol</td>
-              <td class="py-4 text-xs">200mcg</td>
-              <td class="py-4 text-xs">1x daily</td>
-              <td class="py-4 text-xs">4-8 weeks</td>
+              <td class="py-4 text-xs font-sans">200mcg</td>
+              <td class="py-4 text-xs font-sans">1x daily</td>
+              <td class="py-4 text-xs font-sans">4-8 weeks</td>
             </tr>
 <tr class="border-b border-outline-variant/10">
               <td class="py-4 font-medium text-on-surface text-xs">Loading Phase</td>
-              <td class="py-4 text-xs">500mcg</td>
-              <td class="py-4 text-xs">1x daily</td>
-              <td class="py-4 text-xs">2 weeks</td>
+              <td class="py-4 text-xs font-sans">500mcg</td>
+              <td class="py-4 text-xs font-sans">1x daily</td>
+              <td class="py-4 text-xs font-sans">2 weeks</td>
             </tr>
 
           </tbody>
