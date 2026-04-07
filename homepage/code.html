@@ -130,12 +130,12 @@ function verifyAge() {
   if (age >= 18) {
     document.getElementById('age-gate').style.display = 'none';
     document.body.style.overflow = '';
-    sessionStorage.setItem('ageVerified', 'true');
+    localStorage.setItem('ageVerified', 'true');
   } else {
     alert('You must be 18 or older to access this site.');
   }
 }
-if (sessionStorage.getItem('ageVerified') === 'true') {
+if (localStorage.getItem('ageVerified') === 'true') {
   document.getElementById('age-gate').style.display = 'none';
 } else {
   document.body.style.overflow = 'hidden';
@@ -143,7 +143,7 @@ if (sessionStorage.getItem('ageVerified') === 'true') {
 </script>
 <!-- Promo Banner -->
 <div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase fixed top-0 w-full z-[60]">
-  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · Free shipping on orders $100+ · <span class="text-slate-400">For research purposes only</span></span>
+  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · <span class="text-slate-400">For research purposes only</span></span>
 </div>
 <!-- TopAppBar -->
 <header class="fixed top-[34px] w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl bg-gradient-to-b from-slate-50 to-transparent">
@@ -287,20 +287,99 @@ if (sessionStorage.getItem('ageVerified') === 'true') {
 </div>
 </div>
 </section>
-<!-- Blue Verification Banner -->
-<section class="py-20 px-8">
-<div class="max-w-7xl mx-auto bg-primary-container rounded-2xl p-12 md:p-20 text-center relative overflow-hidden">
-<div class="relative z-10">
-<h2 class="text-3xl md:text-5xl font-bold text-on-primary mb-8 tracking-tight">Every batch independently verified</h2>
-<a class="inline-flex items-center gap-2 bg-white text-primary-container px-8 py-4 rounded-lg font-bold hover:bg-slate-50 transition-colors" href="../about/code.html">
-                        View Certificates
-                        <span class="material-symbols-outlined" data-icon="open_in_new">open_in_new</span>
+<!-- Full Product Catalog -->
+<section class="py-32 px-8 bg-white">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-20">
+<h2 class="text-4xl md:text-5xl font-bold tracking-tight text-on-surface mb-6">Our Full Catalog</h2>
+<p class="text-on-surface-variant text-lg max-w-2xl mx-auto">Research-grade peptides, third-party tested, shipped within 24 hours. Every vial backed by a Certificate of Analysis.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- GHK-Cu -->
+<a href="../product_detail_ghkcu/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 hover:shadow-lg transition-all">
+<div class="aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden mb-6">
+<img alt="GHK-Cu" class="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110" src="../images/products/ghkcu.png?v=3"/>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold mb-1">Anti-Aging</p>
+<h3 class="text-xl font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">GHK-Cu</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider mb-3">50mg &middot; 99%+ Purity</p>
+<p class="text-xl font-semibold text-primary">$39.99</p>
+</a>
+<!-- BPC-157 -->
+<a href="../product_detail_bpc_157/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 hover:shadow-lg transition-all">
+<div class="aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden mb-6">
+<img alt="BPC-157" class="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110" src="../images/products/bpc157.png?v=3"/>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold mb-1">Recovery</p>
+<h3 class="text-xl font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">BPC-157</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider mb-3">5mg &middot; 99%+ Purity</p>
+<p class="text-xl font-semibold text-primary">$44.99</p>
+</a>
+<!-- TB-500 -->
+<a href="../product_detail_tb500/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 hover:shadow-lg transition-all">
+<div class="aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden mb-6">
+<img alt="TB-500" class="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110" src="../images/products/tb500.png?v=3"/>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold mb-1">Tissue Repair</p>
+<h3 class="text-xl font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">TB-500</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider mb-3">5mg &middot; 99%+ Purity</p>
+<p class="text-xl font-semibold text-primary">$49.99</p>
+</a>
+<!-- CJC/Ipamorelin -->
+<a href="../product_detail_cjcipa/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 hover:shadow-lg transition-all">
+<div class="aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden mb-6">
+<img alt="CJC/Ipamorelin" class="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110" src="../images/products/cjcipa.png?v=3"/>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold mb-1">Growth Hormone</p>
+<h3 class="text-xl font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">CJC/Ipamorelin</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider mb-3">5mg Blend &middot; 99%+ Purity</p>
+<p class="text-xl font-semibold text-primary">$54.99</p>
+</a>
+<!-- MT-2 -->
+<a href="../product_detail_mt2/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 hover:shadow-lg transition-all">
+<div class="aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden mb-6">
+<img alt="MT-2" class="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110" src="../images/products/mt2.png?v=3"/>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold mb-1">Melanocortin</p>
+<h3 class="text-xl font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">MT-2</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider mb-3">10mg &middot; 99%+ Purity</p>
+<p class="text-xl font-semibold text-primary">$34.99</p>
+</a>
+<!-- Retatrutide -->
+<a href="../product_detail_retatrutide/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 hover:shadow-lg transition-all">
+<div class="aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden mb-6">
+<img alt="Retatrutide" class="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110" src="../images/products/retatrutide.png?v=3"/>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold mb-1">Triple Agonist</p>
+<h3 class="text-xl font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">Retatrutide</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider mb-3">5mg &middot; 99%+ Purity</p>
+<p class="text-xl font-semibold text-primary">$65.00</p>
+</a>
+<!-- IGF-1 LR3 -->
+<a href="../product_detail_igf1lr3/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 hover:shadow-lg transition-all">
+<div class="aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden mb-6">
+<img alt="IGF-1 LR3" class="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110" src="../images/products/igf1lr3.png?v=3"/>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold mb-1">Growth Factor</p>
+<h3 class="text-xl font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">IGF-1 LR3</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider mb-3">1mg &middot; 99%+ Purity</p>
+<p class="text-xl font-semibold text-primary">$59.99</p>
+</a>
+<!-- G-LOW -->
+<a href="../product_detail_glow/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 hover:shadow-lg transition-all">
+<div class="aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden mb-6">
+<img alt="G-LOW" class="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110" src="../images/products/glow.png?v=3"/>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold mb-1">Weight Management</p>
+<h3 class="text-xl font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">G-LOW</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider mb-3">70mg &middot; 99%+ Purity</p>
+<p class="text-xl font-semibold text-primary">$89.99</p>
 </a>
 </div>
-<!-- Abstract texture background -->
-<div class="absolute inset-0 opacity-10 pointer-events-none">
-<div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white to-transparent"></div>
-<div class="absolute bottom-0 left-0 w-1/2 h-full bg-gradient-to-r from-white to-transparent"></div>
+<div class="text-center mt-12">
+<a href="../products_page/code.html" class="inline-flex items-center gap-2 text-primary font-semibold hover:opacity-80 transition-all">
+View All Products <span class="material-symbols-outlined" style="font-size:18px">arrow_forward</span>
+</a>
 </div>
 </div>
 </section>
@@ -313,7 +392,6 @@ if (sessionStorage.getItem('ageVerified') === 'true') {
 <ul class="space-y-4">
 <li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../products_page/code.html">Shop</a></li>
 <li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../products_page/code.html">Categories</a></li>
-<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../products_page/code.html">Bulk Pricing</a></li>
 </ul>
 </div>
 <div>
@@ -328,8 +406,8 @@ if (sessionStorage.getItem('ageVerified') === 'true') {
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-[0.1em] text-xs">Connect</h4>
 <ul class="space-y-4">
-<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">TikTok</a></li>
-<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">Instagram</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="https://www.tiktok.com/@serenityresearchlabs">TikTok</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="https://www.instagram.com/serenityresearchlabs/">Instagram</a></li>
 <li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../about/code.html">About Us</a></li>
 </ul>
 </div>

@@ -130,12 +130,12 @@ function verifyAge() {
   if (age >= 18) {
     document.getElementById('age-gate').style.display = 'none';
     document.body.style.overflow = '';
-    sessionStorage.setItem('ageVerified', 'true');
+    localStorage.setItem('ageVerified', 'true');
   } else {
     alert('You must be 18 or older to access this site.');
   }
 }
-if (sessionStorage.getItem('ageVerified') === 'true') {
+if (localStorage.getItem('ageVerified') === 'true') {
   document.getElementById('age-gate').style.display = 'none';
 } else {
   document.body.style.overflow = 'hidden';
@@ -143,7 +143,7 @@ if (sessionStorage.getItem('ageVerified') === 'true') {
 </script>
 <!-- Promo Banner -->
 <div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase fixed top-0 w-full z-[60]">
-  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · Free shipping on orders $100+ · <span class="text-slate-400">For research purposes only</span></span>
+  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · <span class="text-slate-400">For research purposes only</span></span>
 </div>
 <!-- TopAppBar -->
 <header class="fixed top-[34px] w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl bg-gradient-to-b from-slate-50 to-transparent">
@@ -358,21 +358,15 @@ if (sessionStorage.getItem('ageVerified') === 'true') {
       <p class="text-on-surface-variant mb-4 leading-relaxed">Our website may contain links to third-party websites and services that are not operated by Serenity Research Labs. This privacy policy applies only to our website. We are not responsible for the privacy practices of linked websites, and we encourage you to review their privacy policies before sharing any personal information.</p>
     </div>
 
-    <!-- 9. Children's Privacy -->
+    <!-- 9. Changes to This Policy -->
     <div class="mb-16">
-      <h2 class="text-3xl font-bold text-on-surface mb-6">9. Children's Privacy</h2>
-      <p class="text-on-surface-variant mb-4 leading-relaxed">Serenity Research Labs does not knowingly collect personal information from individuals under 18 years of age. Our products and services are intended exclusively for research purposes and are not available to children. If we become aware that we have collected information from a minor, we will take steps to delete such information promptly. Parents or guardians who believe their child has provided information to our site should contact us immediately.</p>
-    </div>
-
-    <!-- 10. Changes to This Policy -->
-    <div class="mb-16">
-      <h2 class="text-3xl font-bold text-on-surface mb-6">10. Changes to This Policy</h2>
+      <h2 class="text-3xl font-bold text-on-surface mb-6">9. Changes to This Policy</h2>
       <p class="text-on-surface-variant mb-4 leading-relaxed">We may update this privacy policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors. When we make material changes, we will notify you by updating the "Last updated" date at the top of this policy. Your continued use of our website following the posting of revised policy means that you accept and agree to the changes.</p>
     </div>
 
-    <!-- 11. Contact Us -->
+    <!-- 10. Contact Us -->
     <div class="mb-16">
-      <h2 class="text-3xl font-bold text-on-surface mb-6">11. Contact Us</h2>
+      <h2 class="text-3xl font-bold text-on-surface mb-6">10. Contact Us</h2>
       <p class="text-on-surface-variant mb-4 leading-relaxed">If you have questions, concerns, or requests regarding this privacy policy or our privacy practices, please contact us at:</p>
       <div class="bg-surface-container-lowest p-6 rounded-lg mt-6 border border-outline-variant/20">
         <p class="text-on-surface font-semibold mb-2">Serenity Research Labs LLC</p>
@@ -393,7 +387,6 @@ if (sessionStorage.getItem('ageVerified') === 'true') {
 <ul class="space-y-4">
 <li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../products_page/code.html">Shop</a></li>
 <li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../products_page/code.html">Categories</a></li>
-<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../products_page/code.html">Bulk Pricing</a></li>
 </ul>
 </div>
 <div>
@@ -408,8 +401,8 @@ if (sessionStorage.getItem('ageVerified') === 'true') {
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-[0.1em] text-xs">Connect</h4>
 <ul class="space-y-4">
-<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">TikTok</a></li>
-<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">Instagram</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="https://www.tiktok.com/@serenityresearchlabs">TikTok</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="https://www.instagram.com/serenityresearchlabs/">Instagram</a></li>
 <li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../about/code.html">About Us</a></li>
 </ul>
 </div>

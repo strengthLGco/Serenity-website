@@ -36,6 +36,13 @@ tailwind.config = {
 .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; line-height: 1; }
 body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
 .text-micro { font-size: 0.65rem; letter-spacing: 0.05em; }
+.sub-option { cursor:pointer; transition: all 0.15s ease; }
+.sub-option:hover { border-color: rgba(0,95,170,0.3); }
+.sub-option.active { border-color: #005faa; background: #f1f3ff; }
+.sub-option .sub-check { display:none; }
+.sub-option.active .sub-check { display:flex; }
+.sub-option .sub-badge { display:none; }
+.sub-option.active .sub-badge { display:inline-block; }
 </style>
 <style>
     /* Mobile menu styles */
@@ -51,7 +58,7 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
 <body class="bg-surface text-on-surface selection:bg-primary-container selection:text-white">
 <!-- Promo Banner -->
 <div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase fixed top-0 w-full z-[60]">
-  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off &middot; Free shipping on orders $100+</span>
+  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off</span>
 </div>
 <!-- TopAppBar -->
 <nav class="fixed top-[34px] w-full z-50 bg-white/80 backdrop-blur-xl bg-gradient-to-b from-slate-50 to-transparent">
@@ -81,7 +88,6 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
   <!-- Left: Image -->
   <div class="relative aspect-square bg-surface-container-lowest flex items-center justify-center overflow-hidden rounded-xl">
     <img alt="GHK-Cu Product Image" class="w-4/5 h-4/5 object-contain" src="../images/products/ghkcu.png?v=3"/>
-    <!-- Trust Badges on Image -->
     <div class="absolute top-6 left-6 flex flex-col gap-2">
       <span class="bg-primary text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full flex items-center gap-1.5">
         <span class="material-symbols-outlined text-xs" style="font-size:14px">verified</span> 99%+ Purity
@@ -101,12 +107,43 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
       <span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-widest rounded-full">Research Grade</span>
       <span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">50mg Lyophilized</span>
     </div>
-    <div class="mb-8">
-      <p class="text-4xl font-light tracking-tight text-on-surface">$39.99 <span class="text-sm text-outline uppercase tracking-wider ml-2 font-medium">USD</span></p>
+    <!-- Subscription Options -->
+    <div class="mb-6">
+      <label class="text-[10px] font-bold uppercase tracking-widest text-outline mb-3 block">Purchase Type</label>
+      <div class="grid grid-cols-2 gap-3" id="sub-options">
+        <div class="sub-option active border border-outline-variant/30 rounded-lg p-4 relative" data-sub="one-time" data-discount="0" onclick="selectSub(this)">
+          <div class="sub-check absolute top-3 right-3 w-5 h-5 rounded-full bg-primary items-center justify-center"><span class="material-symbols-outlined text-white" style="font-size:14px">check</span></div>
+          <p class="text-sm font-semibold text-on-surface">One-Time</p>
+          <p class="text-[10px] text-outline mt-0.5">No commitment</p>
+        </div>
+        <div class="sub-option border border-outline-variant/30 rounded-lg p-4 relative" data-sub="monthly" data-discount="20" onclick="selectSub(this)">
+          <div class="sub-check absolute top-3 right-3 w-5 h-5 rounded-full bg-primary items-center justify-center"><span class="material-symbols-outlined text-white" style="font-size:14px">check</span></div>
+          <p class="text-sm font-semibold text-on-surface">Monthly</p>
+          <p class="text-[10px] text-outline mt-0.5">Every 30 days</p>
+          <span class="sub-badge mt-2 text-[9px] font-bold uppercase tracking-wider bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Save 20%</span>
+        </div>
+        <div class="sub-option border border-outline-variant/30 rounded-lg p-4 relative" data-sub="bi-monthly" data-discount="15" onclick="selectSub(this)">
+          <div class="sub-check absolute top-3 right-3 w-5 h-5 rounded-full bg-primary items-center justify-center"><span class="material-symbols-outlined text-white" style="font-size:14px">check</span></div>
+          <p class="text-sm font-semibold text-on-surface">Bi-Monthly</p>
+          <p class="text-[10px] text-outline mt-0.5">Every 60 days</p>
+          <span class="sub-badge mt-2 text-[9px] font-bold uppercase tracking-wider bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Save 15%</span>
+        </div>
+        <div class="sub-option border border-outline-variant/30 rounded-lg p-4 relative" data-sub="quarterly" data-discount="10" onclick="selectSub(this)">
+          <div class="sub-check absolute top-3 right-3 w-5 h-5 rounded-full bg-primary items-center justify-center"><span class="material-symbols-outlined text-white" style="font-size:14px">check</span></div>
+          <p class="text-sm font-semibold text-on-surface">Quarterly</p>
+          <p class="text-[10px] text-outline mt-0.5">Every 90 days</p>
+          <span class="sub-badge mt-2 text-[9px] font-bold uppercase tracking-wider bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Save 10%</span>
+        </div>
+      </div>
+    </div>
+    <!-- Price -->
+    <div class="mb-6">
+      <p class="text-4xl font-light tracking-tight text-on-surface"><span id="display-price">$39.99</span> <span class="text-sm text-outline uppercase tracking-wider ml-2 font-medium">USD</span></p>
+      <p id="sub-savings" class="text-xs text-green-600 font-medium mt-1 hidden"></p>
     </div>
     <!-- Quantity Selector -->
     <div class="flex flex-col gap-3 mb-6">
-      <label class="text-[10px] font-bold uppercase tracking-widest text-outline">Select Quantity</label>
+      <label class="text-[10px] font-bold uppercase tracking-widest text-outline">Quantity</label>
       <div class="flex items-center w-32 h-14 border border-outline-variant/30 bg-surface-container-lowest rounded-lg">
         <button data-qty-minus class="flex-1 h-full flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-sm">remove</span></button>
         <div data-qty-display class="flex-1 text-center font-medium">1</div>
@@ -114,7 +151,7 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
       </div>
     </div>
     <!-- Add to Cart -->
-    <button data-add-to-cart data-product-id="ghk-cu" data-product-name="GHK-Cu" data-product-desc="5mg Lyophilized" data-product-price="39.99" data-product-icon="science" class="w-full bg-primary-container text-on-primary py-5 font-bold uppercase tracking-widest text-sm hover:brightness-110 active:scale-[0.98] transition-all rounded-xl mb-4">Add to Cart</button>
+    <button data-add-to-cart data-product-id="ghk-cu" data-product-name="GHK-Cu" data-product-desc="50mg Lyophilized" data-product-price="39.99" data-product-icon="science" class="w-full bg-primary-container text-on-primary py-5 font-bold uppercase tracking-widest text-sm hover:brightness-110 active:scale-[0.98] transition-all rounded-xl mb-4" id="add-to-cart-btn">Add to Cart &mdash; $39.99</button>
     <!-- Trust Row -->
     <div class="flex flex-col gap-3 mt-2">
       <div class="flex items-center gap-2 text-on-surface-variant">
@@ -133,114 +170,267 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
   </div>
 </section>
 
-<!-- Tabs Section -->
+<!-- Statistical Highlight Cards -->
+<section class="bg-surface-container-lowest py-16 border-y border-outline-variant/10">
+<div class="max-w-7xl mx-auto px-8">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div class="text-center p-6">
+      <span class="material-symbols-outlined text-primary mb-3" style="font-size:28px">biotech</span>
+      <p class="text-3xl md:text-4xl font-black text-on-surface tracking-tight">70%</p>
+      <p class="text-[10px] uppercase tracking-[0.15em] font-bold text-outline mt-2">Collagen Increase</p>
+      <p class="text-[10px] text-on-surface-variant mt-1">3-month clinical application</p>
+    </div>
+    <div class="text-center p-6">
+      <span class="material-symbols-outlined text-primary mb-3" style="font-size:28px">genetics</span>
+      <p class="text-3xl md:text-4xl font-black text-on-surface tracking-tight">4,000+</p>
+      <p class="text-[10px] uppercase tracking-[0.15em] font-bold text-outline mt-2">Genes Modulated</p>
+      <p class="text-[10px] text-on-surface-variant mt-1">31.2% of human genome</p>
+    </div>
+    <div class="text-center p-6">
+      <span class="material-symbols-outlined text-primary mb-3" style="font-size:28px">dermatology</span>
+      <p class="text-3xl md:text-4xl font-black text-on-surface tracking-tight">22%</p>
+      <p class="text-[10px] uppercase tracking-[0.15em] font-bold text-outline mt-2">Skin Firmness</p>
+      <p class="text-[10px] text-on-surface-variant mt-1">12-week double-blind study</p>
+    </div>
+    <div class="text-center p-6">
+      <span class="material-symbols-outlined text-primary mb-3" style="font-size:28px">trending_down</span>
+      <p class="text-3xl md:text-4xl font-black text-on-surface tracking-tight">16%</p>
+      <p class="text-[10px] uppercase tracking-[0.15em] font-bold text-outline mt-2">Fine Line Reduction</p>
+      <p class="text-[10px] text-on-surface-variant mt-1">Optical profilometry measured</p>
+    </div>
+  </div>
+  <p class="text-[10px] text-outline text-center mt-6 italic">Data from peer-reviewed clinical studies. Individual research results may vary. For research purposes only.</p>
+</div>
+</section>
+
+<!-- Tabs Section (Research + Protocols) -->
 <section class="bg-surface-container-low py-24 border-t border-outline-variant/10">
 <div class="max-w-7xl mx-auto px-8">
-  <!-- Tab Headers -->
   <div class="flex gap-12 border-b border-outline-variant/20 mb-16 overflow-x-auto whitespace-nowrap">
     <button class="pb-6 border-b-2 border-primary text-on-surface font-bold text-xs uppercase tracking-widest">Research</button>
     <a href="../coa/ghk-cu-coa.pdf" target="_blank" class="pb-6 border-b-2 border-transparent text-outline hover:text-on-surface font-bold text-xs uppercase tracking-widest transition-colors cursor-pointer">Certificate of Analysis</a>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+  <div class="grid grid-cols-1 gap-20">
     <div class="space-y-8">
       <div>
         <h3 class="text-micro font-black text-primary uppercase tracking-[0.2em] mb-4">Mechanism of Action</h3>
-        <p class="text-on-surface-variant leading-relaxed font-light">GHK-Cu is a naturally occurring copper complex of the tripeptide glycyl-L-histidyl-L-lysine. It's found in human plasma, saliva, and urine, and declines significantly with age. Research shows it activates over 4,000 genes — switching on regenerative ones and silencing destructive ones. It stimulates collagen and elastin production, attracts immune cells to injury sites, and has potent antioxidant properties that neutralize free radical damage.</p>
+        <p class="text-on-surface-variant leading-relaxed font-light">GHK-Cu is a naturally occurring copper complex of the tripeptide glycyl-L-histidyl-L-lysine. Found in human plasma, saliva, and urine, it declines significantly with age — dropping from ~200 ng/mL at age 20 to ~80 ng/mL by age 60. Research shows it activates over 4,000 genes, switching on regenerative pathways and silencing destructive ones while stimulating collagen, elastin, and potent antioxidant defense.</p>
       </div>
       <div>
         <h3 class="text-micro font-black text-primary uppercase tracking-[0.2em] mb-4">What Researchers Report</h3>
         <ul class="space-y-4 text-on-surface-variant font-light">
           <li class="flex gap-4">
             <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
-            <span>32% increase in collagen synthesis in dermal fibroblast models.</span>
+            <span>Up to 70% increase in collagen synthesis in clinical application studies.</span>
           </li>
-<li class="flex gap-4">
+          <li class="flex gap-4">
             <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
-            <span>Significant reduction in fine lines and photodamage markers.</span>
+            <span>22% improvement in skin firmness and 16% fine line reduction in 12-week trials.</span>
           </li>
-<li class="flex gap-4">
+          <li class="flex gap-4">
             <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
             <span>Accelerated wound contraction and re-epithelialization in tissue models.</span>
           </li>
-
+          <li class="flex gap-4">
+            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+            <span>1,942 genes upregulated and 762 genes suppressed in human fibroblasts.</span>
+          </li>
         </ul>
       </div>
       <div>
         <h3 class="text-micro font-black text-primary uppercase tracking-[0.2em] mb-4">Researched For</h3>
-        <p class="text-on-surface-variant leading-relaxed font-light">Skin rejuvenation, hair restoration, wound healing, and anti-aging protocols. Popular in the 18-30 crowd for maintaining skin quality during intense training and sun exposure.</p>
-      </div>
-    </div>
-    <!-- Right Column: Dosing Protocols -->
-    <div class="space-y-8">
-      <!-- Dosing Protocol Table -->
-      <div class="bg-surface-container-lowest p-10 border border-outline-variant/5 rounded-xl">
-        <div class="flex justify-between items-start mb-8">
-          <div>
-            <h4 class="font-bold text-lg tracking-tight mb-1">Research Protocols</h4>
-            <p class="text-micro text-outline uppercase tracking-widest">Common dosing schedules in literature</p>
-          </div>
-          <span class="material-symbols-outlined text-outline">labs</span>
-        </div>
-        <table class="w-full text-left">
-          <thead>
-            <tr class="border-b border-outline-variant/10">
-              <th class="text-[10px] font-bold uppercase tracking-widest text-outline pb-4">Protocol</th>
-              <th class="text-[10px] font-bold uppercase tracking-widest text-outline pb-4">Dose</th>
-              <th class="text-[10px] font-bold uppercase tracking-widest text-outline pb-4">Frequency</th>
-              <th class="text-[10px] font-bold uppercase tracking-widest text-outline pb-4">Duration</th>
-            </tr>
-          </thead>
-          <tbody class="text-sm text-on-surface-variant">
-            <tr class="border-b border-outline-variant/10">
-              <td class="py-4 font-medium text-on-surface text-xs">Topical Protocol</td>
-              <td class="py-4 text-xs font-sans">1-2mg/mL</td>
-              <td class="py-4 text-xs font-sans">2x daily</td>
-              <td class="py-4 text-xs font-sans">8-12 weeks</td>
-            </tr>
-<tr class="border-b border-outline-variant/10">
-              <td class="py-4 font-medium text-on-surface text-xs">Injection Protocol</td>
-              <td class="py-4 text-xs font-sans">200mcg</td>
-              <td class="py-4 text-xs font-sans">1x daily</td>
-              <td class="py-4 text-xs font-sans">4-8 weeks</td>
-            </tr>
-<tr class="border-b border-outline-variant/10">
-              <td class="py-4 font-medium text-on-surface text-xs">Loading Phase</td>
-              <td class="py-4 text-xs font-sans">500mcg</td>
-              <td class="py-4 text-xs font-sans">1x daily</td>
-              <td class="py-4 text-xs font-sans">2 weeks</td>
-            </tr>
-
-          </tbody>
-        </table>
-        <p class="text-[10px] text-outline mt-6 italic">For research reference only. Serenity does not recommend specific protocols.</p>
+        <p class="text-on-surface-variant leading-relaxed font-light">Skin rejuvenation, hair restoration, wound healing, and anti-aging protocols. Research shows 30-50% follicle size increase in controlled hair growth studies.</p>
       </div>
     </div>
   </div>
 </div>
 </section>
 
-<!-- Cross-sell -->
+<!-- Frequently Stacked Together (Inline Cross-sell with Add to Cart) -->
 <section class="py-24 px-8 bg-surface">
 <div class="max-w-7xl mx-auto">
-  <h2 class="text-2xl font-bold tracking-tight text-on-surface mb-4">Stack With</h2>
+  <h2 class="text-2xl font-bold tracking-tight text-on-surface mb-2">Frequently Stacked Together</h2>
   <p class="text-on-surface-variant text-sm mb-12">Researchers commonly pair GHK-Cu with these compounds for enhanced protocols.</p>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    <a href="../product_detail_mt2/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all">
-        <h3 class="font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">MT-2</h3>
-        <p class="text-xs text-on-surface-variant mb-4">Skin + tanning synergy</p>
-        <span class="text-lg font-medium text-primary">$34.99</span>
+    <!-- Cross-sell: MT-2 -->
+    <div class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all flex flex-col">
+      <a href="../product_detail_mt2/code.html" class="flex-1">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary" style="font-size:20px">wb_sunny</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-on-surface group-hover:text-primary transition-colors">MT-2</h3>
+            <p class="text-[10px] uppercase tracking-widest text-outline">10mg Lyophilized</p>
+          </div>
+        </div>
+        <p class="text-xs text-on-surface-variant mb-4 leading-relaxed">Skin pigmentation + GHK-Cu rejuvenation for complete skin protocol synergy.</p>
       </a>
-<a href="../product_detail_bpc_157/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all">
-        <h3 class="font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">BPC-157</h3>
-        <p class="text-xs text-on-surface-variant mb-4">Tissue repair support</p>
-        <span class="text-lg font-medium text-primary">$44.99</span>
+      <div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/10">
+        <span class="text-lg font-semibold text-primary">$34.99</span>
+        <button data-add-to-cart data-product-id="mt-2" data-product-name="MT-2" data-product-desc="10mg Lyophilized" data-product-price="34.99" data-product-icon="wb_sunny" class="bg-primary-container text-on-primary text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-lg hover:brightness-110 active:scale-[0.97] transition-all">Add to Cart</button>
+      </div>
+    </div>
+    <!-- Cross-sell: BPC-157 -->
+    <div class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all flex flex-col">
+      <a href="../product_detail_bpc_157/code.html" class="flex-1">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary" style="font-size:20px">healing</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-on-surface group-hover:text-primary transition-colors">BPC-157</h3>
+            <p class="text-[10px] uppercase tracking-widest text-outline">5mg Lyophilized</p>
+          </div>
+        </div>
+        <p class="text-xs text-on-surface-variant mb-4 leading-relaxed">Tissue repair meets skin regeneration. The #1 recovery + anti-aging pairing.</p>
       </a>
-<a href="../products_page/code.html" class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all">
-        <h3 class="font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">Bac Water</h3>
-        <p class="text-xs text-on-surface-variant mb-4">Required for reconstitution</p>
-        <span class="text-lg font-medium text-primary">$9.99</span>
+      <div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/10">
+        <span class="text-lg font-semibold text-primary">$44.99</span>
+        <button data-add-to-cart data-product-id="bpc-157" data-product-name="BPC-157" data-product-desc="5mg Lyophilized" data-product-price="44.99" data-product-icon="healing" class="bg-primary-container text-on-primary text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-lg hover:brightness-110 active:scale-[0.97] transition-all">Add to Cart</button>
+      </div>
+    </div>
+    <!-- Cross-sell: Bac Water -->
+    <div class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all flex flex-col">
+      <a href="../products_page/code.html" class="flex-1">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary" style="font-size:20px">water_drop</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-on-surface group-hover:text-primary transition-colors">Bacteriostatic Water</h3>
+            <p class="text-[10px] uppercase tracking-widest text-outline">30mL Vial</p>
+          </div>
+        </div>
+        <p class="text-xs text-on-surface-variant mb-4 leading-relaxed">Required for reconstitution. USP-grade sterile water for all peptide research.</p>
       </a>
+      <div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/10">
+        <span class="text-lg font-semibold text-primary">$9.99</span>
+        <button data-add-to-cart data-product-id="bac-water" data-product-name="Bacteriostatic Water" data-product-desc="30mL Vial" data-product-price="9.99" data-product-icon="water_drop" class="bg-primary-container text-on-primary text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-lg hover:brightness-110 active:scale-[0.97] transition-all">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 
+<!-- Safety Profile + Molecular Data + References -->
+<section class="bg-surface-container-low py-24 border-t border-outline-variant/10">
+<div class="max-w-7xl mx-auto px-8">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+    <!-- Safety Profile -->
+    <div class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/5">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="material-symbols-outlined text-primary" style="font-size:22px">shield</span>
+        <h3 class="font-bold text-on-surface tracking-tight">Safety Profile</h3>
+      </div>
+      <div class="space-y-4">
+        <div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+          <span class="text-xs text-on-surface-variant">Injection site irritation</span>
+          <span class="text-xs font-semibold text-on-surface">~10-20%</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+          <span class="text-xs text-on-surface-variant">Topical irritation</span>
+          <span class="text-xs font-semibold text-on-surface">Rare</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+          <span class="text-xs text-on-surface-variant">Serious adverse events</span>
+          <span class="text-xs font-semibold text-green-600">None documented</span>
+        </div>
+        <div class="flex justify-between items-center py-2">
+          <span class="text-xs text-on-surface-variant">Decades of topical use data</span>
+          <span class="text-xs font-semibold text-green-600">Since 1980s</span>
+        </div>
+      </div>
+      <div class="mt-6 p-4 bg-surface-container-low rounded-lg">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-outline mb-2">Exclusion Criteria</p>
+        <p class="text-xs text-on-surface-variant leading-relaxed">Wilson's disease, known copper allergy, active skin infections, pregnancy/breastfeeding (not studied). Not FDA approved for any indication.</p>
+      </div>
+    </div>
+    <!-- Molecular Profile -->
+    <div class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/5">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="material-symbols-outlined text-primary" style="font-size:22px">science</span>
+        <h3 class="font-bold text-on-surface tracking-tight">Molecular Profile</h3>
+      </div>
+      <div class="space-y-4">
+        <div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+          <span class="text-xs text-on-surface-variant">Type</span>
+          <span class="text-xs font-semibold text-on-surface">Copper-peptide complex</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+          <span class="text-xs text-on-surface-variant">CAS Number</span>
+          <span class="text-xs font-semibold text-on-surface font-mono">49557-75-7</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+          <span class="text-xs text-on-surface-variant">Molecular Weight</span>
+          <span class="text-xs font-semibold text-on-surface">340.38 g/mol</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+          <span class="text-xs text-on-surface-variant">MW (with Copper)</span>
+          <span class="text-xs font-semibold text-on-surface">401.91 g/mol</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+          <span class="text-xs text-on-surface-variant">Sequence</span>
+          <span class="text-xs font-semibold text-on-surface font-mono">Gly-His-Lys</span>
+        </div>
+        <div class="flex justify-between items-center py-2">
+          <span class="text-xs text-on-surface-variant">Formula</span>
+          <span class="text-xs font-semibold text-on-surface font-mono">C&#8321;&#8326;H&#8322;&#8328;CuN&#8326;O&#8326;</span>
+        </div>
+      </div>
+      <!-- Storage -->
+      <div class="mt-6 p-4 bg-surface-container-low rounded-lg">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-outline mb-3">Storage Requirements</p>
+        <div class="space-y-2">
+          <div class="flex justify-between text-xs">
+            <span class="text-on-surface-variant">Lyophilized</span>
+            <span class="font-medium text-on-surface">-20&deg;C &middot; Up to 2 years</span>
+          </div>
+          <div class="flex justify-between text-xs">
+            <span class="text-on-surface-variant">Reconstituted</span>
+            <span class="font-medium text-on-surface">2-8&deg;C &middot; Up to 30 days</span>
+          </div>
+          <div class="flex justify-between text-xs">
+            <span class="text-on-surface-variant">Note</span>
+            <span class="font-medium text-on-surface">Protect from light</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- References -->
+    <div class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/5">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="material-symbols-outlined text-primary" style="font-size:22px">menu_book</span>
+        <h3 class="font-bold text-on-surface tracking-tight">Key References</h3>
+      </div>
+      <div class="space-y-5">
+        <div class="border-b border-outline-variant/10 pb-4">
+          <p class="text-xs font-semibold text-on-surface mb-1">Int J Mol Sci, 2018</p>
+          <p class="text-[11px] text-on-surface-variant leading-relaxed">Regenerative and Protective Actions of GHK-Cu Peptide</p>
+          <p class="text-[10px] text-outline mt-1">Pickart &amp; Margolina &middot; PMC6073405</p>
+        </div>
+        <div class="border-b border-outline-variant/10 pb-4">
+          <p class="text-xs font-semibold text-on-surface mb-1">BioMed Research Int, 2015</p>
+          <p class="text-[11px] text-on-surface-variant leading-relaxed">GHK as Natural Modulator of Cellular Pathways</p>
+          <p class="text-[10px] text-outline mt-1">Gene expression &amp; epigenetic study</p>
+        </div>
+        <div class="border-b border-outline-variant/10 pb-4">
+          <p class="text-xs font-semibold text-on-surface mb-1">J Invest Dermatol, 2000</p>
+          <p class="text-[11px] text-on-surface-variant leading-relaxed">Wound Healing &amp; ECM Modulation</p>
+          <p class="text-[10px] text-outline mt-1">Sim&eacute;on et al.</p>
+        </div>
+        <div class="border-b border-outline-variant/10 pb-4">
+          <p class="text-xs font-semibold text-on-surface mb-1">Arch Facial Plast Surg</p>
+          <p class="text-[11px] text-on-surface-variant leading-relaxed">Topical Copper Tripeptide on CO2 Laser-Resurfaced Skin</p>
+          <p class="text-[10px] text-outline mt-1">Clinical application study</p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold text-on-surface mb-1">Cosmetics, 2015</p>
+          <p class="text-[11px] text-on-surface-variant leading-relaxed">Antioxidant &amp; Oxidative Stress Prevention</p>
+          <p class="text-[10px] text-outline mt-1">GHK-Cu molecular profile</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 </section>
@@ -268,14 +458,14 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
   </div>
   <div class="flex flex-col gap-4">
     <h5 class="text-[10px] font-black uppercase tracking-widest text-slate-900">Legal</h5>
-    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../faq_page/code.html">Terms of Service</a>
-    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../faq_page/code.html">Privacy Policy</a>
-    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../faq_page/code.html">Refund Policy</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../terms/code.html">Terms of Service</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../privacy/code.html">Privacy Policy</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../refund/code.html">Refund Policy</a>
   </div>
   <div class="flex flex-col gap-4">
     <h5 class="text-[10px] font-black uppercase tracking-widest text-slate-900">Connect</h5>
-    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="#">TikTok</a>
-    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="#">Instagram</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="https://www.tiktok.com/@serenityresearchlabs">TikTok</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="https://www.instagram.com/serenityresearchlabs/">Instagram</a>
     <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../about/code.html">About Us</a>
   </div>
 </div>
@@ -285,7 +475,27 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
 </footer>
 <!-- Chatbot Widget -->
 <script src="../js/chatbot.js"></script>
-
+<!-- Subscription + Price Logic -->
+<script>
+const BASE_PRICE = 39.99;
+function selectSub(el) {
+  document.querySelectorAll('.sub-option').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  const discount = parseInt(el.dataset.discount) || 0;
+  const price = discount > 0 ? (BASE_PRICE * (1 - discount / 100)).toFixed(2) : BASE_PRICE.toFixed(2);
+  document.getElementById('display-price').textContent = '$' + price;
+  const btn = document.getElementById('add-to-cart-btn');
+  btn.textContent = 'Add to Cart \u2014 $' + price;
+  btn.dataset.productPrice = price;
+  const savings = document.getElementById('sub-savings');
+  if (discount > 0) {
+    savings.textContent = 'You save $' + (BASE_PRICE - parseFloat(price)).toFixed(2) + ' per order with ' + el.querySelector('.text-sm').textContent.toLowerCase() + ' subscription';
+    savings.classList.remove('hidden');
+  } else {
+    savings.classList.add('hidden');
+  }
+}
+</script>
 <script>
 function openMobileMenu() {
   document.getElementById('mobile-menu').classList.add('active');

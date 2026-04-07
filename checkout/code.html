@@ -150,7 +150,7 @@
 
 <!-- Sticky Promo Banner -->
 <div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase fixed top-0 w-full z-[60]">
-  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · Free shipping on orders $100+</span>
+  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off</span>
 </div>
 
 <!-- TopAppBar -->
@@ -334,7 +334,7 @@
         </div>
         <div class="flex justify-between text-sm">
           <span class="text-on-surface-variant">Shipping</span>
-          <span id="shipping-display" class="font-medium text-green-600">FREE</span>
+          <span id="shipping-display" class="font-medium text-on-surface">$7.99</span>
         </div>
         <div class="flex justify-between items-end pt-4 border-t border-outline-variant/20">
           <span class="text-xs font-black uppercase tracking-widest text-on-surface">Total Due</span>
@@ -416,8 +416,8 @@
   © 2026 Serenity Research Labs. For research use only. Not for human consumption.
 </p>
 <div class="flex gap-8">
-<a href="https://tiktok.com" class="text-slate-400 hover:text-blue-500 transition-colors text-xs font-bold uppercase tracking-widest">TikTok</a>
-<a href="https://instagram.com" class="text-slate-400 hover:text-blue-500 transition-colors text-xs font-bold uppercase tracking-widest">Instagram</a>
+<a href="https://www.tiktok.com/@serenityresearchlabs" class="text-slate-400 hover:text-blue-500 transition-colors text-xs font-bold uppercase tracking-widest">TikTok</a>
+<a href="https://www.instagram.com/serenityresearchlabs/" class="text-slate-400 hover:text-blue-500 transition-colors text-xs font-bold uppercase tracking-widest">Instagram</a>
 </div>
 </div>
 </footer>
@@ -478,7 +478,7 @@ function updateTotals() {
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
   const discount = promoApplied ? subtotal * 0.15 : 0;
   const afterDiscount = subtotal - discount;
-  const shipping = afterDiscount >= 100 ? 0 : 7.99;
+  const shipping = 7.99;
   const total = afterDiscount + shipping;
 
   document.getElementById("subtotal-display").textContent = `$${subtotal.toFixed(2)}`;
@@ -492,13 +492,8 @@ function updateTotals() {
     discountRow.classList.add("hidden");
   }
 
-  if (shipping === 0) {
-    document.getElementById("shipping-display").textContent = "FREE";
-    document.getElementById("shipping-display").className = "font-medium text-green-600";
-  } else {
-    document.getElementById("shipping-display").textContent = `$${shipping.toFixed(2)}`;
-    document.getElementById("shipping-display").className = "font-medium text-on-surface";
-  }
+  document.getElementById("shipping-display").textContent = `$${shipping.toFixed(2)}`;
+  document.getElementById("shipping-display").className = "font-medium text-on-surface";
 }
 
 function applyPromo() {

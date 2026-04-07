@@ -147,8 +147,8 @@ def create_payment_intent():
             discount = int(total * 0.15)
             total -= discount
 
-        # Free shipping on orders $100+ (10000 cents), otherwise $7.99
-        shipping = 0 if (total >= 10000) else 799
+        # Flat rate shipping $7.99
+        shipping = 799
         total += shipping
 
         # Minimum charge is $0.50 (Stripe requirement)

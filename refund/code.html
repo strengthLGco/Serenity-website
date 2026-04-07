@@ -130,12 +130,12 @@ function verifyAge() {
   if (age >= 18) {
     document.getElementById('age-gate').style.display = 'none';
     document.body.style.overflow = '';
-    sessionStorage.setItem('ageVerified', 'true');
+    localStorage.setItem('ageVerified', 'true');
   } else {
     alert('You must be 18 or older to access this site.');
   }
 }
-if (sessionStorage.getItem('ageVerified') === 'true') {
+if (localStorage.getItem('ageVerified') === 'true') {
   document.getElementById('age-gate').style.display = 'none';
 } else {
   document.body.style.overflow = 'hidden';
@@ -143,7 +143,7 @@ if (sessionStorage.getItem('ageVerified') === 'true') {
 </script>
 <!-- Promo Banner -->
 <div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase fixed top-0 w-full z-[60]">
-  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · Free shipping on orders $100+ · <span class="text-slate-400">For research purposes only</span></span>
+  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · <span class="text-slate-400">For research purposes only</span></span>
 </div>
 <!-- TopAppBar -->
 <header class="fixed top-[34px] w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl bg-gradient-to-b from-slate-50 to-transparent">
@@ -407,7 +407,6 @@ Our team responds to inquiries within 24 business hours.
 <ul class="space-y-4">
 <li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../products_page/code.html">Shop</a></li>
 <li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../products_page/code.html">Categories</a></li>
-<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../products_page/code.html">Bulk Pricing</a></li>
 </ul>
 </div>
 <div>
@@ -422,8 +421,8 @@ Our team responds to inquiries within 24 business hours.
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-[0.1em] text-xs">Connect</h4>
 <ul class="space-y-4">
-<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">TikTok</a></li>
-<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">Instagram</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="https://www.tiktok.com/@serenityresearchlabs">TikTok</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="https://www.instagram.com/serenityresearchlabs/">Instagram</a></li>
 <li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../about/code.html">About Us</a></li>
 </ul>
 </div>

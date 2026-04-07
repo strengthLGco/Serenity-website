@@ -130,12 +130,12 @@ function verifyAge() {
   if (age >= 18) {
     document.getElementById('age-gate').style.display = 'none';
     document.body.style.overflow = '';
-    sessionStorage.setItem('ageVerified', 'true');
+    localStorage.setItem('ageVerified', 'true');
   } else {
     alert('You must be 18 or older to access this site.');
   }
 }
-if (sessionStorage.getItem('ageVerified') === 'true') {
+if (localStorage.getItem('ageVerified') === 'true') {
   document.getElementById('age-gate').style.display = 'none';
 } else {
   document.body.style.overflow = 'hidden';
@@ -143,7 +143,7 @@ if (sessionStorage.getItem('ageVerified') === 'true') {
 </script>
 <!-- Promo Banner -->
 <div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase fixed top-0 w-full z-[60]">
-  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · Free shipping on orders $100+ · <span class="text-slate-400">For research purposes only</span></span>
+  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off · <span class="text-slate-400">For research purposes only</span></span>
 </div>
 <!-- TopAppBar -->
 <header class="fixed top-[34px] w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl bg-gradient-to-b from-slate-50 to-transparent">
@@ -197,10 +197,12 @@ if (sessionStorage.getItem('ageVerified') === 'true') {
 <p class="text-base leading-relaxed mt-4">You acknowledge and agree that:</p>
 <ul class="list-disc list-inside space-y-2 text-base leading-relaxed mt-3 ml-2">
 <li>These products are intended solely for qualified researchers in controlled laboratory environments</li>
-<li>These products have not been tested for safety or efficacy in human subjects</li>
-<li>These products are not intended to diagnose, treat, cure, mitigate, or prevent any disease or medical condition</li>
-<li>All information provided is for research purposes only and does not constitute medical or health advice</li>
-<li>You assume full responsibility for the proper handling, storage, and use of these products</li>
+<li>These products have not been tested for safety or efficacy in human or animal subjects</li>
+<li>These products are NOT intended to diagnose, treat, cure, mitigate, or prevent any disease, condition, or ailment</li>
+<li>These products are NOT intended for any form of human or animal administration</li>
+<li>All information provided is for research purposes only and does not constitute medical, health, or veterinary advice</li>
+<li>Serenity Research Labs makes no health or therapeutic claims regarding these products</li>
+<li>You assume full responsibility for the proper handling, storage, and use of these products in accordance with all applicable laws</li>
 </ul>
 </div>
 
@@ -226,10 +228,11 @@ if (sessionStorage.getItem('ageVerified') === 'true') {
 </div>
 
 <div>
-<h2 class="text-3xl font-bold text-on-surface mb-4">6. Shipping and Delivery</h2>
+<h2 class="text-3xl font-bold text-on-surface mb-4">6. Shipping, Delivery, and Returns</h2>
 <p class="text-base leading-relaxed">All products are shipped within the contiguous United States only. We do not ship internationally or to addresses outside the United States. Serenity Research Labs uses standard shipping carriers and makes reasonable efforts to deliver orders within the timeframe specified on our website. However, we do not guarantee delivery dates and are not liable for delays caused by shipping carriers or circumstances beyond our control.</p>
 <p class="text-base leading-relaxed mt-4">You are responsible for receiving and inspecting your order upon delivery. Please report any damage, loss, or discrepancies within five (5) business days of receipt. All products must be signed for upon delivery. Serenity Research Labs is not responsible for packages that are lost, stolen, or damaged after delivery to the address you provided.</p>
 <p class="text-base leading-relaxed mt-4">You agree to ensure that the delivery address is accurate and complete. Incorrect addresses may result in delivery delays or failed delivery attempts, and you will be responsible for any additional shipping costs required to deliver your order.</p>
+<p class="text-base leading-relaxed mt-4"><strong>Returns and Refunds:</strong> Products may be returned within thirty (30) days of receipt for a full refund, provided they are unused and in original packaging. Refund requests must be initiated through our website or by contacting support@serenityresearchlabs.com. Refunds are processed within 10-15 business days of receipt and inspection of returned products. Shipping costs for returns are the responsibility of the customer. Please refer to our Refund Policy for complete details.</p>
 </div>
 
 <div>
@@ -297,7 +300,6 @@ Email: support@serenityresearchlabs.com
 <ul class="space-y-4">
 <li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../products_page/code.html">Shop</a></li>
 <li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../products_page/code.html">Categories</a></li>
-<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../products_page/code.html">Bulk Pricing</a></li>
 </ul>
 </div>
 <div>
@@ -312,8 +314,8 @@ Email: support@serenityresearchlabs.com
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-[0.1em] text-xs">Connect</h4>
 <ul class="space-y-4">
-<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">TikTok</a></li>
-<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="#">Instagram</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="https://www.tiktok.com/@serenityresearchlabs">TikTok</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="https://www.instagram.com/serenityresearchlabs/">Instagram</a></li>
 <li><a class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors" href="../about/code.html">About Us</a></li>
 </ul>
 </div>
