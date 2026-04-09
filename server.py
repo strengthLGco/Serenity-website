@@ -279,4 +279,5 @@ if __name__ == "__main__":
     print("\n   Press Ctrl+C to stop.\n")
 
     port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    debug = os.environ.get("FLASK_DEBUG", "true").lower() == "true"
+    app.run(host="0.0.0.0", port=port, debug=debug)
