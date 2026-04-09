@@ -1,72 +1,37 @@
 <!DOCTYPE html>
-<html class="light" lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Serenity Research Labs - Checkout</title>
+<meta name="theme-color" content="#000000"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="https://js.stripe.com/v3/"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<link href="../css/serenity.css" rel="stylesheet"/>
+<script>
   tailwind.config = {
-    darkMode: "class",
     theme: {
       extend: {
         colors: {
-          "inverse-surface": "#293040",
-          "background": "#f9f9ff",
-          "inverse-on-surface": "#edf0ff",
-          "tertiary": "#006490",
-          "surface-container-high": "#e1e8fd",
-          "secondary": "#515f74",
-          "on-surface": "#141b2b",
-          "surface-tint": "#0060ab",
-          "error-container": "#ffdad6",
-          "on-error-container": "#93000a",
-          "secondary-fixed": "#d5e3fc",
-          "surface": "#f9f9ff",
-          "outline": "#717783",
-          "inverse-primary": "#a3c9ff",
-          "secondary-fixed-dim": "#b9c7df",
-          "on-surface-variant": "#404752",
-          "on-primary-container": "#ffffff",
-          "tertiary-container": "#007eb4",
-          "on-secondary-fixed": "#0d1c2e",
-          "on-error": "#ffffff",
-          "surface-variant": "#dce2f7",
-          "tertiary-fixed-dim": "#89ceff",
-          "on-tertiary": "#ffffff",
-          "on-secondary": "#ffffff",
-          "on-secondary-container": "#57657a",
-          "surface-dim": "#d3daef",
-          "primary-container": "#0078d4",
-          "on-primary": "#ffffff",
-          "on-primary-fixed": "#001c39",
-          "on-tertiary-fixed": "#001e2f",
-          "on-background": "#141b2b",
-          "primary-fixed-dim": "#a3c9ff",
-          "primary": "#005faa",
-          "surface-container-low": "#f1f3ff",
-          "surface-bright": "#f9f9ff",
-          "on-primary-fixed-variant": "#004883",
-          "error": "#ba1a1a",
-          "secondary-container": "#d5e3fc",
-          "primary-fixed": "#d3e3ff",
-          "surface-container-lowest": "#ffffff",
-          "on-tertiary-container": "#ffffff",
-          "on-tertiary-fixed-variant": "#004c6e",
-          "surface-container": "#e9edff",
-          "on-secondary-fixed-variant": "#3a485b",
-          "tertiary-fixed": "#c9e6ff",
-          "outline-variant": "#c0c7d4",
-          "surface-container-highest": "#dce2f7"
+          "accent": "#0a84ff",
+          "accent-hover": "#0071e3",
+          "sr-dark": "#0a0a0c",
+          "sr-dark-elevated": "#141416",
+          "sr-dark-surface": "#1c1c1e",
+          "sr-offwhite": "#f5f5f7",
+          "sr-text-primary": "#1d1d1f",
+          "sr-text-secondary": "#6e6e73",
+          "sr-text-tertiary": "#86868b",
+          "sr-border": "rgba(0, 0, 0, 0.06)",
         },
         fontFamily: {
-          "headline": ["Inter"],
-          "body": ["Inter"],
-          "label": ["Inter"]
+          "display": ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          "body": ['"Inter"', 'system-ui', 'sans-serif'],
         },
-        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
       },
     },
   }
@@ -76,30 +41,25 @@
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
     vertical-align: middle;
   }
-  .hide-scrollbar::-webkit-scrollbar { display: none; }
-  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
   /* Floating Label Logic */
   .floating-label-group { position: relative; }
   .floating-label-group input:focus ~ label,
   .floating-label-group input:not(:placeholder-shown) ~ label {
-    transform: translateY(-1.25rem) scale(0.8);
-    color: #005faa;
+    transform: translateY(-1.6rem) scale(0.75);
+    color: #0a84ff;
   }
   .floating-label-group label {
     position: absolute;
-    left: 0;
-    top: 0.75rem;
-    transition: all 0.2s ease-out;
+    left: 1rem;
+    top: 1rem;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     pointer-events: none;
+    transform-origin: left top;
   }
-
-  body { min-height: max(884px, 100dvh); }
 
   /* Stripe Elements styling */
-  #payment-element {
-    min-height: 200px;
-  }
+  #payment-element { min-height: 200px; }
 
   /* Loading spinner */
   .spinner {
@@ -129,298 +89,366 @@
   }
   .shake { animation: shake 0.4s ease-out; }
 
-  /* Mobile menu styles */
-  #mobile-menu-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:70; }
-  #mobile-menu-overlay.active { display:block; }
-  #mobile-menu { position:fixed; top:0; right:-300px; width:280px; height:100%; background:white; z-index:80; transition:right 0.3s ease; padding:80px 32px 32px; box-shadow:-4px 0 20px rgba(0,0,0,0.1); }
-  #mobile-menu.active { right:0; }
-  #mobile-menu a { display:block; padding:16px 0; font-size:18px; font-weight:500; color:#334155; border-bottom:1px solid #f1f5f9; text-decoration:none; font-family:'Inter',sans-serif; }
-  #mobile-menu a:hover { color:#0060ab; }
-  #mobile-menu .close-btn { position:absolute; top:24px; right:24px; background:none; border:none; cursor:pointer; }
-
-  /* Fade in for payment element */
+  /* Fade in */
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
   .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+
+  /* Promo shimmer */
+  .promo-shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(10,132,255,0.15) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  @keyframes shimmer { 0%,100% { background-position: -200% 0; } 50% { background-position: 200% 0; } }
+
+  /* Custom checkbox */
+  .sr-checkbox {
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid rgba(0,0,0,0.15);
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .sr-checkbox:checked {
+    background: #0a84ff;
+    border-color: #0a84ff;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3E%3C/svg%3E");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .sr-checkbox:focus { outline: none; box-shadow: 0 0 0 3px rgba(10,132,255,0.15); }
+
+  /* Form input style */
+  .sr-input {
+    width: 100%;
+    background: #f5f5f7;
+    border: 1.5px solid transparent;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    color: #1d1d1f;
+    transition: all 0.2s ease;
+  }
+  .sr-input:focus {
+    outline: none;
+    border-color: #0a84ff;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(10,132,255,0.1);
+  }
+  .sr-input::placeholder { color: transparent; }
+
+  /* Secure badge pulse */
+  @keyframes secure-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
 </style>
 </head>
-<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed antialiased">
+<body class="bg-white antialiased font-body text-sr-text-primary">
 
-<!-- Sticky Promo Banner -->
-<div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase fixed top-0 w-full z-[60]">
-  <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off</span>
+<!-- Promo Banner -->
+<div class="bg-sr-dark text-white text-center py-2.5 text-[11px] font-medium tracking-[0.15em] uppercase fixed top-0 w-full z-[60] relative overflow-hidden">
+  <div class="promo-shimmer absolute inset-0"></div>
+  <span class="relative z-10 opacity-90">Use code <span class="font-bold text-accent">SERENITY15</span> for 15% off your order</span>
 </div>
 
-<!-- TopAppBar -->
-<header class="fixed top-[34px] w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl bg-gradient-to-b from-slate-50 to-transparent">
-<div class="flex justify-between items-center px-8 h-20 max-w-screen-2xl mx-auto">
-<button class="md:hidden" onclick="openMobileMenu()"><span class="material-symbols-outlined text-slate-700" style="font-size:28px;">menu</span></button>
-<div class="flex items-center gap-4">
-<span class="text-2xl font-black tracking-tighter text-slate-900 dark:text-white font-headline">SERENITY</span>
-</div>
-<nav class="hidden md:flex gap-12 items-center font-['Inter'] tracking-tight font-medium">
-<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../homepage/code.html">Home</a>
-<a class="text-blue-600 dark:text-blue-400 font-semibold border-b-2 border-blue-600 font-['Inter'] tracking-tight" href="../products_page/code.html">Shop</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../faq_page/code.html">Support</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../about/code.html">About</a>
-</nav>
-<div class="flex items-center gap-6">
-<div class="relative" data-cart-link>
-<button class="hover:opacity-70 transition-opacity duration-200 scale-95 active:scale-90 transition-transform text-blue-600">
-<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
-<span class="absolute top-0 right-0 w-5 h-5 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center hidden" data-cart-badge>0</span>
-</button>
-</div>
-</div>
+<!-- Navigation -->
+<header class="fixed top-[38px] w-full z-50 sr-nav-glass">
+<div class="flex justify-between items-center px-6 sm:px-8 h-16 max-w-screen-xl mx-auto">
+  <button class="md:hidden" onclick="openMobileMenu()"><span class="material-symbols-outlined text-sr-text-primary" style="font-size:24px;">menu</span></button>
+  <a href="../homepage/code.html" class="flex items-center gap-2">
+    <span class="font-display text-xl font-extrabold tracking-[-0.04em] text-sr-text-primary">SERENITY</span>
+  </a>
+  <nav class="hidden md:flex gap-10 items-center">
+    <a class="text-sr-text-secondary hover:text-sr-text-primary transition-colors text-[13px] font-medium" href="../homepage/code.html">Home</a>
+    <a class="text-accent text-[13px] font-semibold" href="../products_page/code.html">Shop</a>
+    <a class="text-sr-text-secondary hover:text-sr-text-primary transition-colors text-[13px] font-medium" href="../faq_page/code.html">Support</a>
+    <a class="text-sr-text-secondary hover:text-sr-text-primary transition-colors text-[13px] font-medium" href="../about/code.html">About</a>
+  </nav>
+  <div class="flex items-center gap-5">
+    <div class="relative" data-cart-link>
+      <button class="text-sr-text-secondary hover:text-accent transition-colors">
+        <span class="material-symbols-outlined" style="font-size:22px;" data-icon="shopping_cart">shopping_cart</span>
+        <span class="absolute -top-1.5 -right-1.5 w-[18px] h-[18px] bg-accent text-white text-[9px] font-bold rounded-full flex items-center justify-center hidden" data-cart-badge>0</span>
+      </button>
+    </div>
+  </div>
 </div>
 </header>
 
-<main class="pt-40 pb-24 px-8 max-w-7xl mx-auto">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-20">
-
-<!-- Left Column: Checkout Form -->
-<div class="lg:col-span-7">
-  <header class="mb-16">
-    <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-outline mb-2 block">SECURE GATEWAY</span>
-    <h1 class="text-5xl font-extrabold tracking-tighter font-headline text-on-surface">Checkout</h1>
-  </header>
-
-  <form id="payment-form" class="space-y-16">
-
-    <!-- Shipping Section -->
-    <section>
-      <h2 class="text-xs font-bold uppercase tracking-widest text-outline mb-8">01. Delivery Logistics</h2>
-      <div class="space-y-10">
-        <div class="floating-label-group border-b border-outline-variant/30">
-          <input class="w-full bg-transparent border-none px-0 py-3 focus:ring-0 focus:outline-none text-on-surface font-medium" id="name" placeholder=" " type="text" required/>
-          <label class="text-outline text-sm uppercase tracking-wider font-semibold" for="name">Full Legal Name</label>
-        </div>
-        <div class="floating-label-group border-b border-outline-variant/30">
-          <input class="w-full bg-transparent border-none px-0 py-3 focus:ring-0 focus:outline-none text-on-surface font-medium" id="email" placeholder=" " type="email" required/>
-          <label class="text-outline text-sm uppercase tracking-wider font-semibold" for="email">Secure Email Address</label>
-        </div>
-        <div class="floating-label-group border-b border-outline-variant/30">
-          <input class="w-full bg-transparent border-none px-0 py-3 focus:ring-0 focus:outline-none text-on-surface font-medium" id="address" placeholder=" " type="text" required/>
-          <label class="text-outline text-sm uppercase tracking-wider font-semibold" for="address">Street Address</label>
-        </div>
-        <div class="grid grid-cols-3 gap-6">
-          <div class="floating-label-group border-b border-outline-variant/30">
-            <input class="w-full bg-transparent border-none px-0 py-3 focus:ring-0 focus:outline-none text-on-surface font-medium" id="city" placeholder=" " type="text" required/>
-            <label class="text-outline text-sm uppercase tracking-wider font-semibold" for="city">City</label>
-          </div>
-          <div class="floating-label-group border-b border-outline-variant/30">
-            <input class="w-full bg-transparent border-none px-0 py-3 focus:ring-0 focus:outline-none text-on-surface font-medium" id="state" placeholder=" " type="text" required/>
-            <label class="text-outline text-sm uppercase tracking-wider font-semibold" for="state">State</label>
-          </div>
-          <div class="floating-label-group border-b border-outline-variant/30">
-            <input class="w-full bg-transparent border-none px-0 py-3 focus:ring-0 focus:outline-none text-on-surface font-medium" id="zip" placeholder=" " type="text" required/>
-            <label class="text-outline text-sm uppercase tracking-wider font-semibold" for="zip">ZIP Code</label>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Payment Section — Stripe Elements -->
-    <section>
-      <h2 class="text-xs font-bold uppercase tracking-widest text-outline mb-8">02. Payment Method</h2>
-
-      <!-- Stripe Payment Element mounts here -->
-      <div class="bg-surface-container-low p-8 rounded-xl">
-        <div class="flex items-center gap-6 mb-6">
-          <span class="text-[10px] font-bold uppercase tracking-wider text-outline">Powered by Stripe</span>
-          <div class="flex items-center gap-3">
-            <span class="text-xs font-bold text-on-surface-variant bg-surface-container-lowest px-2 py-1 rounded">VISA</span>
-            <span class="text-xs font-bold text-on-surface-variant bg-surface-container-lowest px-2 py-1 rounded">MC</span>
-            <span class="text-xs font-bold text-on-surface-variant bg-surface-container-lowest px-2 py-1 rounded">AMEX</span>
-            <span class="text-xs font-bold text-on-surface-variant bg-surface-container-lowest px-2 py-1 rounded">APPLE PAY</span>
-            <span class="text-xs font-bold text-on-surface-variant bg-surface-container-lowest px-2 py-1 rounded">VENMO</span>
-          </div>
-        </div>
-
-        <!-- This is where Stripe injects the real payment form -->
-        <div id="payment-element"></div>
-
-        <!-- Payment errors show here -->
-        <div id="payment-errors" class="mt-4 text-sm text-red-600 font-medium hidden"></div>
-
-        <!-- Loading state while Stripe initializes -->
-        <div id="payment-loading" class="flex items-center justify-center py-12 gap-3">
-          <div class="spinner" style="border-top-color: #005faa; border-color: rgba(0,95,170,0.2);"></div>
-          <span class="text-sm text-outline font-medium">Loading secure payment form...</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Disclaimers -->
-    <section class="space-y-6">
-      <h2 class="text-xs font-bold uppercase tracking-widest text-outline mb-6">03. Legal &amp; Compliance</h2>
-      <div class="flex gap-4 items-start group cursor-pointer">
-        <input class="mt-1 w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" id="age" type="checkbox" required/>
-        <label class="text-sm text-on-surface-variant leading-relaxed select-none" for="age">
-          I certify that I am at least 21 years of age and understand the age requirements for research chemical acquisition.
-        </label>
-      </div>
-      <div class="flex gap-4 items-start group cursor-pointer">
-        <input class="mt-1 w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" id="disclaimer" type="checkbox" required/>
-        <label class="text-sm text-on-surface-variant leading-relaxed select-none" for="disclaimer">
-          I acknowledge that these products are strictly for <span class="font-bold text-on-surface">laboratory research use only</span> and are not intended for human consumption or diagnostic procedures.
-        </label>
-      </div>
-    </section>
-
-    <!-- Security badges -->
-    <div class="flex items-center justify-center gap-6 py-4 mb-4 bg-surface-container-low rounded-lg">
-      <span class="material-symbols-outlined text-green-600 text-lg" data-icon="lock">lock</span>
-      <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">256-bit SSL Encrypted</span>
-      <span class="text-outline-variant">|</span>
-      <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">PCI Compliant</span>
-      <span class="text-outline-variant">|</span>
-      <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Stripe Secured</span>
-    </div>
-
-    <!-- Submit Button -->
-    <button id="submit-btn" class="w-full py-6 bg-primary-container text-white font-black tracking-widest uppercase text-sm hover:bg-primary transition-all rounded-xl flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed" type="submit" disabled>
-      <span id="btn-text">Complete Order</span>
-      <span id="btn-spinner" class="hidden"><span class="spinner"></span></span>
-      <span id="btn-arrow" class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
-    </button>
-  </form>
-
-  <!-- Success Message (hidden by default) -->
-  <div id="success-message" class="hidden text-center py-20 space-y-8">
-    <div class="success-check inline-flex items-center justify-center w-24 h-24 rounded-full bg-green-100">
-      <span class="material-symbols-outlined text-green-600" style="font-size: 48px; font-variation-settings: 'FILL' 1;">check_circle</span>
-    </div>
-    <h2 class="text-4xl font-extrabold tracking-tighter font-headline text-on-surface">Order Confirmed</h2>
-    <p class="text-on-surface-variant max-w-md mx-auto">Your order has been placed successfully. A confirmation email with tracking details will be sent to your inbox shortly.</p>
-    <p class="text-xs text-outline uppercase tracking-widest font-bold">Order ID: <span id="order-id" class="text-primary">—</span></p>
-    <a href="../products_page/code.html" class="inline-flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-widest hover:underline">
-      Continue Shopping <span class="material-symbols-outlined text-sm">arrow_forward</span>
-    </a>
-  </div>
+<!-- Mobile Menu -->
+<div id="mobile-menu-overlay"></div>
+<div id="mobile-menu">
+  <button class="close-btn" onclick="closeMobileMenu()"><span class="material-symbols-outlined" style="font-size:24px;">close</span></button>
+  <a href="../homepage/code.html">Home</a>
+  <a href="../products_page/code.html">Shop</a>
+  <a href="../faq_page/code.html">Support</a>
+  <a href="../about/code.html">About</a>
 </div>
 
-<!-- Right Column: Order Summary -->
-<div class="lg:col-span-5">
-  <div class="sticky top-32 space-y-12">
-    <div class="bg-surface-container-low p-10 rounded-2xl">
-      <h2 class="text-xs font-black uppercase tracking-[0.2em] text-outline mb-10">Order Summary</h2>
-      <div id="cart-items" class="space-y-8 mb-12">
-        <!-- Cart items populated by JS -->
-      </div>
+<main class="pt-32 pb-24 px-5 sm:px-8 max-w-6xl mx-auto">
 
-      <!-- Promo Code Field -->
-      <div class="border-t border-outline-variant/20 pt-8 mb-6">
-        <div class="flex gap-3">
-          <div class="flex-grow relative">
-            <input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-primary focus:border-primary focus:outline-none text-on-surface font-medium uppercase tracking-wider" id="promo" placeholder="PROMO CODE" type="text"/>
+  <!-- Breadcrumb -->
+  <div class="flex items-center gap-2 text-[11px] text-sr-text-tertiary font-medium tracking-wide mb-10">
+    <a href="../products_page/code.html" class="hover:text-accent transition-colors">Shop</a>
+    <span class="material-symbols-outlined" style="font-size:14px;">chevron_right</span>
+    <span class="text-sr-text-primary">Checkout</span>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+
+  <!-- Left Column: Checkout Form -->
+  <div class="lg:col-span-7 order-2 lg:order-1">
+
+    <form id="payment-form" class="space-y-10">
+
+      <!-- Shipping Section -->
+      <section>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-7 h-7 rounded-full bg-sr-text-primary text-white text-xs font-bold flex items-center justify-center font-display">1</span>
+          <h2 class="font-display text-sm font-bold tracking-[-0.01em] text-sr-text-primary">Shipping Details</h2>
+        </div>
+        <div class="space-y-4">
+          <div class="floating-label-group">
+            <input class="sr-input" id="name" placeholder=" " type="text" required autocomplete="name"/>
+            <label class="text-sr-text-tertiary text-sm font-medium" for="name">Full Name</label>
           </div>
-          <button id="apply-promo-btn" class="bg-on-surface text-surface px-6 py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:opacity-90 transition-opacity" type="button" onclick="applyPromo()">Apply</button>
+          <div class="floating-label-group">
+            <input class="sr-input" id="email" placeholder=" " type="email" required autocomplete="email"/>
+            <label class="text-sr-text-tertiary text-sm font-medium" for="email">Email Address</label>
+          </div>
+          <div class="floating-label-group">
+            <input class="sr-input" id="address" placeholder=" " type="text" required autocomplete="street-address"/>
+            <label class="text-sr-text-tertiary text-sm font-medium" for="address">Street Address</label>
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="floating-label-group">
+              <input class="sr-input" id="city" placeholder=" " type="text" required autocomplete="address-level2"/>
+              <label class="text-sr-text-tertiary text-sm font-medium" for="city">City</label>
+            </div>
+            <div class="floating-label-group">
+              <input class="sr-input" id="state" placeholder=" " type="text" required autocomplete="address-level1"/>
+              <label class="text-sr-text-tertiary text-sm font-medium" for="state">State</label>
+            </div>
+            <div class="floating-label-group">
+              <input class="sr-input" id="zip" placeholder=" " type="text" required autocomplete="postal-code"/>
+              <label class="text-sr-text-tertiary text-sm font-medium" for="zip">ZIP</label>
+            </div>
+          </div>
         </div>
-        <p id="promo-status" class="text-[10px] mt-3 uppercase tracking-wider font-medium text-outline">Follow us on TikTok &amp; Instagram for exclusive codes</p>
-      </div>
+      </section>
 
-      <!-- Totals -->
-      <div class="border-t border-outline-variant/20 pt-6 space-y-4">
-        <div class="flex justify-between text-sm">
-          <span class="text-on-surface-variant">Subtotal</span>
-          <span id="subtotal-display" class="font-medium text-on-surface">$0.00</span>
+      <!-- Payment Section -->
+      <section>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-7 h-7 rounded-full bg-sr-text-primary text-white text-xs font-bold flex items-center justify-center font-display">2</span>
+          <h2 class="font-display text-sm font-bold tracking-[-0.01em] text-sr-text-primary">Payment</h2>
         </div>
-        <div id="discount-row" class="flex justify-between text-sm hidden">
-          <span class="text-green-600">Discount (15%)</span>
-          <span id="discount-display" class="font-medium text-green-600">-$0.00</span>
-        </div>
-        <div class="flex justify-between text-sm">
-          <span class="text-on-surface-variant">Shipping</span>
-          <span id="shipping-display" class="font-medium text-on-surface">$7.99</span>
-        </div>
-        <div class="flex justify-between items-end pt-4 border-t border-outline-variant/20">
-          <span class="text-xs font-black uppercase tracking-widest text-on-surface">Total Due</span>
-          <span id="total-display" class="text-3xl font-black tracking-tighter text-primary">$0.00</span>
-        </div>
-      </div>
-    </div>
 
-    <!-- Trust badges -->
-    <div class="px-6 space-y-6">
-      <div class="flex gap-4 items-center">
-        <span class="material-symbols-outlined text-outline" data-icon="lock">lock</span>
-        <p class="text-[10px] font-semibold text-outline uppercase tracking-wider leading-relaxed">
-          End-to-end encrypted transaction via Stripe Secure
-        </p>
+        <div class="bg-sr-offwhite rounded-2xl p-6 sm:p-8">
+          <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-accent" style="font-size:18px; font-variation-settings: 'FILL' 1;">lock</span>
+              <span class="text-[11px] font-semibold text-sr-text-tertiary tracking-wide uppercase">Secured by Stripe</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-bold text-sr-text-tertiary bg-white px-2 py-1 rounded-md">VISA</span>
+              <span class="text-[10px] font-bold text-sr-text-tertiary bg-white px-2 py-1 rounded-md">MC</span>
+              <span class="text-[10px] font-bold text-sr-text-tertiary bg-white px-2 py-1 rounded-md">AMEX</span>
+              <span class="text-[10px] font-bold text-sr-text-tertiary bg-white px-2 py-1 rounded-md hidden sm:inline-block">APPLE PAY</span>
+            </div>
+          </div>
+
+          <!-- Stripe Payment Element -->
+          <div id="payment-element"></div>
+
+          <!-- Payment errors -->
+          <div id="payment-errors" class="mt-4 text-sm text-red-500 font-medium hidden"></div>
+
+          <!-- Loading state -->
+          <div id="payment-loading" class="flex items-center justify-center py-12 gap-3">
+            <div class="spinner" style="border-top-color: #0a84ff; border-color: rgba(10,132,255,0.2);"></div>
+            <span class="text-sm text-sr-text-tertiary font-medium">Loading secure payment...</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Legal Section -->
+      <section>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-7 h-7 rounded-full bg-sr-text-primary text-white text-xs font-bold flex items-center justify-center font-display">3</span>
+          <h2 class="font-display text-sm font-bold tracking-[-0.01em] text-sr-text-primary">Compliance</h2>
+        </div>
+        <div class="space-y-4 bg-sr-offwhite rounded-2xl p-6">
+          <label class="flex gap-3 items-start cursor-pointer group" for="age">
+            <input class="sr-checkbox" id="age" type="checkbox" required/>
+            <span class="text-[13px] text-sr-text-secondary leading-relaxed group-hover:text-sr-text-primary transition-colors">
+              I certify that I am at least <strong class="text-sr-text-primary">18 years of age</strong> and meet the requirements for research chemical acquisition.
+            </span>
+          </label>
+          <label class="flex gap-3 items-start cursor-pointer group" for="disclaimer">
+            <input class="sr-checkbox" id="disclaimer" type="checkbox" required/>
+            <span class="text-[13px] text-sr-text-secondary leading-relaxed group-hover:text-sr-text-primary transition-colors">
+              I acknowledge these products are strictly for <strong class="text-sr-text-primary">laboratory research use only</strong> and are not for human consumption.
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Submit Button -->
+      <button id="submit-btn" class="w-full py-4 bg-sr-text-primary text-white font-display font-bold text-[15px] tracking-[-0.01em] hover:bg-black transition-all rounded-2xl flex items-center justify-center gap-3 disabled:opacity-40 disabled:cursor-not-allowed" type="submit" disabled>
+        <span id="btn-text">Complete Order</span>
+        <span id="btn-spinner" class="hidden"><span class="spinner"></span></span>
+        <span id="btn-arrow" class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+      </button>
+
+      <!-- Security row -->
+      <div class="flex items-center justify-center gap-4 text-sr-text-tertiary">
+        <span class="material-symbols-outlined" style="font-size:16px; font-variation-settings:'FILL' 1;" data-icon="lock">lock</span>
+        <span class="text-[10px] font-medium tracking-wider uppercase">256-bit SSL</span>
+        <span class="text-[10px]">|</span>
+        <span class="text-[10px] font-medium tracking-wider uppercase">PCI Compliant</span>
+        <span class="text-[10px]">|</span>
+        <span class="text-[10px] font-medium tracking-wider uppercase">Stripe Secured</span>
       </div>
-      <div class="flex gap-4 items-center">
-        <span class="material-symbols-outlined text-outline" data-icon="verified_user">verified_user</span>
-        <p class="text-[10px] font-semibold text-outline uppercase tracking-wider leading-relaxed">
-          Discrete clinical packaging. No external lab marking.
-        </p>
+    </form>
+
+    <!-- Success Message (hidden by default) -->
+    <div id="success-message" class="hidden text-center py-20 space-y-6">
+      <div class="success-check inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-50">
+        <span class="material-symbols-outlined text-green-500" style="font-size: 40px; font-variation-settings: 'FILL' 1;">check_circle</span>
       </div>
-      <div class="flex gap-4 items-center">
-        <span class="material-symbols-outlined text-outline" data-icon="verified">verified</span>
-        <p class="text-[10px] font-semibold text-outline uppercase tracking-wider leading-relaxed">
-          99%+ purity verified · COA included with every order
-        </p>
-      </div>
-      <div class="flex gap-4 items-center">
-        <span class="material-symbols-outlined text-outline" data-icon="undo">undo</span>
-        <p class="text-[10px] font-semibold text-outline uppercase tracking-wider leading-relaxed">
-          Satisfaction guarantee · Damaged products replaced free
-        </p>
-      </div>
+      <h2 class="font-display text-3xl font-bold tracking-[-0.03em] text-sr-text-primary">Order Confirmed</h2>
+      <p class="text-sr-text-secondary text-[15px] max-w-md mx-auto leading-relaxed">A confirmation email with tracking details will be sent to your inbox shortly.</p>
+      <p class="text-[11px] text-sr-text-tertiary uppercase tracking-widest font-semibold">Order ID: <span id="order-id" class="text-accent font-bold">---</span></p>
+      <a href="../products_page/code.html" class="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all">
+        Continue Shopping <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      </a>
     </div>
   </div>
-</div>
 
-</div>
+  <!-- Right Column: Order Summary -->
+  <div class="lg:col-span-5 order-1 lg:order-2">
+    <div class="lg:sticky lg:top-28 space-y-6">
+
+      <!-- Summary Card -->
+      <div class="bg-sr-offwhite rounded-2xl p-6 sm:p-8">
+        <h2 class="font-display text-sm font-bold tracking-[-0.01em] text-sr-text-primary mb-6">Order Summary</h2>
+
+        <div id="cart-items" class="space-y-5 mb-6">
+          <!-- Cart items populated by JS -->
+        </div>
+
+        <!-- Promo Code -->
+        <div class="border-t border-black/[0.06] pt-5 mb-5">
+          <div class="flex gap-2">
+            <input class="flex-grow bg-white border border-black/[0.08] rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent text-sr-text-primary font-medium uppercase tracking-wider transition-all" id="promo" placeholder="Promo code" type="text"/>
+            <button id="apply-promo-btn" class="bg-sr-text-primary text-white px-5 py-3 rounded-xl font-semibold text-xs tracking-wide hover:bg-black transition-colors" type="button" onclick="applyPromo()">Apply</button>
+          </div>
+          <p id="promo-status" class="text-[11px] mt-2 text-sr-text-tertiary font-medium">Follow us on TikTok &amp; IG for exclusive codes</p>
+        </div>
+
+        <!-- Totals -->
+        <div class="border-t border-black/[0.06] pt-5 space-y-3">
+          <div class="flex justify-between text-sm">
+            <span class="text-sr-text-secondary">Subtotal</span>
+            <span id="subtotal-display" class="font-medium text-sr-text-primary">$0.00</span>
+          </div>
+          <div id="discount-row" class="flex justify-between text-sm hidden">
+            <span class="text-green-600">Discount (15%)</span>
+            <span id="discount-display" class="font-medium text-green-600">-$0.00</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-sr-text-secondary">Shipping</span>
+            <span id="shipping-display" class="font-medium text-sr-text-primary">$7.99</span>
+          </div>
+          <div class="flex justify-between items-baseline pt-4 border-t border-black/[0.06]">
+            <span class="font-display text-sm font-bold text-sr-text-primary">Total</span>
+            <span id="total-display" class="font-display text-2xl font-extrabold tracking-[-0.03em] text-sr-text-primary">$0.00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust Badges -->
+      <div class="space-y-4 px-2">
+        <div class="flex gap-3 items-center">
+          <span class="material-symbols-outlined text-sr-text-tertiary" style="font-size:20px;" data-icon="lock">lock</span>
+          <p class="text-[12px] text-sr-text-secondary leading-relaxed">End-to-end encrypted via Stripe Secure</p>
+        </div>
+        <div class="flex gap-3 items-center">
+          <span class="material-symbols-outlined text-sr-text-tertiary" style="font-size:20px;" data-icon="verified_user">verified_user</span>
+          <p class="text-[12px] text-sr-text-secondary leading-relaxed">Discrete clinical packaging. No external markings.</p>
+        </div>
+        <div class="flex gap-3 items-center">
+          <span class="material-symbols-outlined text-sr-text-tertiary" style="font-size:20px;" data-icon="verified">verified</span>
+          <p class="text-[12px] text-sr-text-secondary leading-relaxed">99%+ purity verified. COA with every order.</p>
+        </div>
+        <div class="flex gap-3 items-center">
+          <span class="material-symbols-outlined text-sr-text-tertiary" style="font-size:20px;" data-icon="undo">undo</span>
+          <p class="text-[12px] text-sr-text-secondary leading-relaxed">Damaged products replaced free of charge.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
 </main>
 
 <!-- Footer -->
-<footer class="bg-slate-50 dark:bg-slate-900 w-full py-16 px-8 border-t border-slate-100 dark:border-slate-800">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto font-['Inter'] text-sm tracking-wide">
-<div class="space-y-6">
-<span class="text-lg font-bold tracking-tighter text-slate-900 dark:text-white">SERENITY</span>
-<p class="text-slate-500 dark:text-slate-400 leading-relaxed max-w-xs">
-  Advancing human potential through rigorous biochemical research and uncompromising purity standards.
-</p>
+<footer class="bg-sr-offwhite w-full py-16 px-6 sm:px-8 border-t border-sr-border">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-10 max-w-6xl mx-auto text-sm">
+  <div class="space-y-4">
+    <span class="font-display text-lg font-extrabold tracking-[-0.04em] text-sr-text-primary">SERENITY</span>
+    <p class="text-sr-text-secondary text-[13px] leading-relaxed max-w-xs">
+      Advancing human potential through rigorous biochemical research and uncompromising purity standards.
+    </p>
+  </div>
+  <div>
+    <h4 class="font-display font-bold text-sr-text-primary mb-5 text-xs tracking-wide uppercase">Resources</h4>
+    <ul class="space-y-3 text-sr-text-secondary text-[13px]">
+      <li><a class="hover:text-accent transition-colors" href="../about/code.html">Lab Analysis</a></li>
+      <li><a class="hover:text-accent transition-colors" href="../faq_page/code.html">Safety Protocols</a></li>
+      <li><a class="hover:text-accent transition-colors" href="../about/code.html">Lab Reports</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4 class="font-display font-bold text-sr-text-primary mb-5 text-xs tracking-wide uppercase">Company</h4>
+    <ul class="space-y-3 text-sr-text-secondary text-[13px]">
+      <li><a class="hover:text-accent transition-colors" href="../about/code.html">About Us</a></li>
+      <li><a class="hover:text-accent transition-colors" href="../faq_page/code.html">Contact</a></li>
+      <li><a class="hover:text-accent transition-colors" href="../privacy_page/code.html">Privacy</a></li>
+    </ul>
+  </div>
+  <div class="space-y-4">
+    <h4 class="font-display font-bold text-sr-text-primary mb-5 text-xs tracking-wide uppercase">Newsletter</h4>
+    <div class="flex gap-2">
+      <input class="bg-white border border-sr-border rounded-xl p-3 text-xs w-full focus:ring-2 focus:ring-accent/20 focus:border-accent focus:outline-none transition-all" placeholder="Research Email" type="email"/>
+      <button class="bg-accent text-white p-3 rounded-xl hover:bg-accent-hover transition-colors">
+        <span class="material-symbols-outlined text-sm" data-icon="send">send</span>
+      </button>
+    </div>
+  </div>
 </div>
-<div>
-<h4 class="font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-xs">Resources</h4>
-<ul class="space-y-4 text-slate-500 dark:text-slate-400">
-<li><a class="hover:text-blue-500 transition-colors" href="../about/code.html">Lab Analysis</a></li>
-<li><a class="hover:text-blue-500 transition-colors" href="../faq_page/code.html">Safety Protocols</a></li>
-<li><a class="hover:text-blue-500 transition-colors" href="../about/code.html">Lab Reports</a></li>
-</ul>
-</div>
-<div>
-<h4 class="font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-xs">Company</h4>
-<ul class="space-y-4 text-slate-500 dark:text-slate-400">
-<li><a class="hover:text-blue-500 transition-colors" href="../about/code.html">About Us</a></li>
-<li><a class="hover:text-blue-500 transition-colors" href="../faq_page/code.html">Contact</a></li>
-<li><a class="hover:text-blue-500 transition-colors" href="../faq_page/code.html">Privacy</a></li>
-</ul>
-</div>
-<div class="space-y-6">
-<h4 class="font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-xs">Newsletter</h4>
-<div class="flex gap-2">
-<input class="bg-white dark:bg-slate-800 border-none rounded p-3 text-xs w-full focus:ring-1 focus:ring-blue-500" placeholder="Research Email" type="text"/>
-<button class="bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition-colors">
-<span class="material-symbols-outlined text-sm" data-icon="send">send</span>
-</button>
-</div>
-</div>
-</div>
-<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6">
-<p class="text-slate-400 dark:text-slate-500 text-[10px] uppercase tracking-widest font-medium">
-  © 2026 Serenity Research Labs. For research use only. Not for human consumption.
-</p>
-<div class="flex gap-8">
-<a href="https://www.tiktok.com/@serenityresearchlabs" class="text-slate-400 hover:text-blue-500 transition-colors text-xs font-bold uppercase tracking-widest">TikTok</a>
-<a href="https://www.instagram.com/serenityresearchlabs/" class="text-slate-400 hover:text-blue-500 transition-colors text-xs font-bold uppercase tracking-widest">Instagram</a>
-</div>
+<div class="max-w-6xl mx-auto mt-12 pt-6 border-t border-sr-border flex flex-col md:flex-row justify-between items-center gap-4">
+  <p class="text-sr-text-tertiary text-[10px] uppercase tracking-widest font-medium">
+    &copy; 2026 Serenity Research Labs. For research use only. Not for human consumption.
+  </p>
+  <div class="flex gap-6">
+    <a href="https://www.tiktok.com/@serenityresearchlabs" class="text-sr-text-tertiary hover:text-accent transition-colors text-xs font-semibold uppercase tracking-widest">TikTok</a>
+    <a href="https://www.instagram.com/serenityresearchlabs/" class="text-sr-text-tertiary hover:text-accent transition-colors text-xs font-semibold uppercase tracking-widest">Instagram</a>
+  </div>
 </div>
 </footer>
+
 <script src="../js/chatbot.js"></script>
 
 <script>
@@ -437,6 +465,12 @@ try {
 let promoCode = "";
 let promoApplied = false;
 
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.appendChild(document.createTextNode(String(str)));
+  return div.innerHTML;
+}
+
 // =============================================================================
 // RENDER CART
 // =============================================================================
@@ -447,9 +481,9 @@ function renderCart() {
   if (cart.length === 0) {
     container.innerHTML = `
       <div class="text-center py-8">
-        <span class="material-symbols-outlined text-outline text-4xl mb-4">shopping_cart</span>
-        <p class="text-on-surface-variant font-medium">Your cart is empty</p>
-        <a href="../products_page/code.html" class="text-primary text-sm font-bold uppercase tracking-widest hover:underline mt-4 inline-block">Browse Products</a>
+        <span class="material-symbols-outlined text-sr-text-tertiary text-4xl mb-3 block">shopping_cart</span>
+        <p class="text-sr-text-secondary font-medium text-sm mb-3">Your cart is empty</p>
+        <a href="../products_page/code.html" class="text-accent text-sm font-semibold hover:underline">Browse Products &rarr;</a>
       </div>
     `;
     document.getElementById("submit-btn").disabled = true;
@@ -457,16 +491,21 @@ function renderCart() {
   }
 
   cart.forEach(item => {
+    const safeIcon = escapeHtml(item.icon);
+    const safeName = escapeHtml(item.name);
+    const safeDesc = escapeHtml(item.desc);
+    const safeQty = parseInt(item.qty, 10) || 1;
+    const safePrice = parseFloat(item.price) || 0;
     container.innerHTML += `
-      <div class="flex items-center gap-6">
-        <div class="w-20 h-20 bg-surface-container-highest rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center">
-          <span class="material-symbols-outlined text-primary text-3xl">${item.icon}</span>
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 bg-white rounded-xl flex-shrink-0 flex items-center justify-center" style="box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+          <span class="material-symbols-outlined text-accent text-2xl">${safeIcon}</span>
         </div>
-        <div class="flex-grow">
-          <h3 class="font-bold text-on-surface tracking-tight">${item.name}</h3>
-          <p class="text-[10px] text-outline uppercase tracking-wider font-semibold">Qty: ${item.qty} · ${item.desc}</p>
+        <div class="flex-grow min-w-0">
+          <h3 class="font-semibold text-sr-text-primary text-sm tracking-tight truncate">${safeName}</h3>
+          <p class="text-[11px] text-sr-text-tertiary font-medium">Qty: ${safeQty} &middot; ${safeDesc}</p>
         </div>
-        <span class="font-bold text-on-surface">$${(item.price * item.qty).toFixed(2)}</span>
+        <span class="font-semibold text-sr-text-primary text-sm tabular-nums">$${(safePrice * safeQty).toFixed(2)}</span>
       </div>
     `;
   });
@@ -493,7 +532,6 @@ function updateTotals() {
   }
 
   document.getElementById("shipping-display").textContent = `$${shipping.toFixed(2)}`;
-  document.getElementById("shipping-display").className = "font-medium text-on-surface";
 }
 
 function applyPromo() {
@@ -504,16 +542,16 @@ function applyPromo() {
   if (code === "SERENITY15") {
     promoCode = code;
     promoApplied = true;
-    status.textContent = "✓ SERENITY15 applied — 15% off!";
-    status.className = "text-[10px] mt-3 uppercase tracking-wider font-bold text-green-600";
+    status.textContent = "SERENITY15 applied — 15% off!";
+    status.className = "text-[11px] mt-2 font-semibold text-green-600";
     input.disabled = true;
     input.classList.add("opacity-50");
     document.getElementById("apply-promo-btn").disabled = true;
     document.getElementById("apply-promo-btn").classList.add("opacity-50");
     updateTotals();
   } else {
-    status.textContent = "✕ Invalid promo code";
-    status.className = "text-[10px] mt-3 uppercase tracking-wider font-bold text-red-500";
+    status.textContent = "Invalid promo code";
+    status.className = "text-[11px] mt-2 font-semibold text-red-500";
     input.classList.add("shake");
     setTimeout(() => input.classList.remove("shake"), 500);
   }
@@ -527,13 +565,11 @@ let stripe, elements, paymentElement;
 
 async function initStripe() {
   try {
-    // Fetch publishable key from our backend
     const response = await fetch("/api/config");
     const { publishableKey } = await response.json();
 
     stripe = Stripe(publishableKey);
 
-    // Create Payment Intent on the server (cart + promo only — shipping/email sent at confirmation)
     const intentResponse = await fetch("/api/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -550,46 +586,43 @@ async function initStripe() {
       return;
     }
 
-    // Create Stripe Elements with the Payment Element
     elements = stripe.elements({
       clientSecret: intentData.clientSecret,
       appearance: {
         theme: "stripe",
         variables: {
-          colorPrimary: "#005faa",
-          colorBackground: "#f9f9ff",
-          colorText: "#141b2b",
-          colorDanger: "#ba1a1a",
+          colorPrimary: "#0a84ff",
+          colorBackground: "#ffffff",
+          colorText: "#1d1d1f",
+          colorDanger: "#ff3b30",
           fontFamily: "Inter, system-ui, sans-serif",
           spacingUnit: "4px",
-          borderRadius: "8px",
+          borderRadius: "12px",
         },
         rules: {
           ".Input": {
-            border: "1px solid #c0c7d4",
+            border: "1.5px solid rgba(0,0,0,0.08)",
             boxShadow: "none",
+            backgroundColor: "#ffffff",
           },
           ".Input:focus": {
-            border: "1px solid #005faa",
-            boxShadow: "0 0 0 1px #005faa",
+            border: "1.5px solid #0a84ff",
+            boxShadow: "0 0 0 3px rgba(10,132,255,0.1)",
           },
           ".Label": {
-            fontWeight: "600",
-            fontSize: "11px",
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
+            fontWeight: "500",
+            fontSize: "13px",
+            color: "#6e6e73",
           },
         },
       },
     });
 
-    // Mount the Payment Element (this single element handles cards, Apple Pay, Google Pay, Venmo, etc.)
     paymentElement = elements.create("payment", {
       layout: {
         type: "tabs",
         defaultCollapsed: false,
       },
-      // Wallets like Apple Pay / Google Pay show automatically when available
       wallets: {
         applePay: "auto",
         googlePay: "auto",
@@ -598,7 +631,6 @@ async function initStripe() {
 
     paymentElement.mount("#payment-element");
 
-    // Hide loading, enable submit when ready
     paymentElement.on("ready", () => {
       document.getElementById("payment-loading").classList.add("hidden");
       document.getElementById("submit-btn").disabled = false;
@@ -615,11 +647,11 @@ async function initStripe() {
   } catch (err) {
     console.error("Stripe init error:", err);
     document.getElementById("payment-loading").innerHTML = `
-      <div class="text-center py-8 space-y-4">
-        <span class="material-symbols-outlined text-amber-500" style="font-size:36px;">warning</span>
-        <p class="text-sm text-on-surface-variant font-medium">Payment system loading...</p>
-        <p class="text-xs text-outline">Make sure the server is running (python server.py)</p>
-        <button onclick="initStripe()" class="text-xs text-primary font-bold uppercase tracking-widest hover:underline">Retry Connection</button>
+      <div class="text-center py-8 space-y-3">
+        <span class="material-symbols-outlined text-amber-500" style="font-size:32px;">warning</span>
+        <p class="text-sm text-sr-text-secondary font-medium">Payment system loading...</p>
+        <p class="text-xs text-sr-text-tertiary">Make sure the server is running (python server.py)</p>
+        <button onclick="initStripe()" class="text-xs text-accent font-semibold hover:underline">Retry</button>
       </div>
     `;
   }
@@ -631,13 +663,11 @@ async function initStripe() {
 document.getElementById("payment-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  // Validate checkboxes
   if (!document.getElementById("age").checked || !document.getElementById("disclaimer").checked) {
     showError("Please accept both legal disclaimers to proceed.");
     return;
   }
 
-  // Validate shipping fields
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const address = document.getElementById("address").value.trim();
@@ -649,7 +679,6 @@ document.getElementById("payment-form").addEventListener("submit", async (e) => 
 
   setLoading(true);
 
-  // Confirm payment with Stripe
   const { error, paymentIntent } = await stripe.confirmPayment({
     elements,
     confirmParams: {
@@ -718,11 +747,9 @@ function showSuccess(paymentIntentId) {
   success.classList.remove("hidden");
   success.classList.add("fade-in");
   document.getElementById("order-id").textContent = paymentIntentId.slice(-8).toUpperCase();
-  // Scroll to top
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// Check if returning from a redirect-based payment (e.g., Apple Pay on some devices)
 async function checkRedirectResult() {
   const params = new URLSearchParams(window.location.search);
   if (params.get("success") === "true" && params.get("payment_intent")) {
@@ -754,4 +781,5 @@ initStripe();
 </script>
 <script src="../js/cart.js"></script>
 
-</body></html>
+</body>
+</html>

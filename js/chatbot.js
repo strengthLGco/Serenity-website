@@ -1,5 +1,11 @@
 // Serenity Research Labs - AI Product Advisor Chatbot
 (function() {
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
   const RESPONSES = {
     "fat_loss": {
       title: "Fat Loss Research",
@@ -160,7 +166,7 @@
     function addUserMessage(text) {
       const msg = document.createElement('div');
       msg.className = 'srl-msg user';
-      msg.innerHTML = `<div class="bubble">${text}</div>`;
+      msg.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
       body.appendChild(msg);
       body.scrollTop = body.scrollHeight;
     }

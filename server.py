@@ -40,6 +40,19 @@ app = Flask(__name__, static_folder=".", static_url_path="")
 
 
 # =============================================================================
+# SECURITY HEADERS
+# =============================================================================
+@app.after_request
+def add_security_headers(response: "Flask.response_class") -> "Flask.response_class":
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+    return response
+
+
+# =============================================================================
 # STATIC FILE SERVING (replaces python -m http.server)
 # =============================================================================
 @app.route("/")
