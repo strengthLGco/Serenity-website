@@ -129,7 +129,7 @@ def create_payment_intent():
                 "price": 6500  # $65.00
             },
             "glow-stack": {
-                "name": "The Glow Stack",
+                "name": "G-LOW (TB-500 + BPC-157 + GHK-Cu)",
                 "price": 8999  # $89.99
             },
         }

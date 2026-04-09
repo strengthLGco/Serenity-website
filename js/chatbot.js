@@ -1,4 +1,4 @@
-// Serenity Research Labs - AI Product Advisor Chatbot
+// Serenity Research Labs - Research Compound Advisor Chatbot
 (function() {
   function escapeHtml(str) {
     const div = document.createElement('div');
@@ -7,81 +7,78 @@
   }
 
   const RESPONSES = {
-    "fat_loss": {
-      title: "Fat Loss Research",
-      text: "For metabolic and weight management research, two compounds dominate the literature:",
+    "peptide_signaling": {
+      title: "Peptide Signaling Research",
+      text: "Two widely studied compounds in cytoprotection and cell migration signaling pathways:",
       recs: [
-        { name: "G-LOW", desc: "GLP-1 receptor agonist — the most researched pathway for appetite regulation and metabolic optimization. 70mg concentration gives you serious research runway.", price: "$89.99", link: "../product_detail_glow/code.html" },
-        { name: "Retatrutide", desc: "Triple-agonist hitting GLP-1, GIP, and glucagon receptors simultaneously. The most powerful metabolic compound in research right now.", price: "$65.00", link: "../product_detail_retatrutide/code.html" }
+        { name: "BPC-157", desc: "Gastric pentadecapeptide (15 amino acids) — extensively studied in murine models for cytoprotective and nitric oxide signaling pathways. 5mg lyophilized.", price: "$44.99", link: "../product_detail_bpc_157/code.html" },
+        { name: "TB-500", desc: "Synthetic thymosin beta-4 fragment — investigated for actin-sequestering properties and cell migration modulation in preclinical research. 5mg lyophilized.", price: "$49.99", link: "../product_detail_tb500/code.html" }
       ]
     },
-    "recovery": {
-      title: "Recovery Research",
-      text: "The recovery stack is the bread and butter of peptide research. Two compounds that work synergistically:",
+    "receptor_studies": {
+      title: "Receptor Pathway Research",
+      text: "Compounds targeting specific receptor subtypes for pharmacological characterization:",
       recs: [
-        { name: "BPC-157", desc: "The gold standard for tissue repair research — gastric pentadecapeptide that accelerates tendon, ligament, and muscle healing pathways.", price: "$44.99", link: "../product_detail_bpc_157/code.html" },
-        { name: "TB-500", desc: "Thymosin Beta-4 fragment that promotes angiogenesis and reduces inflammation. Pair it with BPC-157 for the ultimate recovery protocol.", price: "$49.99", link: "../product_detail_tb500/code.html" }
+        { name: "CJC/Ipamorelin", desc: "GHRH analog + ghrelin mimetic blend — dual-pathway secretagogue studied for GHRH-R and GHS-R1a receptor binding and pulsatile signaling patterns. 5mg blend.", price: "$54.99", link: "../product_detail_cjcipa/code.html" },
+        { name: "Retatrutide", desc: "Triple-agonist incretin — GLP-1R, GIPR, and GCGR binding profiles under investigation. One of the most novel multi-receptor peptides in current research. 5mg.", price: "$65.00", link: "../product_detail_retatrutide/code.html" }
       ]
     },
-    "anti_aging": {
-      title: "Anti-Aging Research",
-      text: "Longevity and regeneration research focuses on two key pathways:",
+    "matrix_remodeling": {
+      title: "Extracellular Matrix Research",
+      text: "Compounds studied in connective tissue signaling and extracellular matrix remodeling:",
       recs: [
-        { name: "GHK-Cu", desc: "Copper peptide backed by 50+ studies — activates over 4,000 genes involved in tissue remodeling, collagen synthesis, and cellular repair.", price: "$39.99", link: "../product_detail_ghkcu/code.html" },
-        { name: "CJC/Ipamorelin", desc: "Clean GH secretagogue blend that elevates growth hormone without spiking cortisol. Research shows improved sleep, body composition, and recovery.", price: "$54.99", link: "../product_detail_cjcipa/code.html" }
+        { name: "GHK-Cu", desc: "Copper-binding tripeptide (Gly-His-Lys) — researched for fibroblast signaling, copper chelation, and gene expression modulation in tissue culture. 50mg.", price: "$39.99", link: "../product_detail_ghkcu/code.html" },
+        { name: "G-LOW", desc: "Multi-compound research blend: 10mg TB-500 + 10mg BPC-157 + 50mg GHK-Cu (70mg total). Three independently studied compounds in a single lyophilized preparation.", price: "$89.99", link: "../product_detail_glow/code.html" }
       ]
     },
-    "muscle": {
-      title: "Muscle Growth Research",
-      text: "For hypertrophy and growth pathway research, these compounds target the key mechanisms:",
+    "melanocortin": {
+      title: "Melanocortin Receptor Research",
+      text: "Compounds targeting the melanocortin receptor family (MC1R–MC5R):",
       recs: [
-        { name: "IGF-1 LR3", desc: "Long-acting growth factor that activates satellite cells — the precursors to new muscle fiber formation. 3x longer half-life than native IGF-1.", price: "$59.99", link: "../product_detail_igf1lr3/code.html" },
-        { name: "CJC/Ipamorelin", desc: "Synergistic GH blend that amplifies natural growth hormone output 2-3x. The foundation of any serious growth protocol.", price: "$54.99", link: "../product_detail_cjcipa/code.html" }
+        { name: "MT-2", desc: "Cyclic heptapeptide analog of alpha-MSH — non-selective melanocortin receptor agonist studied for MC1R and MC4R binding affinity and signaling cascades. 10mg.", price: "$34.99", link: "../product_detail_mt2/code.html" }
       ]
     },
-    "skin": {
-      title: "Skin & Appearance Research",
-      text: "For skin quality, tanning, and appearance-focused research:",
+    "growth_factor": {
+      title: "Growth Factor Research",
+      text: "Recombinant peptides studied for IGF-1 receptor signaling and cell proliferation kinetics:",
       recs: [
-        { name: "MT-2", desc: "Melanocortin agonist that triggers melanin production — achieve a deep, even tan without UV damage. Also researched for appetite modulation.", price: "$34.99", link: "../product_detail_mt2/code.html" },
-        { name: "GHK-Cu", desc: "The regenerative copper peptide — 32% increase in collagen synthesis in research models. Skin elasticity, wound healing, and hair restoration.", price: "$39.99", link: "../product_detail_ghkcu/code.html" }
+        { name: "IGF-1 LR3", desc: "Long R3 IGF-1 analog (83 amino acids) — Arg3 substitution reduces IGFBP binding, extending bioavailability in research assays. Recombinant, 1mg.", price: "$59.99", link: "../product_detail_igf1lr3/code.html" }
+      ]
+    },
+    "compound_blends": {
+      title: "Pre-Configured Research Kits",
+      text: "Curated compound combinations based on commonly co-cited research protocols. All kits include bacteriostatic water for reconstitution:",
+      recs: [
+        { name: "View All Research Kits", desc: "See our full catalog of multi-compound research kits with volume pricing.", price: "From $49.99", link: "../pricing_stacks/code.html" }
       ]
     },
     "bpc": {
-      title: "BPC-157 Info",
-      text: "BPC-157 is a 15-amino acid gastric pentadecapeptide researched for tissue repair, gut healing, and recovery acceleration. It's the most popular peptide we carry — most researchers start here. Pairs perfectly with TB-500 for a complete recovery stack.",
+      title: "BPC-157 Compound Profile",
+      text: "BPC-157 is a 15-amino acid gastric pentadecapeptide (Body Protection Compound) derived from human gastric juice. It has been extensively studied in preclinical models for cytoprotective signaling, nitric oxide pathway modulation, and soft tissue interaction research. One of the most cited peptides in current literature.",
       recs: [
-        { name: "BPC-157", desc: "5mg lyophilized, 99%+ purity, COA included", price: "$44.99", link: "../product_detail_bpc_157/code.html" }
-      ]
-    },
-    "stacks": {
-      title: "Our Pre-Built Stacks",
-      text: "We've curated research stacks based on the most common protocols. Save 18-20% vs buying individually:",
-      recs: [
-        { name: "Gym Stack ($119.99)", desc: "BPC-157 + TB-500 + CJC/Ipa — the complete performance research protocol.", price: "$119.99", link: "../pricing_stacks/code.html" },
-        { name: "Summer Stack ($69.99)", desc: "MT-2 + GHK-Cu + Bac Water — skin, tan, and appearance research.", price: "$69.99", link: "../pricing_stacks/code.html" }
+        { name: "BPC-157", desc: "5mg lyophilized, 99%+ purity via HPLC, COA included.", price: "$44.99", link: "../product_detail_bpc_157/code.html" }
       ]
     },
     "default": {
-      title: "How Can I Help?",
-      text: "I can recommend peptides based on your research goals. Try asking about: fat loss, recovery, muscle growth, anti-aging, skin & tanning, or our pre-built stacks. You can also ask about any specific compound.",
+      title: "Research Compound Advisor",
+      text: "I can help you navigate our catalog of research-grade peptides. Select a research category below or type a compound name for detailed information.",
       recs: []
     }
   };
 
   function matchResponse(input) {
     const lower = input.toLowerCase();
-    if (lower.includes("fat") || lower.includes("weight") || lower.includes("metaboli") || lower.includes("glp") || lower.includes("sema") || lower.includes("ozempic") || lower.includes("tirzepatide")) return RESPONSES.fat_loss;
-    if (lower.includes("recover") || lower.includes("heal") || lower.includes("tendon") || lower.includes("joint") || lower.includes("injur")) return RESPONSES.recovery;
-    if (lower.includes("age") || lower.includes("aging") || lower.includes("longev") || lower.includes("regenerat") || lower.includes("collagen")) return RESPONSES.anti_aging;
-    if (lower.includes("muscle") || lower.includes("growth") || lower.includes("hypertrophy") || lower.includes("gain") || lower.includes("mass") || lower.includes("igf")) return RESPONSES.muscle;
-    if (lower.includes("skin") || lower.includes("hair") || lower.includes("tan") || lower.includes("mt-2") || lower.includes("melanotan") || lower.includes("appearance")) return RESPONSES.skin;
-    if (lower.includes("bpc") || lower.includes("157")) return RESPONSES.bpc;
-    if (lower.includes("stack") || lower.includes("bundle") || lower.includes("combo") || lower.includes("package")) return RESPONSES.stacks;
-    if (lower.includes("ship") || lower.includes("deliver")) return { title: "Shipping Info", text: "All orders ship within 24 hours in temperature-controlled, discreet packaging. Most US orders arrive in 2-4 business days. Flat rate shipping is $7.99.", recs: [] };
+    if (lower.includes("bpc") || lower.includes("157") || lower.includes("gastric")) return RESPONSES.bpc;
+    if (lower.includes("signal") || lower.includes("cytoprotect") || lower.includes("cell migrat") || lower.includes("tb") || lower.includes("thymosin")) return RESPONSES.peptide_signaling;
+    if (lower.includes("receptor") || lower.includes("ghrh") || lower.includes("ghrelin") || lower.includes("glp") || lower.includes("incretin") || lower.includes("cjc") || lower.includes("ipa") || lower.includes("retatr") || lower.includes("secreta")) return RESPONSES.receptor_studies;
+    if (lower.includes("matrix") || lower.includes("collagen") || lower.includes("fibroblast") || lower.includes("ghk") || lower.includes("copper") || lower.includes("glow") || lower.includes("g-low") || lower.includes("connective")) return RESPONSES.matrix_remodeling;
+    if (lower.includes("melanocort") || lower.includes("mt-2") || lower.includes("melanotan") || lower.includes("msh") || lower.includes("mc1r") || lower.includes("mc4r") || lower.includes("pigment")) return RESPONSES.melanocortin;
+    if (lower.includes("igf") || lower.includes("growth factor") || lower.includes("lr3") || lower.includes("proliferat")) return RESPONSES.growth_factor;
+    if (lower.includes("stack") || lower.includes("bundle") || lower.includes("combo") || lower.includes("kit") || lower.includes("blend") || lower.includes("package")) return RESPONSES.compound_blends;
+    if (lower.includes("ship") || lower.includes("deliver")) return { title: "Shipping Info", text: "All orders ship within 24 hours in temperature-controlled packaging. Most US orders arrive in 2-4 business days. Flat rate shipping: $7.99.", recs: [] };
     if (lower.includes("payment") || lower.includes("pay") || lower.includes("card") || lower.includes("crypto")) return { title: "Payment Methods", text: "We accept Visa, Mastercard, Amex, Apple Pay, and select cryptocurrencies (BTC, ETH). All transactions are encrypted and PCI-compliant.", recs: [] };
-    if (lower.includes("coa") || lower.includes("certificate") || lower.includes("test") || lower.includes("purity") || lower.includes("lab")) return { title: "Purity & COAs", text: "Every batch is third-party tested via HPLC and Mass Spectrometry. Certificates of Analysis are included with every order and available on request for any batch.", recs: [] };
-    if (lower.includes("promo") || lower.includes("code") || lower.includes("discount") || lower.includes("coupon")) return { title: "Promo Codes", text: "Use code SERENITY15 at checkout for 15% off your order. Follow us on TikTok and Instagram for exclusive drops and additional codes.", recs: [] };
+    if (lower.includes("coa") || lower.includes("certificate") || lower.includes("test") || lower.includes("purity") || lower.includes("hplc") || lower.includes("lab")) return { title: "Purity & COAs", text: "Every batch is third-party tested via HPLC and Mass Spectrometry. Certificates of Analysis are included with every order and available on request for any batch.", recs: [] };
+    if (lower.includes("promo") || lower.includes("code") || lower.includes("discount") || lower.includes("coupon")) return { title: "Promo Codes", text: "Use code SERENITY15 at checkout for 15% off your order. Follow us on TikTok and Instagram for exclusive promotions.", recs: [] };
     return RESPONSES.default;
   }
 
@@ -119,6 +116,7 @@
       #srl-chat-send { background:#0078d4; border:none; border-radius:8px; width:40px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
       #srl-chat-send:hover { background:#005faa; }
       #srl-chat-send .icon { color:white; font-size:18px; }
+      .srl-disclaimer { font-size:9px; color:#556; text-align:center; padding:8px 16px 12px; border-top:1px solid rgba(255,255,255,0.04); }
       @media (max-width:480px) { #srl-chat-panel { width:calc(100vw - 32px); right:16px; bottom:90px; } }
     `;
     document.head.appendChild(style);
@@ -134,14 +132,15 @@
     panel.id = 'srl-chat-panel';
     panel.innerHTML = `
       <div id="srl-chat-header">
-        <h3>Serenity AI Advisor</h3>
-        <p>Peptide Research Assistant</p>
+        <h3>Compound Advisor</h3>
+        <p>Research Catalog Navigator</p>
       </div>
       <div id="srl-chat-body"></div>
       <div id="srl-chat-input-wrap">
-        <input id="srl-chat-input" placeholder="Ask about any peptide..." type="text"/>
+        <input id="srl-chat-input" placeholder="Search compounds or ask a question..." type="text"/>
         <button id="srl-chat-send"><span class="material-symbols-outlined icon">send</span></button>
       </div>
+      <div class="srl-disclaimer">For research purposes only. Not for human consumption.</div>
     `;
     document.body.appendChild(panel);
 
@@ -154,8 +153,8 @@
       msg.className = 'srl-msg bot';
       let html = `<div class="bubble"><strong>${resp.title}</strong><br>${resp.text}</div>`;
       if (resp.recs && resp.recs.length) {
-        resp.recs.forEach(r => {
-          html += `<div class="srl-rec"><h4>${r.name}</h4><span class="price">${r.price}</span><p>${r.desc}</p><a href="${r.link}">Shop ${r.name.split(' ')[0]}</a></div>`;
+        resp.recs.forEach(function(r) {
+          html += `<div class="srl-rec"><h4>${r.name}</h4><span class="price">${r.price}</span><p>${r.desc}</p><a href="${r.link}">View Details</a></div>`;
         });
       }
       msg.innerHTML = html;
@@ -176,22 +175,22 @@
       const msg = document.createElement('div');
       msg.className = 'srl-msg bot';
       msg.innerHTML = `
-        <div class="bubble">Not sure which peptide is right for your research goals? I can help. Pick a category or type your question below.</div>
+        <div class="bubble">Welcome to Serenity Research Labs. Select a research category or type a compound name to explore our catalog.</div>
         <div class="srl-pills">
-          <span class="srl-pill" data-q="fat_loss">Fat Loss</span>
-          <span class="srl-pill" data-q="recovery">Recovery</span>
-          <span class="srl-pill" data-q="anti_aging">Anti-Aging</span>
-          <span class="srl-pill" data-q="muscle">Muscle Growth</span>
-          <span class="srl-pill" data-q="skin">Skin & Hair</span>
-          <span class="srl-pill" data-q="stacks">View Stacks</span>
+          <span class="srl-pill" data-q="peptide_signaling">Peptide Signaling</span>
+          <span class="srl-pill" data-q="receptor_studies">Receptor Studies</span>
+          <span class="srl-pill" data-q="matrix_remodeling">Matrix Research</span>
+          <span class="srl-pill" data-q="melanocortin">Melanocortin</span>
+          <span class="srl-pill" data-q="growth_factor">Growth Factors</span>
+          <span class="srl-pill" data-q="compound_blends">Research Kits</span>
         </div>
       `;
       body.appendChild(msg);
-      msg.querySelectorAll('.srl-pill').forEach(pill => {
+      msg.querySelectorAll('.srl-pill').forEach(function(pill) {
         pill.addEventListener('click', function() {
           const key = this.getAttribute('data-q');
           addUserMessage(this.textContent);
-          setTimeout(() => addBotMessage(RESPONSES[key]), 400);
+          setTimeout(function() { addBotMessage(RESPONSES[key]); }, 400);
         });
       });
     }
@@ -201,7 +200,7 @@
       if (!text) return;
       addUserMessage(text);
       input.value = '';
-      setTimeout(() => addBotMessage(matchResponse(text)), 500);
+      setTimeout(function() { addBotMessage(matchResponse(text)); }, 500);
     }
 
     toggle.addEventListener('click', function() {
