@@ -505,12 +505,24 @@ function renderCart() {
           <h3 class="font-semibold text-sr-text-primary text-sm tracking-tight truncate">${safeName}</h3>
           <p class="text-[11px] text-sr-text-tertiary font-medium">Qty: ${safeQty} &middot; ${safeDesc}</p>
         </div>
-        <span class="font-semibold text-sr-text-primary text-sm tabular-nums">$${(safePrice * safeQty).toFixed(2)}</span>
+        <span class="font-semibold text-sr-text-primary text-sm tabular-nums mr-2">$${(safePrice * safeQty).toFixed(2)}</span>
+        <button onclick="removeFromCart('${escapeHtml(item.id)}')" class="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-full text-sr-text-tertiary hover:text-red-500 hover:bg-red-50 transition-all duration-200" aria-label="Remove ${safeName}">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
       </div>
     `;
   });
 
   updateTotals();
+}
+
+function removeFromCart(productId) {
+  cart = cart.filter(item => item.id !== productId);
+  localStorage.setItem("serenity_cart", JSON.stringify(cart));
+  if (typeof SerenityCart !== 'undefined') {
+    SerenityCart.updateCartBadge();
+  }
+  renderCart();
 }
 
 function updateTotals() {
