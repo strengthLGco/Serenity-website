@@ -142,7 +142,7 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
     </div>
     <!-- Price -->
     <div class="mb-6">
-      <p class="text-4xl font-light tracking-tight text-on-surface"><span id="display-price">$65.00</span> <span class="text-sm text-outline uppercase tracking-wider ml-2 font-medium">USD</span></p>
+      <p class="text-4xl font-light tracking-tight text-on-surface"><span id="display-price">$79.99</span> <span class="text-sm text-outline uppercase tracking-wider ml-2 font-medium">USD</span></p>
       <p id="sub-savings" class="text-xs text-green-600 font-medium mt-1 hidden"></p>
     </div>
     <!-- Quantity Selector -->
@@ -155,7 +155,7 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
       </div>
     </div>
     <!-- Add to Cart -->
-    <button data-add-to-cart data-product-id="retatrutide" data-product-name="Retatrutide" data-product-desc="5mg Lyophilized" data-product-price="65.00" data-product-icon="science" class="w-full bg-primary-container text-on-primary py-5 font-bold uppercase tracking-widest text-sm hover:brightness-110 active:scale-[0.98] transition-all rounded-xl mb-4" id="add-to-cart-btn">Add to Cart &mdash; $65.00</button>
+    <button data-add-to-cart data-product-id="retatrutide" data-product-name="Retatrutide" data-product-desc="5mg Lyophilized" data-product-price="79.99" data-product-icon="science" class="w-full bg-primary-container text-on-primary py-5 font-bold uppercase tracking-widest text-sm hover:brightness-110 active:scale-[0.98] transition-all rounded-xl mb-4" id="add-to-cart-btn">Add to Cart &mdash; $79.99</button>
     <!-- Trust Row -->
     <div class="flex flex-col gap-3 mt-2">
       <div class="flex items-center gap-2 text-on-surface-variant">
@@ -489,7 +489,7 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
 <script src="../js/chatbot.js"></script>
 <!-- Subscription + Price Logic -->
 <script>
-const BASE_PRICE = 65.00;
+const BASE_PRICE = 79.99;
 function selectSub(el) {
   document.querySelectorAll('.sub-option').forEach(o => o.classList.remove('active'));
   el.classList.add('active');

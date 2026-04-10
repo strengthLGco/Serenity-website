@@ -20,7 +20,7 @@
       text: "Compounds targeting specific receptor subtypes for pharmacological characterization:",
       recs: [
         { name: "CJC/Ipamorelin", desc: "GHRH analog + ghrelin mimetic blend — dual-pathway secretagogue studied for GHRH-R and GHS-R1a receptor binding and pulsatile signaling patterns. 5mg blend.", price: "$54.99", link: "../product_detail_cjcipa/code.html" },
-        { name: "Retatrutide", desc: "Triple-agonist incretin — GLP-1R, GIPR, and GCGR binding profiles under investigation. One of the most novel multi-receptor peptides in current research. 5mg.", price: "$65.00", link: "../product_detail_retatrutide/code.html" }
+        { name: "Retatrutide", desc: "Triple-agonist incretin — GLP-1R, GIPR, and GCGR binding profiles under investigation. One of the most novel multi-receptor peptides in current research. 5mg.", price: "$79.99", link: "../product_detail_retatrutide/code.html" }
       ]
     },
     "matrix_remodeling": {
@@ -42,7 +42,7 @@
       title: "Growth Factor Research",
       text: "Recombinant peptides studied for IGF-1 receptor signaling and cell proliferation kinetics:",
       recs: [
-        { name: "IGF-1 LR3", desc: "Long R3 IGF-1 analog (83 amino acids) — Arg3 substitution reduces IGFBP binding, extending bioavailability in research assays. Recombinant, 1mg.", price: "$59.99", link: "../product_detail_igf1lr3/code.html" }
+        { name: "IGF-1 LR3", desc: "Long R3 IGF-1 analog (83 amino acids) — Arg3 substitution reduces IGFBP binding, extending bioavailability in research assays. Recombinant, 1mg.", price: "$69.99", link: "../product_detail_igf1lr3/code.html" }
       ]
     },
     "compound_blends": {

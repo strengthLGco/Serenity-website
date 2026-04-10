@@ -272,7 +272,7 @@
             </div>
             <p class="text-body text-[13px] leading-relaxed mb-4 line-clamp-2">Long-acting insulin-like growth factor for advanced receptor-binding and proliferation research.</p>
             <div class="flex items-center justify-between">
-              <span class="text-lg font-semibold text-heading">$59.99</span>
+              <span class="text-lg font-semibold text-heading">$69.99</span>
               <a href="../product_detail_igf1lr3/code.html" class="text-brand text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
                 View <span class="material-symbols-outlined text-sm">arrow_forward</span>
               </a>
@@ -292,7 +292,7 @@
             </div>
             <p class="text-body text-[13px] leading-relaxed mb-4 line-clamp-2">Triple-agonist targeting GLP-1, GIP, and glucagon receptors for metabolic research.</p>
             <div class="flex items-center justify-between">
-              <span class="text-lg font-semibold text-heading">$65.00</span>
+              <span class="text-lg font-semibold text-heading">$79.99</span>
               <a href="../product_detail_retatrutide/code.html" class="text-brand text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
                 View <span class="material-symbols-outlined text-sm">arrow_forward</span>
               </a>
@@ -460,14 +460,14 @@ function verifyAge() {
   var m = today.getMonth() - birth.getMonth();
   if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
   if (age >= 18) {
-    localStorage.setItem('ageGateVerified', 'true');
+    localStorage.setItem('ageVerified', 'true');
     document.getElementById('age-gate').style.display = 'none';
   } else {
     alert('You must be 18 or older to access this site.');
   }
 }
 (function() {
-  if (localStorage.getItem('ageGateVerified') === 'true') {
+  if (localStorage.getItem('ageVerified') === 'true') {
     document.getElementById('age-gate').style.display = 'none';
   }
 })();

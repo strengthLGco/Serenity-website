@@ -122,11 +122,11 @@ def create_payment_intent():
             },
             "igf1-lr3": {
                 "name": "IGF-1 LR3",
-                "price": 5999  # $59.99
+                "price": 6999  # $69.99
             },
             "retatrutide": {
                 "name": "Retatrutide",
-                "price": 6500  # $65.00
+                "price": 7999  # $79.99
             },
             "glow-stack": {
                 "name": "G-LOW (TB-500 + BPC-157 + GHK-Cu)",
