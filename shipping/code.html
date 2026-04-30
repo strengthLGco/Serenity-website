@@ -3,14 +3,13 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Terms of Service | Serenity Research Labs</title>
+<title>Shipping Policy | Serenity Research Labs</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="../css/serenity.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -95,7 +94,7 @@
     #mobile-menu a { display:block; padding:16px 0; font-size:18px; font-weight:500; color:#334155; border-bottom:1px solid #f1f5f9; text-decoration:none; font-family:'Inter',sans-serif; }
     #mobile-menu a:hover { color:#0060ab; }
     #mobile-menu .close-btn { position:absolute; top:24px; right:24px; background:none; border:none; cursor:pointer; }
-  </style>
+</style>
 </head>
 <body class="bg-background text-on-surface">
 <!-- Age Verification Modal -->
@@ -174,128 +173,219 @@ fetch('/api/age-status', { credentials: 'same-origin' })
 </div>
 </nav>
 </header>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+<div id="mobile-menu">
+  <button class="close-btn" onclick="closeMobileMenu()"><span class="material-symbols-outlined" style="font-size:24px;color:#334155;">close</span></button>
+  <a href="../homepage/code.html">Home</a>
+  <a href="../products_page/code.html">Shop</a>
+  <a href="../faq_page/code.html">Support</a>
+  <a href="../about/code.html">About</a>
+  <a href="../checkout/code.html">Cart</a>
+</div>
+
 <main class="pt-28">
 <!-- Hero Section -->
-<section class="relative bg-surface-container-lowest py-20 px-6">
-<div class="max-w-4xl mx-auto">
-<h1 class="text-5xl md:text-6xl font-bold tracking-tight text-on-surface mb-6">Terms of Service</h1>
-<p class="text-xl text-on-surface-variant">Last updated: April 2026</p>
+<section class="relative bg-surface-container-lowest min-h-[400px] flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+<div class="max-w-4xl z-10">
+<h1 class="text-5xl md:text-6xl font-extrabold tracking-tighter text-on-surface mb-6 leading-[1.1]">Shipping Policy</h1>
+<p class="text-lg md:text-xl text-on-surface-variant font-light mb-4">Effective Date: April 10, 2026</p>
+<p class="text-on-surface-variant text-base max-w-2xl mx-auto leading-relaxed">Serenity Research Labs LLC is committed to fast, discreet, and reliable shipping for all research chemical orders.</p>
 </div>
+<div class="absolute inset-0 bg-gradient-to-tr from-surface via-transparent to-surface-container-low pointer-events-none"></div>
 </section>
 
-<!-- Terms Content -->
-<section class="py-20 px-8 bg-surface">
-<div class="max-w-4xl mx-auto prose prose-lg max-w-none">
-<!-- Terms Text -->
-<div class="space-y-12 text-on-surface-variant">
+<!-- Content Section -->
+<section class="py-24 px-8 bg-surface">
+<div class="max-w-3xl mx-auto">
 
-<div>
-<h2 class="text-3xl font-bold text-on-surface mb-4 mt-0">1. Acceptance of Terms</h2>
-<p class="text-base leading-relaxed">By accessing and using the Serenity Research Labs website and services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not access or use our website or purchase our products. Your continued use of our services constitutes your acceptance of these terms and any updates or modifications we may make from time to time.</p>
-</div>
-
-<div>
-<h2 class="text-3xl font-bold text-on-surface mb-4">2. Eligibility and Age Verification</h2>
-<p class="text-base leading-relaxed">You represent and warrant that you are at least eighteen (18) years of age and possess the legal authority to enter into this agreement. You affirm that you are purchasing products exclusively for authorized research purposes within laboratories, clinical settings, or approved research facilities. By verifying your age and using our services, you confirm that your intended use of our products complies with all applicable federal, state, and local laws and regulations.</p>
-</div>
-
-<div>
-<h2 class="text-3xl font-bold text-on-surface mb-4">3. Product Use Disclaimer</h2>
-<p class="text-base leading-relaxed">All products offered by Serenity Research Labs LLC are sold as research chemicals and are intended exclusively for in vitro research, laboratory use, and scientific investigation only. Our products are NOT dietary supplements, NOT approved for human consumption, NOT intended for veterinary use, and NOT approved or evaluated by the Food and Drug Administration (FDA).</p>
-<p class="text-base leading-relaxed mt-4">You acknowledge and agree that:</p>
-<ul class="list-disc list-inside space-y-2 text-base leading-relaxed mt-3 ml-2">
-<li>These products are intended solely for qualified researchers in controlled laboratory environments</li>
-<li>These products have not been tested for safety or efficacy in human or animal subjects</li>
-<li>These products are NOT intended to diagnose, treat, cure, mitigate, or prevent any disease, condition, or ailment</li>
-<li>These products are NOT intended for any form of human or animal administration</li>
-<li>All information provided is for research purposes only and does not constitute medical, health, or veterinary advice</li>
-<li>Serenity Research Labs makes no health or therapeutic claims regarding these products</li>
-<li>You assume full responsibility for the proper handling, storage, and use of these products in accordance with all applicable laws</li>
-</ul>
-</div>
-
-<div>
-<h2 class="text-3xl font-bold text-on-surface mb-4">4. Prohibited Uses</h2>
-<p class="text-base leading-relaxed">You strictly agree not to use, distribute, or facilitate the use of any Serenity Research Labs products for:</p>
-<ul class="list-disc list-inside space-y-2 text-base leading-relaxed mt-3 ml-2">
-<li>Human consumption, ingestion, injection, inhalation, or any form of human administration</li>
-<li>Veterinary use or administration to animals</li>
-<li>Use as a dietary supplement or nutritional product</li>
-<li>Resale, distribution, or transfer to third parties without express written authorization from Serenity Research Labs</li>
-<li>Any purpose not explicitly stated as a permitted research use</li>
-<li>Any illegal activity or use that violates applicable laws or regulations</li>
-</ul>
-<p class="text-base leading-relaxed mt-4">Violation of these terms will result in immediate termination of your account and may result in civil or criminal liability.</p>
-</div>
-
-<div>
-<h2 class="text-3xl font-bold text-on-surface mb-4">5. Ordering and Payment</h2>
-<p class="text-base leading-relaxed">When you place an order with Serenity Research Labs, you are submitting an offer to purchase products under these Terms of Service. We reserve the right to accept or reject any order in our sole discretion. All orders are subject to verification of your age and eligibility status.</p>
-<p class="text-base leading-relaxed mt-4">You agree to provide accurate, truthful, and complete information in your account and during checkout. You are responsible for maintaining the confidentiality of your account credentials and are fully responsible for all activities that occur under your account. You agree to immediately notify us of any unauthorized use or breach of security.</p>
-<p class="text-base leading-relaxed mt-4">Payment must be received and cleared before products are dispatched. We accept standard payment methods as displayed on our website. You authorize us to charge the payment method you provide for the total purchase amount, including any applicable taxes or fees.</p>
-</div>
-
-<div>
-<h2 class="text-3xl font-bold text-on-surface mb-4">6. Shipping, Delivery, and Returns</h2>
-<p class="text-base leading-relaxed">All products are shipped within the contiguous United States only. We do not ship internationally or to addresses outside the United States. Serenity Research Labs uses standard shipping carriers and makes reasonable efforts to deliver orders within the timeframe specified on our website. However, we do not guarantee delivery dates and are not liable for delays caused by shipping carriers or circumstances beyond our control.</p>
-<p class="text-base leading-relaxed mt-4">You are responsible for receiving and inspecting your order upon delivery. Please report any damage, loss, or discrepancies within five (5) business days of receipt. All products must be signed for upon delivery. Serenity Research Labs is not responsible for packages that are lost, stolen, or damaged after delivery to the address you provided.</p>
-<p class="text-base leading-relaxed mt-4">You agree to ensure that the delivery address is accurate and complete. Incorrect addresses may result in delivery delays or failed delivery attempts, and you will be responsible for any additional shipping costs required to deliver your order.</p>
-<p class="text-base leading-relaxed mt-4"><strong>Returns and Refunds:</strong> Products may be returned within thirty (30) days of receipt for a full refund, provided they are unused and in original packaging. Refund requests must be initiated through our website or by contacting support@serenityresearchlabs.com. Refunds are processed within 10-15 business days of receipt and inspection of returned products. Shipping costs for returns are the responsibility of the customer. Please refer to our Refund Policy for complete details.</p>
-</div>
-
-<div>
-<h2 class="text-3xl font-bold text-on-surface mb-4">7. Intellectual Property</h2>
-<p class="text-base leading-relaxed">All content on the Serenity Research Labs website, including but not limited to text, graphics, logos, images, product descriptions, research data, certificates of analysis, and software, is the exclusive property of Serenity Research Labs LLC or its content suppliers and is protected by copyright, trademark, and other intellectual property laws.</p>
-<p class="text-base leading-relaxed mt-4">You may not reproduce, distribute, modify, create derivative works, or use any content from our website without the express written permission of Serenity Research Labs. All rights not expressly granted are reserved.</p>
-</div>
-
-<div>
-<h2 class="text-3xl font-bold text-on-surface mb-4">8. Limitation of Liability</h2>
-<p class="text-base leading-relaxed">TO THE FULLEST EXTENT PERMITTED BY LAW, SERENITY RESEARCH LABS LLC SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, PUNITIVE, OR EXEMPLARY DAMAGES, INCLUDING BUT NOT LIMITED TO DAMAGES FOR LOSS OF PROFITS, GOODWILL, USE, DATA, OR OTHER INTANGIBLE LOSSES, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
-<p class="text-base leading-relaxed mt-4">Our total liability to you for any claim arising out of or related to these terms or your use of our products or services shall not exceed the total amount paid by you for the product in question.</p>
-<p class="text-base leading-relaxed mt-4">Some jurisdictions do not allow the exclusion or limitation of liability for certain types of damages, so some of the above limitations may not apply to you.</p>
-</div>
-
-<div>
-<h2 class="text-3xl font-bold text-on-surface mb-4">9. Indemnification</h2>
-<p class="text-base leading-relaxed">You agree to indemnify, defend, and hold harmless Serenity Research Labs LLC, its officers, directors, employees, agents, and successors from and against any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising out of or resulting from:</p>
-<ul class="list-disc list-inside space-y-2 text-base leading-relaxed mt-3 ml-2">
-<li>Your use or misuse of our products</li>
-<li>Your violation of these Terms of Service or applicable laws</li>
-<li>Your infringement of any third-party rights</li>
-<li>Any claim that your use of our products caused damage or injury</li>
-<li>Your breach of any representation or warranty contained in these terms</li>
-</ul>
-</div>
-
-<div>
-<h2 class="text-3xl font-bold text-on-surface mb-4">10. Governing Law and Jurisdiction</h2>
-<p class="text-base leading-relaxed">These Terms of Service and all matters arising out of or relating to your access and use of Serenity Research Labs' website and products shall be governed by and construed in accordance with the laws of the State of Wyoming, without regard to its conflict of laws principles.</p>
-<p class="text-base leading-relaxed mt-4">You irrevocably submit to the exclusive jurisdiction of the state and federal courts located in Wyoming and waive any objection to venue or inconvenient forum. You agree that any legal action or proceeding relating to these terms must be brought exclusively in such courts.</p>
-</div>
-
-<div>
-<h2 class="text-3xl font-bold text-on-surface mb-4">11. Changes to Terms</h2>
-<p class="text-base leading-relaxed">Serenity Research Labs reserves the right to modify these Terms of Service at any time. Changes will be effective immediately upon posting to our website. Your continued use of our services after changes are posted constitutes your acceptance of the modified terms. We encourage you to review these terms regularly to stay informed of any updates.</p>
-</div>
-
-<div>
-<h2 class="text-3xl font-bold text-on-surface mb-4">12. Contact Information</h2>
-<p class="text-base leading-relaxed">If you have any questions, concerns, or requests regarding these Terms of Service or our policies, please contact us at:</p>
-<p class="text-base leading-relaxed mt-4 font-medium">
-Serenity Research Labs LLC<br/>
-Email: support@serenityresearchlabs.com
+<!-- 1. Domestic Shipping -->
+<div class="mb-16">
+<h2 class="text-3xl font-bold text-on-surface mb-6 flex items-center gap-3">
+<span class="text-primary-container">1.</span>
+Domestic Shipping (United States)
+</h2>
+<p class="text-on-surface-variant text-base leading-relaxed mb-6">
+All orders are shipped within the continental United States via USPS. We currently do not ship internationally.
 </p>
-<p class="text-base leading-relaxed mt-4">We are committed to addressing your concerns promptly and professionally. Please allow five to seven business days for a response to your inquiry.</p>
+<div class="overflow-x-auto mb-6">
+<table class="w-full text-sm border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/30">
+<th class="text-left py-3 pr-4 font-semibold text-on-surface">Shipping Method</th>
+<th class="text-left py-3 pr-4 font-semibold text-on-surface">Estimated Delivery</th>
+<th class="text-left py-3 font-semibold text-on-surface">Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-outline-variant/15">
+<td class="py-3 pr-4 text-on-surface-variant">Standard Shipping (USPS)</td>
+<td class="py-3 pr-4 text-on-surface-variant">3–7 business days</td>
+<td class="py-3 text-on-surface font-medium">$7.99 flat rate</td>
+</tr>
+</tbody>
+</table>
 </div>
-
-<div class="border-t border-outline-variant/30 pt-12 mt-12">
-<p class="text-sm text-on-surface-variant">
-© 2026 Serenity Research Labs LLC. All products are sold for research purposes only. This agreement constitutes the entire agreement between you and Serenity Research Labs LLC regarding the subject matter hereof and supersedes all prior agreements and understandings.
+<p class="text-on-surface-variant text-sm leading-relaxed">
+Delivery times are estimates and may vary depending on your location and carrier volume. Serenity Research Labs is not responsible for delays caused by the carrier after shipment.
 </p>
 </div>
 
+<!-- 2. Order Processing -->
+<div class="mb-16">
+<h2 class="text-3xl font-bold text-on-surface mb-6 flex items-center gap-3">
+<span class="text-primary-container">2.</span>
+Order Processing
+</h2>
+<p class="text-on-surface-variant text-base leading-relaxed mb-4">
+Orders are processed Monday through Friday, excluding federal holidays. Most orders are processed and shipped within 1–2 business days of payment confirmation.
+</p>
+<ul class="space-y-3">
+<li class="flex gap-4">
+<span class="text-primary-container font-bold flex-shrink-0">•</span>
+<p class="text-on-surface-variant text-sm">Orders placed before 2:00 PM PST are typically shipped the same business day.</p>
+</li>
+<li class="flex gap-4">
+<span class="text-primary-container font-bold flex-shrink-0">•</span>
+<p class="text-on-surface-variant text-sm">Orders placed after 2:00 PM PST or on weekends/holidays will be processed the next business day.</p>
+</li>
+<li class="flex gap-4">
+<span class="text-primary-container font-bold flex-shrink-0">•</span>
+<p class="text-on-surface-variant text-sm">You will receive a confirmation email with tracking information once your order has shipped.</p>
+</li>
+</ul>
 </div>
+
+<!-- 3. Packaging & Discretion -->
+<div class="mb-16">
+<h2 class="text-3xl font-bold text-on-surface mb-6 flex items-center gap-3">
+<span class="text-primary-container">3.</span>
+Packaging &amp; Discretion
+</h2>
+<p class="text-on-surface-variant text-base leading-relaxed mb-4">
+All orders are shipped in plain, unmarked packaging with no external branding or product descriptions. Your privacy is important to us.
+</p>
+<ul class="space-y-3">
+<li class="flex gap-4">
+<span class="text-primary-container font-bold flex-shrink-0">•</span>
+<p class="text-on-surface-variant text-sm">Products are securely packaged to prevent damage during transit.</p>
+</li>
+<li class="flex gap-4">
+<span class="text-primary-container font-bold flex-shrink-0">•</span>
+<p class="text-on-surface-variant text-sm">Temperature-sensitive compounds are shipped with appropriate protective materials.</p>
+</li>
+<li class="flex gap-4">
+<span class="text-primary-container font-bold flex-shrink-0">•</span>
+<p class="text-on-surface-variant text-sm">The return address will display our business name only — no product details on the exterior.</p>
+</li>
+</ul>
+</div>
+
+<!-- 4. Tracking -->
+<div class="mb-16">
+<h2 class="text-3xl font-bold text-on-surface mb-6 flex items-center gap-3">
+<span class="text-primary-container">4.</span>
+Order Tracking
+</h2>
+<p class="text-on-surface-variant text-base leading-relaxed mb-4">
+A tracking number will be provided via email once your order ships. You can track your package directly through the USPS website or app.
+</p>
+<p class="text-on-surface-variant text-base leading-relaxed">
+If your tracking information has not updated within 48 hours of shipment, please contact us at <a href="mailto:support@serenityresearchlabs.com" class="text-primary hover:underline">support@serenityresearchlabs.com</a> and we will investigate promptly.
+</p>
+</div>
+
+<!-- 5. Lost or Damaged Shipments -->
+<div class="mb-16">
+<h2 class="text-3xl font-bold text-on-surface mb-6 flex items-center gap-3">
+<span class="text-primary-container">5.</span>
+Lost or Damaged Shipments
+</h2>
+<p class="text-on-surface-variant text-base leading-relaxed mb-4">
+If your package is lost, damaged, or arrives with compromised contents:
+</p>
+<ul class="space-y-3">
+<li class="flex gap-4">
+<span class="text-primary-container font-bold flex-shrink-0">1.</span>
+<p class="text-on-surface-variant text-sm">Contact us within 7 days of the expected delivery date at <a href="mailto:support@serenityresearchlabs.com" class="text-primary hover:underline">support@serenityresearchlabs.com</a>.</p>
+</li>
+<li class="flex gap-4">
+<span class="text-primary-container font-bold flex-shrink-0">2.</span>
+<p class="text-on-surface-variant text-sm">Include your order number and photos of any damage.</p>
+</li>
+<li class="flex gap-4">
+<span class="text-primary-container font-bold flex-shrink-0">3.</span>
+<p class="text-on-surface-variant text-sm">We will arrange a replacement shipment or issue a refund per our <a href="../refund/code.html" class="text-primary hover:underline">Refund Policy</a>.</p>
+</li>
+</ul>
+</div>
+
+<!-- 6. Address Accuracy -->
+<div class="mb-16">
+<h2 class="text-3xl font-bold text-on-surface mb-6 flex items-center gap-3">
+<span class="text-primary-container">6.</span>
+Address Accuracy
+</h2>
+<p class="text-on-surface-variant text-base leading-relaxed">
+Please ensure your shipping address is complete and accurate at checkout. Serenity Research Labs is not responsible for orders shipped to incorrect addresses provided by the customer. If a package is returned to us due to an incorrect address, re-shipping fees may apply.
+</p>
+</div>
+
+<!-- 7. Restricted Shipments -->
+<div class="mb-16">
+<h2 class="text-3xl font-bold text-on-surface mb-6 flex items-center gap-3">
+<span class="text-primary-container">7.</span>
+Shipping Restrictions
+</h2>
+<p class="text-on-surface-variant text-base leading-relaxed mb-4">
+We currently ship to all 50 U.S. states. We do not ship to:
+</p>
+<ul class="space-y-3">
+<li class="flex gap-4">
+<span class="text-primary-container font-bold flex-shrink-0">•</span>
+<p class="text-on-surface-variant text-sm">International addresses</p>
+</li>
+<li class="flex gap-4">
+<span class="text-primary-container font-bold flex-shrink-0">•</span>
+<p class="text-on-surface-variant text-sm">P.O. boxes (due to carrier requirements for signature confirmation)</p>
+</li>
+<li class="flex gap-4">
+<span class="text-primary-container font-bold flex-shrink-0">•</span>
+<p class="text-on-surface-variant text-sm">APO/FPO/DPO military addresses</p>
+</li>
+</ul>
+</div>
+
+<!-- 8. Contact -->
+<div class="mb-16 p-8 bg-primary-container/10 rounded-2xl border border-primary-container/20">
+<h2 class="text-3xl font-bold text-on-surface mb-6 flex items-center gap-3">
+<span class="text-primary-container">8.</span>
+Contact Us
+</h2>
+<p class="text-on-surface-variant text-base leading-relaxed mb-6">
+For shipping questions, tracking issues, or delivery concerns:
+</p>
+<div class="space-y-3">
+<p class="text-on-surface">
+<span class="font-semibold">Email:</span> <a href="mailto:support@serenityresearchlabs.com" class="text-primary hover:underline">support@serenityresearchlabs.com</a>
+</p>
+<p class="text-on-surface">
+<span class="font-semibold">Phone:</span> <a href="tel:+19165812242" class="text-primary hover:underline">(916) 581-2242</a>
+</p>
+<p class="text-on-surface text-sm text-on-surface-variant">
+Our team responds to inquiries within 24 business hours.
+</p>
+</div>
+</div>
+
+<!-- Final Note -->
+<div class="mt-20 p-6 bg-surface-container-low rounded-xl">
+<p class="text-on-surface-variant text-sm leading-relaxed">
+<span class="font-semibold text-on-surface">Important Reminder:</span> All Serenity Research Labs products are sold exclusively for in vitro research purposes only and are not for human or animal consumption. Customers are responsible for complying with all applicable local, state, and federal laws regarding the purchase and use of these products.
+</p>
+</div>
+
 </div>
 </section>
 </main>
@@ -331,9 +421,10 @@ Email: support@serenityresearchlabs.com
 </div>
 </div>
 <div class="max-w-7xl mx-auto pt-20 mt-20 border-t border-slate-200 dark:border-slate-800 text-center">
-<p class="text-slate-400 dark:text-slate-500 text-xs">© 2026 Serenity Research Labs. For research use only. Not for human consumption.</p>
+<p class="text-slate-400 dark:text-slate-500 text-xs">&copy; 2026 Serenity Research Labs. For research use only. Not for human consumption.</p>
 </div>
 </footer>
+<script src="../js/chatbot.js"></script>
 
 <script>
 function openMobileMenu() {
@@ -348,5 +439,5 @@ function closeMobileMenu() {
 }
 </script>
 <script src="../js/cart.js"></script>
-
-</body></html>
+</body>
+</html>

@@ -23,7 +23,7 @@
             "surface-container-high": "#e1e8fd",
             "secondary": "#515f74",
             "on-surface": "#141b2b",
-            "surface-tint": "#0060ab",
+            "surface-tint": "#0a84ff",
             "error-container": "#ffdad6",
             "on-error-container": "#93000a",
             "secondary-fixed": "#d5e3fc",
@@ -42,13 +42,13 @@
             "on-secondary": "#ffffff",
             "on-secondary-container": "#57657a",
             "surface-dim": "#d3daef",
-            "primary-container": "#0078d4",
+            "primary-container": "#0071e3",
             "on-primary": "#ffffff",
             "on-primary-fixed": "#001c39",
             "on-tertiary-fixed": "#001e2f",
             "on-background": "#141b2b",
             "primary-fixed-dim": "#a3c9ff",
-            "primary": "#005faa",
+            "primary": "#0a84ff",
             "surface-container-low": "#f1f3ff",
             "surface-bright": "#f9f9ff",
             "on-primary-fixed-variant": "#004883",
@@ -90,11 +90,66 @@
     #mobile-menu { position:fixed; top:0; right:-300px; width:280px; height:100%; background:white; z-index:80; transition:right 0.3s ease; padding:80px 32px 32px; box-shadow:-4px 0 20px rgba(0,0,0,0.1); }
     #mobile-menu.active { right:0; }
     #mobile-menu a { display:block; padding:16px 0; font-size:18px; font-weight:500; color:#334155; border-bottom:1px solid #f1f5f9; text-decoration:none; font-family:'Inter',sans-serif; }
-    #mobile-menu a:hover { color:#0060ab; }
+    #mobile-menu a:hover { color:#0a84ff; }
     #mobile-menu .close-btn { position:absolute; top:24px; right:24px; background:none; border:none; cursor:pointer; }
 </style>
 </head>
 <body class="text-on-surface antialiased">
+
+<!-- Age Verification Modal -->
+<div id="age-gate" class="fixed inset-0 z-[100] flex items-center justify-center" style="background:rgba(0,0,0,0.92);">
+  <div class="bg-white rounded-3xl p-10 sm:p-12 max-w-md w-full mx-6 text-center" style="box-shadow: 0 24px 80px rgba(0,0,0,0.4);">
+    <div class="mb-8">
+      <span class="text-2xl font-extrabold tracking-tight block">SERENITY</span>
+      <p class="text-xs uppercase tracking-[0.2em] font-bold text-blue-600 mt-1">Research Labs</p>
+    </div>
+    <h2 class="text-xl font-bold tracking-tight mb-2">Age Verification Required</h2>
+    <p class="text-gray-500 text-sm mb-8 leading-relaxed">You must be 18 years or older to access this site. All products are sold exclusively for <em>in vitro</em> research purposes.</p>
+    <div class="flex gap-3 mb-6 justify-center">
+      <input type="text" id="age-mm" placeholder="MM" maxlength="2" inputmode="numeric" class="w-20 text-center border border-gray-200 rounded-xl py-3.5 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"/>
+      <span class="text-gray-300 text-2xl self-center font-light">/</span>
+      <input type="text" id="age-dd" placeholder="DD" maxlength="2" inputmode="numeric" class="w-20 text-center border border-gray-200 rounded-xl py-3.5 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"/>
+      <span class="text-gray-300 text-2xl self-center font-light">/</span>
+      <input type="text" id="age-yyyy" placeholder="YYYY" maxlength="4" inputmode="numeric" class="w-28 text-center border border-gray-200 rounded-xl py-3.5 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"/>
+    </div>
+    <button onclick="verifyAge()" class="w-full bg-black text-white py-4 rounded-xl font-bold text-base hover:bg-gray-900 transition-colors">Enter Site</button>
+    <p class="text-gray-400 text-[10px] mt-5 tracking-wide">By entering, you confirm you are 18+ and agree to our Terms of Service</p>
+  </div>
+</div>
+<script>
+function verifyAge() {
+  var mm = parseInt(document.getElementById('age-mm').value);
+  var dd = parseInt(document.getElementById('age-dd').value);
+  var yyyy = parseInt(document.getElementById('age-yyyy').value);
+  if (!mm || !dd || !yyyy || yyyy > 2026 || yyyy < 1900 || mm < 1 || mm > 12 || dd < 1 || dd > 31) {
+    alert('Please enter a valid date of birth.');
+    return;
+  }
+  var today = new Date();
+  var birth = new Date(yyyy, mm - 1, dd);
+  var age = today.getFullYear() - birth.getFullYear();
+  var m = today.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+  if (age >= 18) {
+    document.getElementById('age-gate').style.display = 'none';
+    document.body.style.overflow = '';
+    fetch('/api/verify-age', { method: 'POST', credentials: 'same-origin' });
+  } else {
+    alert('You must be 18 or older to access this site.');
+  }
+}
+fetch('/api/age-status', { credentials: 'same-origin' })
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    if (d.verified) {
+      document.getElementById('age-gate').style.display = 'none';
+    } else {
+      document.body.style.overflow = 'hidden';
+    }
+  })
+  .catch(function() { document.body.style.overflow = 'hidden'; });
+</script>
+
 
 <!-- Promo Banner -->
 <div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase w-full">
@@ -211,7 +266,7 @@
 <div class="max-w-4xl mx-auto bg-primary-container rounded-2xl p-12 md:p-20 text-center relative overflow-hidden">
 <div class="relative z-10">
 <h2 class="text-3xl md:text-4xl font-bold text-on-primary mb-4 tracking-tight">Ready to get started?</h2>
-<p class="text-white/80 mb-10 max-w-lg mx-auto">Browse our full collection of research-grade peptides and curated stacks.</p>
+<p class="text-white/80 mb-10 max-w-lg mx-auto">Browse our full collection of research-grade peptides and curated compound sets.</p>
 <a class="inline-flex items-center gap-2 bg-white text-primary-container px-8 py-4 rounded-lg font-bold hover:bg-slate-50 transition-colors" href="../products_page/code.html">
     View Collection
     <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
@@ -250,15 +305,17 @@
 <li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../terms/code.html">Terms of Service</a></li>
 <li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../privacy/code.html">Privacy Policy</a></li>
 <li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../refund/code.html">Refund Policy</a></li>
-<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../faq_page/code.html">Shipping Policy</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../shipping/code.html">Shipping Policy</a></li>
 </ul>
 </div>
 <div>
 <h4 class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-6">Connect</h4>
 <ul class="space-y-4">
-<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="https://www.tiktok.com/@serenityresearchlabs">TikTok</a></li>
-<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="https://www.instagram.com/serenityresearchlabs/">Instagram</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="https://www.tiktok.com/@serenityresearchlabs" rel="noopener noreferrer" target="_blank">TikTok</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="https://www.instagram.com/serenityresearchlabs/" rel="noopener noreferrer" target="_blank">Instagram</a></li>
 <li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="../about/code.html">About Us</a></li>
+<li><a class="text-slate-500 text-sm hover:text-blue-500 transition-colors" href="mailto:support@serenityresearchlabs.com">Email Us</a></li>
+<li><span class="text-slate-500 text-sm">(916) 581-2242</span></li>
 </ul>
 </div>
 </div>

@@ -24,7 +24,8 @@ const SerenityCart = (() => {
 
   function addItem(product) {
     const cart = getCart();
-    const existing = cart.find(item => item.id === product.id);
+    const subscription = product.subscription || "one-time";
+    const existing = cart.find(item => item.id === product.id && (item.subscription || "one-time") === subscription);
     if (existing) {
       existing.qty += product.qty || 1;
     } else {
@@ -35,6 +36,9 @@ const SerenityCart = (() => {
         price: product.price,
         qty: product.qty || 1,
         icon: product.icon || "science",
+        subscription: subscription,
+        subscriptionLabel: product.subscriptionLabel || "One-time purchase",
+        discount: product.discount || 0,
       });
     }
     saveCart(cart);
@@ -123,6 +127,9 @@ const SerenityCart = (() => {
         price: parseFloat(addBtn.dataset.productPrice),
         icon: addBtn.dataset.productIcon || "science",
         qty: qty,
+        subscription: addBtn.dataset.subscription || "one-time",
+        subscriptionLabel: addBtn.dataset.subscriptionLabel || "One-time purchase",
+        discount: parseInt(addBtn.dataset.discount || "0", 10),
       };
 
       addItem(product);
@@ -148,6 +155,9 @@ const SerenityCart = (() => {
           price: parseFloat(btn.dataset.productPrice),
           icon: btn.dataset.productIcon || "science",
           qty: 1,
+          subscription: btn.dataset.subscription || "one-time",
+          subscriptionLabel: btn.dataset.subscriptionLabel || "One-time purchase",
+          discount: parseInt(btn.dataset.discount || "0", 10),
         };
         addItem(product);
         btn.textContent = "✓ Added";

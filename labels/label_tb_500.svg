@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="76mm" height="31mm"
+     viewBox="0 0 76 31">
+
+  <!-- Print metadata -->
+  <title>Serenity Research Labs — TB-500 Label</title>
+  <desc>Print-ready vial label. Trim size: 70×25mm. Bleed: 3mm all sides.</desc>
+
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap');
+      text { font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- ===== BLEED AREA (full background) ===== -->
+  <rect x="0" y="0" width="76" height="31" fill="white"/>
+
+  <!-- ===== TRIM MARKS ===== -->
+  <g stroke="#000" stroke-width="0.15" fill="none" opacity="0.6">
+    <!-- Top-left -->
+    <line x1="0" y1="3" x2="2" y2="3"/>
+    <line x1="3" y1="0" x2="3" y2="2"/>
+    <!-- Top-right -->
+    <line x1="74" y1="3" x2="76" y2="3"/>
+    <line x1="73" y1="0" x2="73" y2="2"/>
+    <!-- Bottom-left -->
+    <line x1="0" y1="28" x2="2" y2="28"/>
+    <line x1="3" y1="29" x2="3" y2="31"/>
+    <!-- Bottom-right -->
+    <line x1="74" y1="28" x2="76" y2="28"/>
+    <line x1="73" y1="29" x2="73" y2="31"/>
+  </g>
+
+  <!-- ===== SAFE AREA (content within trim) ===== -->
+  <g transform="translate(3, 3)">
+
+    <!-- Trim boundary (hidden in print, visible in preview) -->
+    <rect x="0" y="0" width="70" height="25"
+          fill="none" stroke="#ccc" stroke-width="0.1" stroke-dasharray="1,1"/>
+
+    <!-- ── Top section: Brand ── -->
+    <!-- Diamond icon -->
+    <polygon points="5,3.5 6.2,2 7.4,3.5 6.2,5" fill="#0a84ff" opacity="0.9"/>
+    <text x="9" y="4.8" font-size="3" font-weight="800" letter-spacing="0.25" fill="#1d1d1f">SERENITY</text>
+    <text x="9" y="7" font-size="1.4" font-weight="600" letter-spacing="0.18" fill="#0a84ff" text-transform="uppercase">RESEARCH LABS</text>
+
+    <!-- Thin separator -->
+    <line x1="4" y1="8.5" x2="66" y2="8.5" stroke="#e0e0e0" stroke-width="0.15"/>
+
+    <!-- ── Middle section: Product name ── -->
+    <text x="35.0" y="14" font-size="5.5" font-weight="700"
+          text-anchor="middle" letter-spacing="0.05" fill="#1d1d1f">TB-500</text>
+
+    <!-- ── Specs line ── -->
+    <text x="35.0" y="17.5" font-size="1.8" font-weight="500"
+          text-anchor="middle" fill="#6e6e73">5mg  ·  99%+ Purity  ·  Lyophilized Powder</text>
+
+    <!-- Thin separator -->
+    <line x1="4" y1="19.0" x2="66" y2="19.0" stroke="#e0e0e0" stroke-width="0.15"/>
+
+    <!-- ── Bottom section: Compliance ── -->
+    <text x="4" y="21.3" font-size="1.3" font-weight="600"
+          letter-spacing="0.1" fill="#ba1a1a">FOR RESEARCH USE ONLY — NOT FOR HUMAN CONSUMPTION</text>
+
+    <text x="4" y="23.0" font-size="1.1" font-weight="400" fill="#86868b">Lot: ____________  |  Store at 2–8°C  |  serenityresearchlabs.com</text>
+
+  </g>
+</svg>

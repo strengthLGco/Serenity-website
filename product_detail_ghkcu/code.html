@@ -16,14 +16,14 @@ tailwind.config = {
     extend: {
       colors: {
         "inverse-surface": "#293040","background": "#f9f9ff","inverse-on-surface": "#edf0ff","tertiary": "#006490",
-        "surface-container-high": "#e1e8fd","secondary": "#515f74","on-surface": "#141b2b","surface-tint": "#0060ab",
+        "surface-container-high": "#e1e8fd","secondary": "#515f74","on-surface": "#141b2b","surface-tint": "#0a84ff",
         "error-container": "#ffdad6","on-error-container": "#93000a","secondary-fixed": "#d5e3fc","surface": "#f9f9ff",
         "outline": "#717783","inverse-primary": "#a3c9ff","secondary-fixed-dim": "#b9c7df","on-surface-variant": "#404752",
         "on-primary-container": "#ffffff","tertiary-container": "#007eb4","on-secondary-fixed": "#0d1c2e","on-error": "#ffffff",
         "surface-variant": "#dce2f7","tertiary-fixed-dim": "#89ceff","on-tertiary": "#ffffff","on-secondary": "#ffffff",
-        "on-secondary-container": "#57657a","surface-dim": "#d3daef","primary-container": "#0078d4","on-primary": "#ffffff",
+        "on-secondary-container": "#57657a","surface-dim": "#d3daef","primary-container": "#0071e3","on-primary": "#ffffff",
         "on-primary-fixed": "#001c39","on-tertiary-fixed": "#001e2f","on-background": "#141b2b","primary-fixed-dim": "#a3c9ff",
-        "primary": "#005faa","surface-container-low": "#f1f3ff","surface-bright": "#f9f9ff","on-primary-fixed-variant": "#004883",
+        "primary": "#0a84ff","surface-container-low": "#f1f3ff","surface-bright": "#f9f9ff","on-primary-fixed-variant": "#004883",
         "error": "#ba1a1a","secondary-container": "#d5e3fc","primary-fixed": "#d3e3ff","surface-container-lowest": "#ffffff",
         "on-tertiary-container": "#ffffff","on-tertiary-fixed-variant": "#004c6e","surface-container": "#e9edff",
         "on-secondary-fixed-variant": "#3a485b","tertiary-fixed": "#c9e6ff","outline-variant": "#c0c7d4",
@@ -40,8 +40,8 @@ tailwind.config = {
 body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
 .text-micro { font-size: 0.65rem; letter-spacing: 0.05em; }
 .sub-option { cursor:pointer; transition: all 0.15s ease; }
-.sub-option:hover { border-color: rgba(0,95,170,0.3); }
-.sub-option.active { border-color: #005faa; background: #f1f3ff; }
+.sub-option:hover { border-color: rgba(10,132,255,0.3); }
+.sub-option.active { border-color: #0a84ff; background: #f0f7ff; }
 .sub-option .sub-check { display:none; }
 .sub-option.active .sub-check { display:flex; }
 .sub-option .sub-badge { display:none; }
@@ -54,11 +54,66 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
     #mobile-menu { position:fixed; top:0; right:-300px; width:280px; height:100%; background:white; z-index:80; transition:right 0.3s ease; padding:80px 32px 32px; box-shadow:-4px 0 20px rgba(0,0,0,0.1); }
     #mobile-menu.active { right:0; }
     #mobile-menu a { display:block; padding:16px 0; font-size:18px; font-weight:500; color:#334155; border-bottom:1px solid #f1f5f9; text-decoration:none; font-family:'Inter',sans-serif; }
-    #mobile-menu a:hover { color:#0060ab; }
+    #mobile-menu a:hover { color:#0a84ff; }
     #mobile-menu .close-btn { position:absolute; top:24px; right:24px; background:none; border:none; cursor:pointer; }
 </style>
 </head>
 <body class="bg-surface text-on-surface selection:bg-primary-container selection:text-white">
+
+<!-- Age Verification Modal -->
+<div id="age-gate" class="fixed inset-0 z-[100] flex items-center justify-center" style="background:rgba(0,0,0,0.92);">
+  <div class="bg-white rounded-3xl p-10 sm:p-12 max-w-md w-full mx-6 text-center" style="box-shadow: 0 24px 80px rgba(0,0,0,0.4);">
+    <div class="mb-8">
+      <span class="text-2xl font-extrabold tracking-tight block">SERENITY</span>
+      <p class="text-xs uppercase tracking-[0.2em] font-bold text-[#0a84ff] mt-1">Research Labs</p>
+    </div>
+    <h2 class="text-xl font-bold tracking-tight mb-2">Age Verification Required</h2>
+    <p class="text-gray-500 text-sm mb-8 leading-relaxed">You must be 18 years or older to access this site. All products are sold exclusively for <em>in vitro</em> research purposes.</p>
+    <div class="flex gap-3 mb-6 justify-center">
+      <input type="text" id="age-mm" placeholder="MM" maxlength="2" inputmode="numeric" class="w-20 text-center border border-gray-200 rounded-xl py-3.5 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-[#0a84ff]/30 focus:border-[#0a84ff] transition-all"/>
+      <span class="text-gray-300 text-2xl self-center font-light">/</span>
+      <input type="text" id="age-dd" placeholder="DD" maxlength="2" inputmode="numeric" class="w-20 text-center border border-gray-200 rounded-xl py-3.5 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-[#0a84ff]/30 focus:border-[#0a84ff] transition-all"/>
+      <span class="text-gray-300 text-2xl self-center font-light">/</span>
+      <input type="text" id="age-yyyy" placeholder="YYYY" maxlength="4" inputmode="numeric" class="w-28 text-center border border-gray-200 rounded-xl py-3.5 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-[#0a84ff]/30 focus:border-[#0a84ff] transition-all"/>
+    </div>
+    <button onclick="verifyAge()" class="w-full bg-[#0a84ff] text-white py-4 rounded-xl font-bold text-base hover:bg-[#0071e3] transition-colors">Enter Site</button>
+    <p class="text-gray-400 text-[10px] mt-5 tracking-wide">By entering, you confirm you are 18+ and agree to our Terms of Service</p>
+  </div>
+</div>
+<script>
+function verifyAge() {
+  var mm = parseInt(document.getElementById('age-mm').value);
+  var dd = parseInt(document.getElementById('age-dd').value);
+  var yyyy = parseInt(document.getElementById('age-yyyy').value);
+  if (!mm || !dd || !yyyy || yyyy > 2026 || yyyy < 1900 || mm < 1 || mm > 12 || dd < 1 || dd > 31) {
+    alert('Please enter a valid date of birth.');
+    return;
+  }
+  var today = new Date();
+  var birth = new Date(yyyy, mm - 1, dd);
+  var age = today.getFullYear() - birth.getFullYear();
+  var m = today.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+  if (age >= 18) {
+    document.getElementById('age-gate').style.display = 'none';
+    document.body.style.overflow = '';
+    fetch('/api/verify-age', { method: 'POST', credentials: 'same-origin' });
+  } else {
+    alert('You must be 18 or older to access this site.');
+  }
+}
+fetch('/api/age-status', { credentials: 'same-origin' })
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    if (d.verified) {
+      document.getElementById('age-gate').style.display = 'none';
+    } else {
+      document.body.style.overflow = 'hidden';
+    }
+  })
+  .catch(function() { document.body.style.overflow = 'hidden'; });
+</script>
+
 <!-- Promo Banner -->
 <div class="bg-on-surface text-surface text-center py-2.5 text-xs font-medium tracking-wider uppercase w-full">
   <span class="opacity-90">Use code <span class="font-black text-primary-fixed-dim">SERENITY15</span> for 15% off</span>
@@ -72,7 +127,7 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
   </div>
   <div class="hidden md:flex items-center gap-10 font-['Inter'] tracking-tight font-medium">
 <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../homepage/code.html">Home</a>
-<a class="text-blue-600 dark:text-blue-400 font-semibold border-b-2 border-blue-600 font-['Inter'] tracking-tight" href="../products_page/code.html">Shop</a>
+<a class="text-[#0a84ff] dark:text-blue-400 font-semibold border-b-2 border-blue-600 font-['Inter'] tracking-tight" href="../products_page/code.html">Shop</a>
 <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../faq_page/code.html">Support</a>
 <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../about/code.html">About</a>
 </div>
@@ -90,7 +145,7 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
 <section class="max-w-screen-2xl mx-auto px-8 py-20 lg:py-32 grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
   <!-- Left: Image -->
   <div class="relative aspect-square bg-surface-container-lowest flex items-center justify-center overflow-hidden rounded-xl">
-    <img alt="GHK-Cu Product Image" class="w-4/5 h-4/5 object-contain" src="../images/products/ghkcu.png?v=3"/>
+    <img alt="GHK-Cu Product Image" class="w-4/5 h-4/5 object-contain" src="../images/products/ghkcu.webp?v=4" loading="lazy"/>
     <div class="absolute top-6 left-6 flex flex-col gap-2">
       <span class="bg-primary text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full flex items-center gap-1.5">
         <span class="material-symbols-outlined text-xs" style="font-size:14px">verified</span> 99%+ Purity
@@ -249,10 +304,10 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
 </div>
 </section>
 
-<!-- Frequently Stacked Together (Inline Cross-sell with Add to Cart) -->
+<!-- Frequently Paired Together (Inline Cross-sell with Add to Cart) -->
 <section class="py-24 px-8 bg-surface">
 <div class="max-w-7xl mx-auto">
-  <h2 class="text-2xl font-bold tracking-tight text-on-surface mb-2">Frequently Stacked Together</h2>
+  <h2 class="text-2xl font-bold tracking-tight text-on-surface mb-2">Frequently Paired Together</h2>
   <p class="text-on-surface-variant text-sm mb-12">Researchers commonly pair GHK-Cu with these compounds for enhanced protocols.</p>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
     <!-- Cross-sell: MT-2 -->
@@ -408,21 +463,21 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
       </div>
       <div class="space-y-5">
         <div class="border-b border-outline-variant/10 pb-4">
-          <a href="https://pubmed.ncbi.nlm.nih.gov/3169264/" target="_blank" class="hover:text-primary transition-colors">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/3169264/" target="_blank" class="hover:text-primary transition-colors" rel="noopener noreferrer" target="_blank">
             <p class="text-xs font-semibold text-on-surface mb-1">FEBS Letters, 1988</p>
             <p class="text-[11px] text-on-surface-variant leading-relaxed">Collagen synthesis fibroblast cultures tripeptide-copper complex</p>
             <p class="text-[10px] text-outline mt-1">PubMed: 3169264</p>
           </a>
         </div>
         <div class="border-b border-outline-variant/10 pb-4">
-          <a href="https://pubmed.ncbi.nlm.nih.gov/8227353/" target="_blank" class="hover:text-primary transition-colors">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/8227353/" target="_blank" class="hover:text-primary transition-colors" rel="noopener noreferrer" target="_blank">
             <p class="text-xs font-semibold text-on-surface mb-1">J Clinical Investigation, 1993</p>
             <p class="text-[11px] text-on-surface-variant leading-relaxed">In vivo connective tissue accumulation GHK-Cu2+</p>
             <p class="text-[10px] text-outline mt-1">PubMed: 8227353</p>
           </a>
         </div>
         <div class="border-b border-outline-variant/10 pb-4">
-          <a href="https://pubmed.ncbi.nlm.nih.gov/18644225/" target="_blank" class="hover:text-primary transition-colors">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/18644225/" target="_blank" class="hover:text-primary transition-colors" rel="noopener noreferrer" target="_blank">
             <p class="text-xs font-semibold text-on-surface mb-1">J Biomaterials Science, 2008</p>
             <p class="text-[11px] text-on-surface-variant leading-relaxed">Human tri-peptide GHK tissue remodeling</p>
             <p class="text-[10px] text-outline mt-1">PubMed: 18644225</p>
@@ -469,12 +524,15 @@ body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
     <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../terms/code.html">Terms of Service</a>
     <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../privacy/code.html">Privacy Policy</a>
     <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../refund/code.html">Refund Policy</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../shipping/code.html">Shipping Policy</a>
   </div>
   <div class="flex flex-col gap-4">
     <h5 class="text-[10px] font-black uppercase tracking-widest text-slate-900">Connect</h5>
-    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="https://www.tiktok.com/@serenityresearchlabs">TikTok</a>
-    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="https://www.instagram.com/serenityresearchlabs/">Instagram</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="https://www.tiktok.com/@serenityresearchlabs" rel="noopener noreferrer" target="_blank">TikTok</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="https://www.instagram.com/serenityresearchlabs/" rel="noopener noreferrer" target="_blank">Instagram</a>
     <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="../about/code.html">About Us</a>
+    <a class="text-slate-500 hover:text-blue-500 transition-colors text-sm" href="mailto:support@serenityresearchlabs.com">Email Us</a>
+    <span class="text-slate-500 text-sm">(916) 581-2242</span>
   </div>
 </div>
 <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-slate-200">
@@ -495,6 +553,9 @@ function selectSub(el) {
   const btn = document.getElementById('add-to-cart-btn');
   btn.textContent = 'Add to Cart \u2014 $' + price;
   btn.dataset.productPrice = price;
+  btn.dataset.subscription = el.dataset.sub || 'one-time';
+  btn.dataset.discount = String(discount);
+  btn.dataset.subscriptionLabel = discount > 0 ? el.querySelector('.text-sm').textContent + ' subscription' : 'One-time purchase';
   const savings = document.getElementById('sub-savings');
   if (discount > 0) {
     savings.textContent = 'You save $' + (BASE_PRICE - parseFloat(price)).toFixed(2) + ' per order with ' + el.querySelector('.text-sm').textContent.toLowerCase() + ' subscription';

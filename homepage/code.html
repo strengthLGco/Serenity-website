@@ -102,16 +102,21 @@ function verifyAge() {
   if (age >= 18) {
     document.getElementById('age-gate').style.display = 'none';
     document.body.style.overflow = '';
-    localStorage.setItem('ageVerified', 'true');
+    fetch('/api/verify-age', { method: 'POST', credentials: 'same-origin' });
   } else {
     alert('You must be 18 or older to access this site.');
   }
 }
-if (localStorage.getItem('ageVerified') === 'true') {
-  document.getElementById('age-gate').style.display = 'none';
-} else {
-  document.body.style.overflow = 'hidden';
-}
+fetch('/api/age-status', { credentials: 'same-origin' })
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    if (d.verified) {
+      document.getElementById('age-gate').style.display = 'none';
+    } else {
+      document.body.style.overflow = 'hidden';
+    }
+  })
+  .catch(function() { document.body.style.overflow = 'hidden'; });
 </script>
 
 <!-- Promo Banner -->
@@ -122,8 +127,8 @@ if (localStorage.getItem('ageVerified') === 'true') {
 </div>
 
 <!-- Navigation -->
-<header class="w-full bg-white border-b border-sr-border">
-  <nav class="flex justify-between items-center px-6 md:px-10 h-14 max-w-[1120px] mx-auto">
+<header class="w-full sr-nav-glass">
+  <nav class="flex justify-between items-center px-6 md:px-10 h-20 max-w-[1120px] mx-auto">
     <a href="../homepage/code.html" class="flex items-center gap-2">
       <span class="font-display text-xl font-extrabold tracking-[-0.04em] text-sr-text-primary">SERENITY</span>
     </a>
@@ -231,7 +236,7 @@ if (localStorage.getItem('ageVerified') === 'true') {
         <!-- BPC-157 -->
         <a href="../product_detail_bpc_157/code.html" class="sr-card group sr-fade-up">
           <div class="aspect-[4/5] bg-sr-offwhite overflow-hidden flex items-center justify-center p-10">
-            <img alt="BPC-157 research peptide vial" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 product-float" src="../images/products/bpc157.png?v=3"/>
+            <img alt="BPC-157 research peptide vial" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 product-float" src="../images/products/bpc157.webp?v=4" loading="lazy"/>
           </div>
           <div class="p-6">
             <p class="sr-label text-accent text-[10px] mb-1.5">Cytoprotection</p>
@@ -243,7 +248,7 @@ if (localStorage.getItem('ageVerified') === 'true') {
         <!-- TB-500 -->
         <a href="../product_detail_tb500/code.html" class="sr-card group sr-fade-up sr-fade-up-delay-1">
           <div class="aspect-[4/5] bg-sr-offwhite overflow-hidden flex items-center justify-center p-10">
-            <img alt="TB-500 research peptide vial" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 product-float-delay" src="../images/products/tb500.png?v=3"/>
+            <img alt="TB-500 research peptide vial" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 product-float-delay" src="../images/products/tb500.webp?v=4" loading="lazy"/>
           </div>
           <div class="p-6">
             <p class="sr-label text-accent text-[10px] mb-1.5">Tissue Repair</p>
@@ -255,7 +260,7 @@ if (localStorage.getItem('ageVerified') === 'true') {
         <!-- CJC/Ipamorelin -->
         <a href="../product_detail_cjcipa/code.html" class="sr-card group sr-fade-up sr-fade-up-delay-2">
           <div class="aspect-[4/5] bg-sr-offwhite overflow-hidden flex items-center justify-center p-10">
-            <img alt="CJC-Ipamorelin research peptide vial" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 product-float" src="../images/products/cjcipa.png?v=3"/>
+            <img alt="CJC-Ipamorelin research peptide vial" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 product-float" src="../images/products/cjcipa.webp?v=4" loading="lazy"/>
           </div>
           <div class="p-6">
             <p class="sr-label text-accent text-[10px] mb-1.5">Growth Hormone</p>
@@ -318,7 +323,7 @@ if (localStorage.getItem('ageVerified') === 'true') {
         <!-- GHK-Cu -->
         <a href="../product_detail_ghkcu/code.html" class="bg-white rounded-2xl p-5 md:p-8 group sr-fade-up" style="box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
           <div class="aspect-square bg-sr-offwhite rounded-xl overflow-hidden mb-4 flex items-center justify-center">
-            <img alt="GHK-Cu peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/ghkcu.png?v=3"/>
+            <img alt="GHK-Cu peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/ghkcu.webp?v=4" loading="lazy"/>
           </div>
           <p class="text-accent text-[10px] font-semibold tracking-wide uppercase mb-1">Anti-Aging</p>
           <h3 class="font-display text-base md:text-xl font-bold tracking-[-0.02em] text-sr-text-primary group-hover:text-accent transition-colors duration-300">GHK-Cu</h3>
@@ -329,7 +334,7 @@ if (localStorage.getItem('ageVerified') === 'true') {
         <!-- BPC-157 -->
         <a href="../product_detail_bpc_157/code.html" class="bg-white rounded-2xl p-5 md:p-8 group sr-fade-up sr-fade-up-delay-1" style="box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
           <div class="aspect-square bg-sr-offwhite rounded-xl overflow-hidden mb-4 flex items-center justify-center">
-            <img alt="BPC-157 peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/bpc157.png?v=3"/>
+            <img alt="BPC-157 peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/bpc157.webp?v=4" loading="lazy"/>
           </div>
           <p class="text-accent text-[10px] font-semibold tracking-wide uppercase mb-1">Cytoprotection</p>
           <h3 class="font-display text-base md:text-xl font-bold tracking-[-0.02em] text-sr-text-primary group-hover:text-accent transition-colors duration-300">BPC-157</h3>
@@ -340,7 +345,7 @@ if (localStorage.getItem('ageVerified') === 'true') {
         <!-- TB-500 -->
         <a href="../product_detail_tb500/code.html" class="bg-white rounded-2xl p-5 md:p-8 group sr-fade-up" style="box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
           <div class="aspect-square bg-sr-offwhite rounded-xl overflow-hidden mb-4 flex items-center justify-center">
-            <img alt="TB-500 peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/tb500.png?v=3"/>
+            <img alt="TB-500 peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/tb500.webp?v=4" loading="lazy"/>
           </div>
           <p class="text-accent text-[10px] font-semibold tracking-wide uppercase mb-1">Tissue Repair</p>
           <h3 class="font-display text-base md:text-xl font-bold tracking-[-0.02em] text-sr-text-primary group-hover:text-accent transition-colors duration-300">TB-500</h3>
@@ -351,7 +356,7 @@ if (localStorage.getItem('ageVerified') === 'true') {
         <!-- CJC/Ipamorelin -->
         <a href="../product_detail_cjcipa/code.html" class="bg-white rounded-2xl p-5 md:p-8 group sr-fade-up sr-fade-up-delay-1" style="box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
           <div class="aspect-square bg-sr-offwhite rounded-xl overflow-hidden mb-4 flex items-center justify-center">
-            <img alt="CJC-Ipamorelin peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/cjcipa.png?v=3"/>
+            <img alt="CJC-Ipamorelin peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/cjcipa.webp?v=4" loading="lazy"/>
           </div>
           <p class="text-accent text-[10px] font-semibold tracking-wide uppercase mb-1">Growth Hormone</p>
           <h3 class="font-display text-base md:text-xl font-bold tracking-[-0.02em] text-sr-text-primary group-hover:text-accent transition-colors duration-300">CJC/Ipamorelin</h3>
@@ -362,7 +367,7 @@ if (localStorage.getItem('ageVerified') === 'true') {
         <!-- MT-2 -->
         <a href="../product_detail_mt2/code.html" class="bg-white rounded-2xl p-5 md:p-8 group sr-fade-up" style="box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
           <div class="aspect-square bg-sr-offwhite rounded-xl overflow-hidden mb-4 flex items-center justify-center">
-            <img alt="MT-2 peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/mt2.png?v=3"/>
+            <img alt="MT-2 peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/mt2.webp?v=4" loading="lazy"/>
           </div>
           <p class="text-accent text-[10px] font-semibold tracking-wide uppercase mb-1">Melanocortin</p>
           <h3 class="font-display text-base md:text-xl font-bold tracking-[-0.02em] text-sr-text-primary group-hover:text-accent transition-colors duration-300">MT-2</h3>
@@ -373,7 +378,7 @@ if (localStorage.getItem('ageVerified') === 'true') {
         <!-- Retatrutide -->
         <a href="../product_detail_retatrutide/code.html" class="bg-white rounded-2xl p-5 md:p-8 group sr-fade-up sr-fade-up-delay-1" style="box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
           <div class="aspect-square bg-sr-offwhite rounded-xl overflow-hidden mb-4 flex items-center justify-center">
-            <img alt="Retatrutide peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/retatrutide.png?v=3"/>
+            <img alt="Retatrutide peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/retatrutide.webp?v=4" loading="lazy"/>
           </div>
           <p class="text-accent text-[10px] font-semibold tracking-wide uppercase mb-1">Triple Agonist</p>
           <h3 class="font-display text-base md:text-xl font-bold tracking-[-0.02em] text-sr-text-primary group-hover:text-accent transition-colors duration-300">Retatrutide</h3>
@@ -384,7 +389,7 @@ if (localStorage.getItem('ageVerified') === 'true') {
         <!-- IGF-1 LR3 -->
         <a href="../product_detail_igf1lr3/code.html" class="bg-white rounded-2xl p-5 md:p-8 group sr-fade-up" style="box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
           <div class="aspect-square bg-sr-offwhite rounded-xl overflow-hidden mb-4 flex items-center justify-center">
-            <img alt="IGF-1 LR3 peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/igf1lr3.png?v=3"/>
+            <img alt="IGF-1 LR3 peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/igf1lr3.webp?v=4" loading="lazy"/>
           </div>
           <p class="text-accent text-[10px] font-semibold tracking-wide uppercase mb-1">Growth Factor</p>
           <h3 class="font-display text-base md:text-xl font-bold tracking-[-0.02em] text-sr-text-primary group-hover:text-accent transition-colors duration-300">IGF-1 LR3</h3>
@@ -395,7 +400,7 @@ if (localStorage.getItem('ageVerified') === 'true') {
         <!-- G-LOW -->
         <a href="../product_detail_glow/code.html" class="bg-white rounded-2xl p-5 md:p-8 group sr-fade-up sr-fade-up-delay-1" style="box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
           <div class="aspect-square bg-sr-offwhite rounded-xl overflow-hidden mb-4 flex items-center justify-center">
-            <img alt="G-LOW peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/glow.png?v=3"/>
+            <img alt="G-LOW peptide" class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-110" src="../images/products/glow.webp?v=4" loading="lazy"/>
           </div>
           <p class="text-accent text-[10px] font-semibold tracking-wide uppercase mb-1">Multi-Compound</p>
           <h3 class="font-display text-base md:text-xl font-bold tracking-[-0.02em] text-sr-text-primary group-hover:text-accent transition-colors duration-300">G-LOW</h3>
@@ -437,7 +442,7 @@ if (localStorage.getItem('ageVerified') === 'true') {
 </section>
 
 <!-- Footer -->
-<footer class="bg-white py-20 px-6 border-t border-sr-border">
+<footer class="bg-sr-offwhite py-16 px-6 border-t border-sr-border">
   <div class="sr-container">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
       <div class="col-span-2 md:col-span-1">
@@ -457,7 +462,7 @@ if (localStorage.getItem('ageVerified') === 'true') {
           <li><a class="text-sr-text-secondary hover:text-accent transition-colors duration-300" href="../terms/code.html">Terms of Service</a></li>
           <li><a class="text-sr-text-secondary hover:text-accent transition-colors duration-300" href="../privacy/code.html">Privacy Policy</a></li>
           <li><a class="text-sr-text-secondary hover:text-accent transition-colors duration-300" href="../refund/code.html">Refund Policy</a></li>
-          <li><a class="text-sr-text-secondary hover:text-accent transition-colors duration-300" href="../faq_page/code.html">Shipping Policy</a></li>
+          <li><a class="text-sr-text-secondary hover:text-accent transition-colors duration-300" href="../shipping/code.html">Shipping Policy</a></li>
         </ul>
       </div>
       <div>
@@ -466,6 +471,8 @@ if (localStorage.getItem('ageVerified') === 'true') {
           <li><a class="text-sr-text-secondary hover:text-accent transition-colors duration-300" href="https://www.tiktok.com/@serenityresearchlabs" target="_blank" rel="noopener noreferrer">TikTok</a></li>
           <li><a class="text-sr-text-secondary hover:text-accent transition-colors duration-300" href="https://www.instagram.com/serenityresearchlabs/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
           <li><a class="text-sr-text-secondary hover:text-accent transition-colors duration-300" href="../about/code.html">About Us</a></li>
+          <li><a class="text-sr-text-secondary hover:text-accent transition-colors duration-300" href="mailto:support@serenityresearchlabs.com">Email Us</a></li>
+          <li><span class="text-sr-text-secondary">(916) 581-2242</span></li>
         </ul>
       </div>
     </div>

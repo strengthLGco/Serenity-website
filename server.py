@@ -13,7 +13,7 @@ SETUP:
 
 import os
 import json
-from flask import Flask, send_from_directory, request, jsonify, redirect
+from flask import Flask, send_from_directory, request, jsonify, redirect, make_response
 
 try:
     import stripe
@@ -36,7 +36,13 @@ STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "whsec_REPLACE_W
 # Your domain — update this when you deploy
 YOUR_DOMAIN = os.environ.get("DOMAIN", "http://localhost:8080")
 
-app = Flask(__name__, static_folder=".", static_url_path="")
+# Promo code configuration
+PROMO_CODE = os.environ.get("PROMO_CODE", "SERENITY15")
+PROMO_DISCOUNT_PERCENT = int(os.environ.get("PROMO_DISCOUNT_PERCENT", "15"))
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+app = Flask(__name__, static_folder=BASE_DIR, static_url_path="")
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", os.urandom(32).hex())
 
 
 # =============================================================================
@@ -49,6 +55,18 @@ def add_security_headers(response: "Flask.response_class") -> "Flask.response_cl
     response.headers["X-XSS-Protection"] = "1; mode=block"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdn.tailwindcss.com https://cdn.jsdelivr.net; "
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; "
+        "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; "
+        "img-src 'self' data: https:; "
+        "frame-src https://js.stripe.com; "
+        "connect-src 'self' https://api.stripe.com; "
+        "object-src 'none'; "
+        "base-uri 'self'"
+    )
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
     return response
 
 
@@ -62,7 +80,34 @@ def index():
 
 @app.route("/<path:path>")
 def serve_static(path):
-    return send_from_directory(".", path)
+    return send_from_directory(BASE_DIR, path)
+
+
+# =============================================================================
+# AGE VERIFICATION
+# =============================================================================
+
+@app.route("/api/verify-age", methods=["POST"])
+def verify_age():
+    """Set a signed cookie confirming age verification."""
+    resp = make_response(jsonify({"verified": True}))
+    secure_cookie = request.is_secure or os.environ.get("FLASK_ENV") == "production"
+    resp.set_cookie(
+        "age_verified",
+        "true",
+        max_age=86400 * 30,
+        httponly=True,
+        secure=secure_cookie,
+        samesite="Strict",
+    )
+    return resp
+
+
+@app.route("/api/age-status", methods=["GET"])
+def age_status():
+    """Check if the user has a valid age verification cookie."""
+    verified = request.cookies.get("age_verified") == "true"
+    return jsonify({"verified": verified})
 
 
 # =============================================================================
@@ -156,8 +201,8 @@ def create_payment_intent():
         # Apply promo code if provided
         promo_code = data.get("promoCode", "").strip().upper()
         discount = 0
-        if promo_code == "SERENITY15":
-            discount = int(total * 0.15)
+        if promo_code == PROMO_CODE:
+            discount = int(total * PROMO_DISCOUNT_PERCENT / 100)
             total -= discount
 
         # Flat rate shipping $7.99
