@@ -101,9 +101,9 @@ const SerenityCart = (() => {
     const qtyDisplay = document.querySelector("[data-qty-display]");
     const minusBtn = document.querySelector("[data-qty-minus]");
     const plusBtn = document.querySelector("[data-qty-plus]");
-    const addBtn = document.querySelector("[data-add-to-cart]");
+    const addBtns = document.querySelectorAll("[data-add-to-cart]");
 
-    if (!addBtn) return; // not a product page
+    if (!addBtns.length) return; // not a commerce page
 
     if (minusBtn) {
       minusBtn.addEventListener("click", () => {
@@ -119,32 +119,35 @@ const SerenityCart = (() => {
       });
     }
 
-    addBtn.addEventListener("click", () => {
-      const product = {
-        id: addBtn.dataset.productId,
-        name: addBtn.dataset.productName,
-        desc: addBtn.dataset.productDesc || "",
-        price: parseFloat(addBtn.dataset.productPrice),
-        icon: addBtn.dataset.productIcon || "science",
-        qty: qty,
-        subscription: addBtn.dataset.subscription || "one-time",
-        subscriptionLabel: addBtn.dataset.subscriptionLabel || "One-time purchase",
-        discount: parseInt(addBtn.dataset.discount || "0", 10),
-      };
+    addBtns.forEach(addBtn => {
+      addBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const product = {
+          id: addBtn.dataset.productId,
+          name: addBtn.dataset.productName,
+          desc: addBtn.dataset.productDesc || "",
+          price: parseFloat(addBtn.dataset.productPrice),
+          icon: addBtn.dataset.productIcon || "science",
+          qty: addBtn.id === "add-to-cart-btn" ? qty : 1,
+          subscription: addBtn.dataset.subscription || "one-time",
+          subscriptionLabel: addBtn.dataset.subscriptionLabel || "One-time purchase",
+          discount: parseInt(addBtn.dataset.discount || "0", 10),
+        };
 
-      addItem(product);
+        addItem(product);
 
-      // Visual feedback
-      const origText = addBtn.textContent;
-      addBtn.textContent = "✓ Added to Cart";
-      addBtn.classList.add("!bg-green-600");
-      setTimeout(() => {
-        addBtn.textContent = origText;
-        addBtn.classList.remove("!bg-green-600");
-      }, 1500);
+        // Visual feedback
+        const origText = addBtn.textContent;
+        addBtn.textContent = addBtn.id === "add-to-cart-btn" ? "✓ Added to Cart" : "✓ Added";
+        addBtn.classList.add("!bg-green-600", "!text-white");
+        setTimeout(() => {
+          addBtn.textContent = origText;
+          addBtn.classList.remove("!bg-green-600", "!text-white");
+        }, 1500);
+      });
     });
 
-    // Also wire up cross-sell "add" buttons if present
+    // Also wire up legacy cross-sell "add" buttons if present
     document.querySelectorAll("[data-cross-sell-add]").forEach(btn => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
