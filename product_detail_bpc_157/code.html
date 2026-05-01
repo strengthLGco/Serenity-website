@@ -98,6 +98,7 @@ function verifyAge() {
     document.getElementById('age-gate').style.display = 'none';
     document.body.style.overflow = '';
     fetch('/api/verify-age', { method: 'POST', credentials: 'same-origin' });
+    window.dispatchEvent(new CustomEvent('serenity:age-verified'));
   } else {
     alert('You must be 18 or older to access this site.');
   }
@@ -576,4 +577,5 @@ function closeMobileMenu() {
 </script>
 <script src="../js/cart.js"></script>
 
+<script src="../js/lead-capture.js"></script>
 </body></html>

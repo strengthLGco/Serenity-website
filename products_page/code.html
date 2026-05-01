@@ -472,6 +472,7 @@ function verifyAge() {
   if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
   if (age >= 18) {
     fetch('/api/verify-age', { method: 'POST', credentials: 'same-origin' });
+    window.dispatchEvent(new CustomEvent('serenity:age-verified'));
     document.getElementById('age-gate').style.display = 'none';
   } else {
     alert('You must be 18 or older to access this site.');
@@ -529,5 +530,6 @@ document.querySelectorAll('.fade-up').forEach(function(el) {
 </script>
 
 <script src="../js/cart.js"></script>
+<script src="../js/lead-capture.js"></script>
 </body>
 </html>

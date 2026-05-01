@@ -193,6 +193,7 @@ function verifyAge() {
     document.getElementById('age-gate').style.display = 'none';
     document.body.style.overflow = '';
     fetch('/api/verify-age', { method: 'POST', credentials: 'same-origin' });
+    window.dispatchEvent(new CustomEvent('serenity:age-verified'));
   } else {
     alert('You must be 18 or older to access this site.');
   }
@@ -614,21 +615,61 @@ function updateTotals() {
   document.getElementById("shipping-display").textContent = `$${shipping.toFixed(2)}`;
 }
 
-function applyPromo() {
+function hasPromoUnlock() {
+  return localStorage.getItem("serenity_promo_unlocked") === "true";
+}
+
+function lockPromoField(message) {
+  const input = document.getElementById("promo");
+  const status = document.getElementById("promo-status");
+  input.value = "SERENITY15";
+  input.disabled = true;
+  input.classList.add("opacity-50");
+  document.getElementById("apply-promo-btn").disabled = true;
+  document.getElementById("apply-promo-btn").classList.add("opacity-50");
+  status.textContent = message || "SERENITY15 unlocked — 15% off applied.";
+  status.className = "text-[11px] mt-2 font-semibold text-green-600";
+}
+
+function initializePromoUnlock() {
+  if (!hasPromoUnlock()) return;
+  promoCode = "SERENITY15";
+  promoApplied = true;
+  lockPromoField();
+}
+
+async function rebuildPaymentIntent() {
+  if (!cart.length) return;
+  const loading = document.getElementById("payment-loading");
+  const submit = document.getElementById("submit-btn");
+  if (paymentElement) {
+    try { paymentElement.unmount(); } catch (e) {}
+  }
+  if (loading) {
+    loading.classList.remove("hidden");
+    loading.innerHTML = `<div class="text-center py-8"><div class="spinner mx-auto mb-3"></div><p class="text-sm text-sr-text-secondary font-medium">Updating secure checkout...</p></div>`;
+  }
+  if (submit) submit.disabled = true;
+  await initStripe();
+}
+
+async function applyPromo() {
   const input = document.getElementById("promo");
   const status = document.getElementById("promo-status");
   const code = input.value.trim().toUpperCase();
 
   if (code === "SERENITY15") {
+    if (!hasPromoUnlock()) {
+      status.textContent = "Enter your email first to unlock SERENITY15.";
+      status.className = "text-[11px] mt-2 font-semibold text-amber-600";
+      if (window.SerenityLeadCapture) window.SerenityLeadCapture.show();
+      return;
+    }
     promoCode = code;
     promoApplied = true;
-    status.textContent = "SERENITY15 applied — 15% off!";
-    status.className = "text-[11px] mt-2 font-semibold text-green-600";
-    input.disabled = true;
-    input.classList.add("opacity-50");
-    document.getElementById("apply-promo-btn").disabled = true;
-    document.getElementById("apply-promo-btn").classList.add("opacity-50");
+    lockPromoField("SERENITY15 applied — 15% off!");
     updateTotals();
+    await rebuildPaymentIntent();
   } else {
     status.textContent = "Invalid promo code";
     status.className = "text-[11px] mt-2 font-semibold text-red-500";
@@ -636,6 +677,14 @@ function applyPromo() {
     setTimeout(() => input.classList.remove("shake"), 500);
   }
 }
+
+window.addEventListener("serenity:promo-unlocked", async () => {
+  promoCode = "SERENITY15";
+  promoApplied = true;
+  lockPromoField("SERENITY15 unlocked — 15% off applied.");
+  updateTotals();
+  await rebuildPaymentIntent();
+});
 
 
 // =============================================================================
@@ -855,11 +904,13 @@ function closeMobileMenu() {
 // =============================================================================
 // INIT
 // =============================================================================
+initializePromoUnlock();
 renderCart();
 checkRedirectResult();
 initStripe();
 </script>
 <script src="../js/cart.js"></script>
 
+<script src="../js/lead-capture.js"></script>
 </body>
 </html>

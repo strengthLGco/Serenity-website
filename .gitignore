@@ -1,1 +1,7 @@
 .vercel
+.venv/
+__pycache__/
+data/leads.jsonl
+finance/receipts/
+finance/statements/
+finance/

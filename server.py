@@ -13,6 +13,8 @@ SETUP:
 
 import os
 import json
+import re
+from datetime import datetime, timezone
 from flask import Flask, send_from_directory, request, jsonify, redirect, make_response
 
 try:
@@ -39,6 +41,7 @@ YOUR_DOMAIN = os.environ.get("DOMAIN", "http://localhost:8080")
 # Promo code configuration
 PROMO_CODE = os.environ.get("PROMO_CODE", "SERENITY15")
 PROMO_DISCOUNT_PERCENT = int(os.environ.get("PROMO_DISCOUNT_PERCENT", "15"))
+LEADS_FILE = os.environ.get("SERENITY_LEADS_FILE", os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "leads.jsonl"))
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__, static_folder=BASE_DIR, static_url_path="")
@@ -110,8 +113,54 @@ def age_status():
     return jsonify({"verified": verified})
 
 
+@app.route("/api/lead-capture", methods=["POST"])
+def lead_capture():
+    """Capture email/SMS opt-ins and unlock SERENITY15 for this browser."""
+    data = request.get_json(silent=True) or {}
+    email = (data.get("email") or "").strip().lower()
+    phone = (data.get("phone") or "").strip()
+    sms_consent = bool(data.get("smsConsent"))
+    source = (data.get("source") or "").strip()[:300]
+
+    if not re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", email):
+        return jsonify({"error": "Enter a valid email address."}), 400
+
+    digits_only = re.sub(r"\D", "", phone)
+    if phone and (len(digits_only) < 10 or len(digits_only) > 15):
+        return jsonify({"error": "Enter a valid phone number, or leave SMS blank."}), 400
+    if phone and not sms_consent:
+        return jsonify({"error": "SMS consent is required before saving a phone number."}), 400
+
+    os.makedirs(os.path.dirname(LEADS_FILE), exist_ok=True)
+    lead = {
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "email": email,
+        "phone": phone,
+        "sms_consent": sms_consent,
+        "source": source,
+        "promo_code": PROMO_CODE,
+        "ip": request.headers.get("X-Forwarded-For", request.remote_addr),
+        "user_agent": request.headers.get("User-Agent", "")[:500],
+    }
+    with open(LEADS_FILE, "a", encoding="utf-8") as f:
+        f.write(json.dumps(lead) + "\n")
+
+    resp = make_response(jsonify({"ok": True, "unlocked": True, "promoCode": PROMO_CODE}))
+    secure_cookie = request.is_secure or os.environ.get("FLASK_ENV") == "production"
+    resp.set_cookie(
+        "serenity_promo_unlocked",
+        "true",
+        max_age=86400 * 90,
+        httponly=True,
+        secure=secure_cookie,
+        samesite="Lax",
+    )
+    return resp
+
+
 # =============================================================================
 # STRIPE API ENDPOINTS
+# =============================================================================
 # =============================================================================
 
 @app.route("/api/config", methods=["GET"])
@@ -202,6 +251,8 @@ def create_payment_intent():
         promo_code = data.get("promoCode", "").strip().upper()
         discount = 0
         if promo_code == PROMO_CODE:
+            if request.cookies.get("serenity_promo_unlocked") != "true":
+                return jsonify({"error": "SERENITY15 requires email signup before checkout."}), 403
             discount = int(total * PROMO_DISCOUNT_PERCENT / 100)
             total -= discount
 
