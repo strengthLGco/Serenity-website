@@ -111,7 +111,7 @@
     <a href="../homepage/code.html" class="flex items-center gap-3">
       <span class="text-xl font-black track-tighter text-heading uppercase">SERENITY</span>
     </a>
-    <div class="hidden md:flex items-center gap-8">
+    <div class="hidden md:flex items-center gap-8 sr-desktop-nav">
       <a class="text-body hover:text-heading transition-colors text-sm font-medium" href="../homepage/code.html">Home</a>
       <a class="text-brand font-semibold text-sm" href="../products_page/code.html">Shop</a>
       <a class="text-body hover:text-heading transition-colors text-sm font-medium" href="../pricing_stacks/code.html">Compound Sets</a>
@@ -453,6 +453,7 @@
   </div>
 </footer>
 
+<script src="../js/site.js"></script>
 <script src="../js/chatbot.js"></script>
 
 <script>
@@ -488,14 +489,21 @@ fetch('/api/age-status', { credentials: 'same-origin' })
 
 // Mobile menu
 function openMobileMenu() {
-  document.getElementById('mobile-menu').classList.add('active');
-  document.getElementById('mobile-menu-overlay').classList.add('active');
+  if (!document.getElementById('mobile-menu') && window.__serenityEnsureMobileMenu) window.__serenityEnsureMobileMenu();
+  var menu = document.getElementById('mobile-menu');
+  var overlay = document.getElementById('mobile-menu-overlay');
+  if (!menu || !overlay) return;
+  menu.classList.add('active');
+  overlay.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 function closeMobileMenu() {
-  document.getElementById('mobile-menu').classList.remove('active');
-  document.getElementById('mobile-menu-overlay').classList.remove('active');
-  document.body.style.overflow = '';
+  var menu = document.getElementById('mobile-menu');
+  var overlay = document.getElementById('mobile-menu-overlay');
+  if (!menu || !overlay) return;
+  menu.classList.remove('active');
+  overlay.classList.remove('active');
+  if (!document.getElementById('age-gate') || !document.getElementById('age-gate').classList.contains('active')) document.body.style.overflow = '';
 }
 
 // Filter buttons

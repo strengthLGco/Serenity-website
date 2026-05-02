@@ -133,7 +133,7 @@ fetch('/api/age-status', { credentials: 'same-origin' })
     <a href="../homepage/code.html" class="flex items-center gap-2">
       <span class="font-display text-xl font-extrabold tracking-[-0.04em] text-sr-text-primary">SERENITY</span>
     </a>
-    <div class="hidden md:flex items-center gap-10 text-[13px] font-medium font-body">
+    <div class="hidden md:flex items-center gap-10 sr-desktop-nav text-[13px] font-medium font-body">
       <a class="text-sr-text-primary hover:text-accent transition-colors duration-300" href="../homepage/code.html">Home</a>
       <a class="text-sr-text-secondary hover:text-accent transition-colors duration-300" href="../products_page/code.html">Shop</a>
       <a class="text-sr-text-secondary hover:text-accent transition-colors duration-300" href="../faq_page/code.html">Support</a>
@@ -498,18 +498,26 @@ document.querySelectorAll('.sr-fade-up').forEach(el => observer.observe(el));
 <!-- Mobile menu -->
 <script>
 function openMobileMenu() {
-  document.getElementById('mobile-menu').classList.add('active');
-  document.getElementById('mobile-menu-overlay').classList.add('active');
+  if (!document.getElementById('mobile-menu') && window.__serenityEnsureMobileMenu) window.__serenityEnsureMobileMenu();
+  var menu = document.getElementById('mobile-menu');
+  var overlay = document.getElementById('mobile-menu-overlay');
+  if (!menu || !overlay) return;
+  menu.classList.add('active');
+  overlay.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 function closeMobileMenu() {
-  document.getElementById('mobile-menu').classList.remove('active');
-  document.getElementById('mobile-menu-overlay').classList.remove('active');
-  document.body.style.overflow = '';
+  var menu = document.getElementById('mobile-menu');
+  var overlay = document.getElementById('mobile-menu-overlay');
+  if (!menu || !overlay) return;
+  menu.classList.remove('active');
+  overlay.classList.remove('active');
+  if (!document.getElementById('age-gate') || !document.getElementById('age-gate').classList.contains('active')) document.body.style.overflow = '';
 }
 </script>
 
 <script src="../js/cart.js"></script>
+<script src="../js/site.js"></script>
 <script src="../js/chatbot.js"></script>
 <script src="../js/lead-capture.js"></script>
 </body>

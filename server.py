@@ -115,28 +115,35 @@ def age_status():
 
 @app.route("/api/lead-capture", methods=["POST"])
 def lead_capture():
-    """Capture email/SMS opt-ins and unlock SERENITY15 for this browser."""
+    """Capture contact info and optional SMS opt-ins, then unlock SERENITY15."""
     data = request.get_json(silent=True) or {}
+    name = (data.get("name") or "").strip()[:120]
     email = (data.get("email") or "").strip().lower()
     phone = (data.get("phone") or "").strip()
-    sms_consent = bool(data.get("smsConsent"))
+    sms_consent = bool(data.get("smsConsent")) and bool(phone)
     source = (data.get("source") or "").strip()[:300]
 
-    if not re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", email):
-        return jsonify({"error": "Enter a valid email address."}), 400
+    if not email and not phone:
+        return jsonify({"error": "Add an email or phone number."}), 400
+    if email and not re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", email):
+        return jsonify({"error": "Enter a valid email address, or leave email blank."}), 400
 
+    # Keep phone capture flexible: no separate area-code field and no hard US-only
+    # formatting. We still reject obvious non-phone garbage so recurring messaging
+    # data stays clean enough to wire into Twilio/Klaviyo/Postscript later.
+    phone = re.sub(r"[^0-9+().\-\s]", "", phone).strip()
     digits_only = re.sub(r"\D", "", phone)
-    if phone and (len(digits_only) < 10 or len(digits_only) > 15):
-        return jsonify({"error": "Enter a valid phone number, or leave SMS blank."}), 400
-    if phone and not sms_consent:
-        return jsonify({"error": "SMS consent is required before saving a phone number."}), 400
+    if phone and (len(digits_only) < 7 or len(digits_only) > 15):
+        return jsonify({"error": "Enter a valid phone number, or leave phone blank."}), 400
 
     os.makedirs(os.path.dirname(LEADS_FILE), exist_ok=True)
     lead = {
         "created_at": datetime.now(timezone.utc).isoformat(),
+        "name": name,
         "email": email,
         "phone": phone,
         "sms_consent": sms_consent,
+        "sms_consent_text": "Recurring availability, documentation, and offer reminders. Reply STOP to opt out." if sms_consent else "",
         "source": source,
         "promo_code": PROMO_CODE,
         "ip": request.headers.get("X-Forwarded-For", request.remote_addr),

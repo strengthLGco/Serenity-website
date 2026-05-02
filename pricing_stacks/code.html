@@ -170,7 +170,7 @@ fetch('/api/age-status', { credentials: 'same-origin' })
 <div class="flex items-center gap-4">
 <span class="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">SERENITY</span>
 </div>
-<nav class="hidden md:flex items-center gap-8 font-['Inter'] tracking-tight font-medium">
+<nav class="hidden md:flex items-center gap-8 sr-desktop-nav font-['Inter'] tracking-tight font-medium">
 <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../homepage/code.html">Home</a>
 <a class="text-[#0a84ff] dark:text-blue-400 font-semibold border-b-2 border-blue-600 font-['Inter'] tracking-tight" href="../products_page/code.html">Shop</a>
 <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-['Inter'] tracking-tight font-medium" href="../faq_page/code.html">Support</a>
@@ -438,18 +438,26 @@ fetch('/api/age-status', { credentials: 'same-origin' })
 <span class="font-['Inter'] text-[10px] uppercase tracking-widest font-bold">Account</span>
 </a>
 </nav>
+<script src="../js/site.js"></script>
 <script src="../js/chatbot.js"></script>
 
 <script>
 function openMobileMenu() {
-  document.getElementById('mobile-menu').classList.add('active');
-  document.getElementById('mobile-menu-overlay').classList.add('active');
+  if (!document.getElementById('mobile-menu') && window.__serenityEnsureMobileMenu) window.__serenityEnsureMobileMenu();
+  var menu = document.getElementById('mobile-menu');
+  var overlay = document.getElementById('mobile-menu-overlay');
+  if (!menu || !overlay) return;
+  menu.classList.add('active');
+  overlay.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 function closeMobileMenu() {
-  document.getElementById('mobile-menu').classList.remove('active');
-  document.getElementById('mobile-menu-overlay').classList.remove('active');
-  document.body.style.overflow = '';
+  var menu = document.getElementById('mobile-menu');
+  var overlay = document.getElementById('mobile-menu-overlay');
+  if (!menu || !overlay) return;
+  menu.classList.remove('active');
+  overlay.classList.remove('active');
+  if (!document.getElementById('age-gate') || !document.getElementById('age-gate').classList.contains('active')) document.body.style.overflow = '';
 }
 </script>
 <script src="../js/cart.js"></script>

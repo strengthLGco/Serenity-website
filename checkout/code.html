@@ -224,7 +224,7 @@ fetch('/api/age-status', { credentials: 'same-origin' })
   <a href="../homepage/code.html" class="flex items-center gap-2">
     <span class="font-display text-xl font-extrabold tracking-[-0.04em] text-sr-text-primary">SERENITY</span>
   </a>
-  <nav class="hidden md:flex gap-10 items-center">
+  <nav class="hidden md:flex gap-10 sr-desktop-nav items-center">
     <a class="text-sr-text-secondary hover:text-sr-text-primary transition-colors text-[13px] font-medium" href="../homepage/code.html">Home</a>
     <a class="text-accent text-[13px] font-semibold" href="../products_page/code.html">Shop</a>
     <a class="text-sr-text-secondary hover:text-sr-text-primary transition-colors text-[13px] font-medium" href="../faq_page/code.html">Support</a>
@@ -518,6 +518,7 @@ fetch('/api/age-status', { credentials: 'same-origin' })
 </div>
 </footer>
 
+<script src="../js/site.js"></script>
 <script src="../js/chatbot.js"></script>
 
 <script>
@@ -891,14 +892,21 @@ async function checkRedirectResult() {
 // MOBILE MENU
 // =============================================================================
 function openMobileMenu() {
-  document.getElementById('mobile-menu').classList.add('active');
-  document.getElementById('mobile-menu-overlay').classList.add('active');
+  if (!document.getElementById('mobile-menu') && window.__serenityEnsureMobileMenu) window.__serenityEnsureMobileMenu();
+  var menu = document.getElementById('mobile-menu');
+  var overlay = document.getElementById('mobile-menu-overlay');
+  if (!menu || !overlay) return;
+  menu.classList.add('active');
+  overlay.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 function closeMobileMenu() {
-  document.getElementById('mobile-menu').classList.remove('active');
-  document.getElementById('mobile-menu-overlay').classList.remove('active');
-  document.body.style.overflow = '';
+  var menu = document.getElementById('mobile-menu');
+  var overlay = document.getElementById('mobile-menu-overlay');
+  if (!menu || !overlay) return;
+  menu.classList.remove('active');
+  overlay.classList.remove('active');
+  if (!document.getElementById('age-gate') || !document.getElementById('age-gate').classList.contains('active')) document.body.style.overflow = '';
 }
 
 // =============================================================================

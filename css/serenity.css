@@ -106,6 +106,19 @@ body {
   border-bottom: 1px solid var(--sr-border);
 }
 
+/* Shared nav polish. Desktop nav gets more breathing room; mobile remains tight. */
+.sr-desktop-nav {
+  gap: clamp(2.75rem, 5vw, 5.75rem) !important;
+}
+
+/* Age gate defaults hidden so verified users never see a page-switch flash. */
+#age-gate:not(.active) {
+  display: none !important;
+}
+#age-gate.active {
+  display: flex !important;
+}
+
 /* ---------- Buttons ---------- */
 .sr-btn-primary {
   display: inline-flex;
@@ -262,3 +275,18 @@ body {
 /* ---------- Utility: Section Padding ---------- */
 .sr-section { padding: var(--sr-section-py) 1.5rem; }
 .sr-container { max-width: var(--sr-content-max); margin: 0 auto; }
+
+
+/* Global header fixes */
+.sr-desktop-nav,
+.hidden.md\:flex.items-center.gap-8,
+.hidden.md\:flex.items-center.gap-10,
+.hidden.md\:flex.gap-10.items-center {
+  gap: clamp(2.75rem, 5vw, 5.75rem) !important;
+}
+.material-symbols-outlined[role="button"] { cursor: pointer; }
+.material-symbols-outlined[role="button"]:focus-visible {
+  outline: 2px solid var(--sr-accent);
+  outline-offset: 4px;
+  border-radius: 999px;
+}

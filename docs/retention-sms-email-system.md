@@ -7,6 +7,9 @@ Capture qualified researcher emails after age verification, unlock `SERENITY15`,
 - Frontend popup: `js/lead-capture.js`
 - Backend endpoint: `POST /api/lead-capture`
 - Local lead storage: `data/leads.jsonl` by default
+- Contact capture asks for optional name, email, and optional phone in one simple phone field — no separate area-code field.
+- Email or phone is enough to save a contact and unlock the offer.
+- SMS recurring messaging consent is explicit and only saved as `sms_consent=true` when a phone number is present and the user checks the opt-in box.
 - Promo gate: server only honors `SERENITY15` if the browser has the `serenity_promo_unlocked=true` cookie set by lead capture.
 - Checkout UX: if `SERENITY15` is typed before signup, checkout opens the signup popup instead of applying the discount.
 
@@ -28,7 +31,8 @@ Recommended stack:
 Headline: `Unlock 15% off your first order.`
 Body: `Join the Serenity list for product availability notes, documentation updates, and researcher-only offers.`
 CTA: `Unlock SERENITY15`
-SMS checkbox: `I agree to receive automated SMS updates and offers from Serenity Research Labs. Consent is not required to purchase. Msg/data rates may apply. Reply STOP to opt out.`
+SMS checkbox: `Text me recurring availability, documentation, and offer reminders from Serenity Research Labs. Consent is not required to purchase. Msg/data rates may apply. Reply STOP to opt out.`
+Contact fields: optional name, email, phone number. Require at least email or phone; do not ask for a separate area code.
 
 ## Flows
 

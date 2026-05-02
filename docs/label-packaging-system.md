@@ -71,7 +71,12 @@ Before ordering labels/boxes:
 - [ ] Export print PDFs from SVG/source files
 - [ ] Proof one physical label before bulk order
 
+## Packaging concept pack
+- Prepared: `docs/label-packaging-concept-pack-2026-05-01.md`
+- Status: 3 concept lanes + image-gen prompt templates + supplier/printer questions are ready.
+- No image-generation credits spent and no supplier/printer order placed.
+
 ## Open design tasks
 - [ ] Add NAD+, Tirzepatide, PT-141 labels to generator once final SKU sizes are confirmed.
 - [ ] Create box dieline once printer/supplier gives dimensions.
-- [ ] Create 2–3 packaging concepts before image-gen credit spend.
+- [x] Create 2–3 packaging concepts before image-gen credit spend.
